@@ -14,7 +14,7 @@
         <version>7</version>
     </parent>
 
-    <groupId>com.bendb</groupId>
+    <groupId>com.bendb.dropwizard</groupId>
     <artifactId>dropwizard-jooq</artifactId>
     <version>0.7.1-1-SNAPSHOT</version>
     <packaging>jar</packaging>
