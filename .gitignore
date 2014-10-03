@@ -1,0 +1,15 @@
+# IDE and Maven
+.idea/
+target/
+*.iml
+*.ipr
+*.iws
+out/
+
+# Eclipse
+.settings/
+.classpath
+.project
+
+# OS X ignores
+.DS_Store
