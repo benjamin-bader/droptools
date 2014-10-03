@@ -2,6 +2,7 @@ Dropwizard jOOQ Bundle
 ======================
 
 [![Build Status](https://travis-ci.org/benjamin-bader/dropwizard-jooq.svg?branch=master)](https://travis-ci.org/benjamin-bader/dropwizard-jooq)
+[![Coverage Status](https://img.shields.io/coveralls/benjamin-bader/dropwizard-jooq.svg)](https://coveralls.io/r/benjamin-bader/dropwizard-jooq)
 
 An addon bundle in the vein of `dropwizard-hibernate` for using the excellent jOOQ SQL library in Dropwizard applications.
 
