@@ -10,7 +10,7 @@ http://maven.apache.org/DECORATION/1.1.0 "
     <custom>
         <fluidoSkin>
             <gitHub>
-                <projectId>dropwizard/dropwizard-jooq</projectId>
+                <projectId>benjamin-bader/dropwizard-jooq</projectId>
                 <ribbonOrientation>right</ribbonOrientation>
                 <ribbonColor>red</ribbonColor>
             </gitHub>
