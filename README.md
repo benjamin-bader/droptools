@@ -36,7 +36,7 @@ This will enable `@Context` injection of jOOQ `Configuration` and `DSLContext` p
 @GET
 @Path("/posts/{id}")
 public BlogPost getPost(@QueryParam("id") int postId, @Context DSLContext database) {
-    BlogPostDto post = database
+    BlogPostRecord post = database
         .selectFrom(POST)
         .where(POST.ID.equal(postId))
         .fetchOne();
