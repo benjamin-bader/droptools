@@ -6,8 +6,10 @@ import io.dropwizard.db.ManagedDataSource;
 import io.dropwizard.setup.Environment;
 import org.jooq.Configuration;
 import org.jooq.ConnectionProvider;
+import org.jooq.DSLContext;
 import org.jooq.SQLDialect;
 import org.jooq.conf.*;
+import org.jooq.impl.DSL;
 import org.jooq.impl.DataSourceConnectionProvider;
 import org.jooq.impl.DefaultConfiguration;
 import org.jooq.impl.DefaultExecuteListenerProvider;
@@ -249,7 +251,12 @@ public class JooqFactory {
         config.set(connectionProvider);
 
         if (logExecutedSql) {
-            LoggingExecutionListener listener = new LoggingExecutionListener(dialect, settings);
+            final Settings loggerSettings = (Settings) settings.clone();
+            loggerSettings.setRenderFormatted(true);
+
+            final DSLContext loggerContext = DSL.using(dialect, settings);
+            final LoggingExecutionListener listener = new LoggingExecutionListener(loggerContext);
+
             config.set(new DefaultExecuteListenerProvider(listener));
         }
 

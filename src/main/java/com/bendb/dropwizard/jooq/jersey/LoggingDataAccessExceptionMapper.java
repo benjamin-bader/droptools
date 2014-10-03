@@ -23,9 +23,4 @@ public class LoggingDataAccessExceptionMapper extends LoggingExceptionMapper<Dat
             LOGGER.error(formatLogMessage(id, exception), exception);
         }
     }
-
-    @Override
-    protected String formatLogMessage(long id, Throwable exception) {
-        return super.formatLogMessage(id, exception);
-    }
 }
