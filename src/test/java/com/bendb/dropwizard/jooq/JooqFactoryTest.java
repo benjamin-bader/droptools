@@ -84,4 +84,15 @@ public class JooqFactoryTest {
         ExecuteListener listener = provider.provide();
         assertThat(listener).isA(LoggingExecutionListener.class);
     }
+
+    @Test
+    public void doesNotAddExecutionLoggerWhenDefaultLoggingEnabled() throws Exception {
+        factory.setLogExecutedSql(true);
+        factory.setExecuteLogging(true);
+
+        Configuration config = factory.build(environment, dataSourceFactory);
+
+        ExecuteListenerProvider[] providers = config.executeListenerProviders();
+        assertThat(providers.length).isEqualTo(0);
+    }
 }

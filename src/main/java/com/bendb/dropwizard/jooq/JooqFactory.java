@@ -18,7 +18,7 @@ import org.jooq.tools.jdbc.JDBCUtils;
 import javax.validation.constraints.NotNull;
 
 /**
- * A factory for jooq {@link org.jooq.Configuration} objects.
+ * A factory for jOOQ {@link org.jooq.Configuration} objects.
  * <p/>
  * <strong>Configuration Parameters</strong>
  * <table>
@@ -250,11 +250,11 @@ public class JooqFactory {
         config.set(dialect);
         config.set(connectionProvider);
 
-        if (logExecutedSql) {
+        if (logExecutedSql && !executeLogging) {
             final Settings loggerSettings = (Settings) settings.clone();
             loggerSettings.setRenderFormatted(true);
 
-            final DSLContext loggerContext = DSL.using(dialect, settings);
+            final DSLContext loggerContext = DSL.using(dialect, loggerSettings);
             final LoggingExecutionListener listener = new LoggingExecutionListener(loggerContext);
 
             config.set(new DefaultExecuteListenerProvider(listener));

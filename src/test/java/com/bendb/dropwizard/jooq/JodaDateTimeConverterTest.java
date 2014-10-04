@@ -1,6 +1,5 @@
-package com.bendb.dropwizard.jooq.jersey;
+package com.bendb.dropwizard.jooq;
 
-import com.bendb.dropwizard.jooq.JodaDateTimeConverter;
 import org.joda.time.DateTime;
 import org.junit.Test;
 
