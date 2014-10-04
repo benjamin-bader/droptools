@@ -10,7 +10,7 @@ An addon bundle in the vein of `dropwizard-hibernate` for using the excellent jO
 Usage
 -----
 
-Add a `JooqBundle` to your `Application` class.
+Add a [JooqBundle](http://dropwizard-jooq.bendb.com/0.7.1-1/apidocs/com/bendb/dropwizard/jooq/JooqFactory.html) to your [Application](http://dropwizard.io/0.7.1/dropwizard-core/apidocs/io/dropwizard/Application.html) class.
 
 ```java
 @Override
@@ -31,7 +31,7 @@ public void initialize(Bootstrap<MyConfiguration> bootstrap) {
 ```
 
 
-This will enable `@Context` injection of jOOQ `Configuration` and `DSLContext` parameters in resource methods:
+This will enable `@Context` injection of jOOQ [Configuration](http://www.jooq.org/javadoc/3.4.0/org/jooq/Configuration.html) and [DSLContext](http://www.jooq.org/javadoc/3.4.0/org/jooq/DSLContext.html) parameters in resource methods:
 
 ```java
 @GET
@@ -52,15 +52,15 @@ This will also enable database healthchecks and install exception mappers.
 Code Generation
 ---------------
 
-`dropwizard-jooq` provides some facilities for making generated pojos, doas, etc. more convenient to use.
+[`dropwizard-jooq`](http://dropwizard-jooq.bendb.com/) provides some classes for making generated pojos, DAOs, etc. more convenient to use.
 
-`JodaDateTimeConverter` can be used to map between `java.sql.Timestamp` and Joda `DateTime` objects.  This is currently the only converter bundled; contributions in this area are welcome!
+[JodaDateTimeConverter](http://dropwizard-jooq.bendb.com/0.7.1-1/apidocs/com/bendb/dropwizard/jooq/JooqFactory.html) can be used to map between `java.sql.Timestamp` and Joda `DateTime` objects.  This is currently the only converter bundled; contributions in this area are welcome!
 
 
 Configuration
 -------------
 
-`dropwizard-jooq` uses the same [DataSourceFactory](http://dropwizard.io/0.7.1/dropwizard-db/apidocs/io/dropwizard/db/DataSourceFactory.html) from [`dropwizard-db`](http://dropwizard.io/0.7.1/dropwizard-db/) for configuring its [DataSource](http://docs.oracle.com/javase/7/docs/api/javax/sql/DataSource.html).
+[`dropwizard-jooq`](http://dropwizard-jooq.bendb.com/) uses the same [DataSourceFactory](http://dropwizard.io/0.7.1/dropwizard-db/apidocs/io/dropwizard/db/DataSourceFactory.html) from [`dropwizard-db`](http://dropwizard.io/0.7.1/dropwizard-db/) for configuring its [DataSource](http://docs.oracle.com/javase/7/docs/api/javax/sql/DataSource.html).
 
 For modifying jOOQ configuration settings, there is [JooqFactory](http://dropwizard-jooq.bendb.com/0.7.1-1/apidocs/com/bendb/dropwizard/jooq/JooqFactory.html):
 
