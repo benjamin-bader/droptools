@@ -1,7 +1,7 @@
 language: java
 install:
   - mvn install
-after_success: mvn jacoco:report coveralls:jacoco
+after_success: mvn cobertura:cobertura coveralls:cobertura
 jdk:
   - oraclejdk8
   - oraclejdk7

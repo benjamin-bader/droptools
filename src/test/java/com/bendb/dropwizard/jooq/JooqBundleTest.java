@@ -73,5 +73,25 @@ public class JooqBundleTest {
         assertThat(captor.getValue().getValidationQuery()).isEqualTo(validationQuery);
     }
 
+    @Test
+    public void providesADefaultJooqFactory() throws Exception {
+        JooqFactory defaultFactory = new JooqFactory();
+        JooqFactory jooqFactory = new JooqBundle<DropwizardConfig>() {
+            @Override
+            public DataSourceFactory getDataSourceFactory(DropwizardConfig configuration) {
+                return dataSourceFactory;
+            }
+        }.getJooqFactory(new DropwizardConfig());
+
+        assertThat(jooqFactory).isNotNull();
+    }
+
+    @Test
+    public void providesBuiltJooqConfiguration() throws Exception {
+        assertThat(jooqBundle.getConfiguration()).isNull();
+        jooqBundle.run(new DropwizardConfig(), environment);
+        assertThat(jooqBundle.getConfiguration()).is(configuration);
+    }
+
     private static final class DropwizardConfig extends io.dropwizard.Configuration {}
 }

@@ -11,9 +11,7 @@ import org.slf4j.Logger;
 
 import java.sql.SQLException;
 
-import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.contains;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
 
@@ -42,6 +40,23 @@ public class LoggingDataAccessExceptionMapperTest {
         mapper.logException(0, e);
 
         verify(logger).error(anyString(), eq(cause));
+    }
+
+    @Test
+    public void logsAllUnderlyingCauses() {
+        SQLException one = new SQLException("a");
+        SQLException two = new SQLException("b");
+        SQLException e = new SQLException("fail");
+        e.setNextException(one);
+        e.setNextException(two);
+
+        DataAccessException dae = new DataAccessException("moar fail", e);
+
+        mapper.logException(0, dae);
+
+        verify(logger).error(anyString(), eq(e));
+        verify(logger).error(anyString(), eq(one));
+        verify(logger).error(anyString(), eq(two));
     }
 
     @Test
