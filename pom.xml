@@ -17,8 +17,12 @@
     <version>0.7.1-3-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>Dropwizard jOOQ Bundle</name>
-    <description>Addon bundle for Dropwizard to support jOOQ for database access</description>
+    <modules>
+        <module>dropwizard-redis</module>
+        <module>dropwizard-jooq</module>
+    </modules>
+
+    <description>Helpful bundles for Dropwizard</description>
     <url>https://github.com/benjamin-bader/dropwizard-jooq</url>
 
     <licenses>
@@ -47,13 +51,12 @@
 
     <distributionManagement>
         <site>
-            <id>dropwizard-jooq</id>
-            <url>http://benjamin-bader.github.io/dropwizard-jooq/${project.version}</url>
+            <id>dropwizard-utils</id>
+            <url>http://dropwizard-jooq.bendb.com/${project.version}</url>
         </site>
     </distributionManagement>
 
     <developers>
-        <!-- TODO(ben): set up @bendb.com for email again -->
         <developer>
             <id>bendb</id>
             <name>Ben Bader</name>
@@ -64,24 +67,12 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <dropwizard.version>0.7.1</dropwizard.version>
-        <jooq.version>3.4.2</jooq.version>
         <coberatura.version>2.6</coberatura.version>
 
         <github.global.server>github</github.global.server>
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>org.jooq</groupId>
-            <artifactId>jooq</artifactId>
-            <version>${jooq.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.dropwizard</groupId>
-            <artifactId>dropwizard-db</artifactId>
-            <version>${dropwizard.version}</version>
-        </dependency>
-
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -101,18 +92,6 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
-    <profiles>
-        <profile>
-            <id>java8-disable-strict-javadoc</id>
-            <activation>
-                <jdk>[1.8,)</jdk>
-            </activation>
-            <properties>
-                <javadoc.doclint.none>-Xdoclint:none</javadoc.doclint.none>
-            </properties>
-        </profile>
-    </profiles>
 
     <build>
         <plugins>
@@ -142,9 +121,6 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>2.9.1</version>
-                <configuration>
-                    <additionalparam>${javadoc.doclint.none}</additionalparam>
-                </configuration>
                 <executions>
                     <execution>
                         <id>attach-javadocs</id>
@@ -161,6 +137,14 @@
                 <configuration>
                     <skipDeploy>true</skipDeploy>
                 </configuration>
+                <executions>
+                    <execution>
+                        <id>attach-descriptor</id>
+                        <goals>
+                            <goal>attach-descriptor</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>com.github.github</groupId>
@@ -224,6 +208,9 @@
                             <report>license</report>
                             <report>project-team</report>
                         </reports>
+                        <configuration>
+                            <aggregate>true</aggregate>
+                        </configuration>
                     </reportSet>
                 </reportSets>
             </plugin>
@@ -236,6 +223,8 @@
                         <format>html</format>
                         <format>xml</format>
                     </formats>
+                    <aggregate>true</aggregate>
+                    <outputDirectory>${project.build.directory}/cobertura</outputDirectory>
                     <instrumentation>
                         <ignoreTrivial>true</ignoreTrivial>
                     </instrumentation>
@@ -246,7 +235,6 @@
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>2.9.1</version>
                 <configuration>
-                    <additionalparam>${javadoc.doclint.none}</additionalparam>
                     <show>public</show>
                 </configuration>
             </plugin>
