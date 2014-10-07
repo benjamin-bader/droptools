@@ -1,11 +1,10 @@
 package com.bendb.dropwizard.redis;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.annotations.VisibleForTesting;
 import com.google.common.net.HostAndPort;
 import io.dropwizard.setup.Environment;
-import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 import redis.clients.jedis.JedisPool;
+import redis.clients.jedis.JedisPoolConfig;
 
 import javax.validation.constraints.NotNull;
 
@@ -46,8 +45,8 @@ import javax.validation.constraints.NotNull;
  * </table>
  */
 public class JedisFactory {
-    private static final int DEFAULT_PORT = 6379;
-    private static final int DEFAULT_MAX_TOTAL = 1024;
+    public static final int DEFAULT_PORT = 6379;
+    public static final int DEFAULT_MAX_TOTAL = 1024;
 
     @JsonProperty
     @NotNull
@@ -103,7 +102,7 @@ public class JedisFactory {
     }
 
     public JedisPool build(Environment environment) {
-        final GenericObjectPoolConfig poolConfig = new GenericObjectPoolConfig();
+        final JedisPoolConfig poolConfig = new JedisPoolConfig();
         poolConfig.setMinIdle(getMinIdle());
         poolConfig.setMaxIdle(getMaxIdle());
         poolConfig.setMaxTotal(getMaxTotal());

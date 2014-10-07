@@ -2,6 +2,7 @@ package com.bendb.dropwizard.jooq.jersey;
 
 import com.sun.jersey.api.model.Parameter;
 import com.sun.jersey.core.spi.component.ComponentContext;
+import com.sun.jersey.core.spi.component.ComponentScope;
 import com.sun.jersey.spi.inject.Injectable;
 import org.jooq.Configuration;
 import org.jooq.ConnectionProvider;
@@ -21,16 +22,21 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class DSLContextInjectableProviderTest {
+public class DSLContextParameterInjectableProviderTest {
     @Mock Configuration configuration;
     @Mock ConnectionProvider connectionProvider;
 
-    DSLContextInjectableProvider provider;
+    DSLContextParameterInjectableProvider provider;
 
     @Before
     public void setup() throws Exception {
         when(configuration.connectionProvider()).thenReturn(connectionProvider);
-        provider = new DSLContextInjectableProvider(configuration);
+        provider = new DSLContextParameterInjectableProvider(configuration);
+    }
+
+    @Test
+    public void isScopedPerRequest() {
+        assertThat(provider.getScope()).isEqualTo(ComponentScope.PerRequest);
     }
 
     @Test

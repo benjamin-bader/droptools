@@ -20,6 +20,7 @@
     <modules>
         <module>dropwizard-redis</module>
         <module>dropwizard-jooq</module>
+        <module>dropwizard-utils-common</module>
     </modules>
 
     <description>Helpful bundles for Dropwizard</description>

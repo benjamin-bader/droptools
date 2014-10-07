@@ -35,5 +35,10 @@
             <artifactId>jooq</artifactId>
             <version>${jooq.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.bendb.dropwizard</groupId>
+            <artifactId>dropwizard-utils-common</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
     </dependencies>
 </project>

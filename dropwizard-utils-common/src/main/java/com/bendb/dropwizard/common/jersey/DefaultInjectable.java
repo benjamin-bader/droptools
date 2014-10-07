@@ -1,4 +1,4 @@
-package com.bendb.dropwizard.jooq.jersey;
+package com.bendb.dropwizard.common.jersey;
 
 import com.sun.jersey.spi.inject.Injectable;
 
@@ -17,5 +17,9 @@ public class DefaultInjectable<T> implements Injectable<T> {
     @Override
     public T getValue() {
         return value;
+    }
+
+    public static <E> DefaultInjectable<E> of(E value) {
+        return new DefaultInjectable<>(value);
     }
 }

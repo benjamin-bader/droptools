@@ -4,6 +4,7 @@ import com.bendb.dropwizard.redis.jersey.JedisInjectableProvider;
 import com.bendb.dropwizard.redis.jersey.JedisPoolInjectableProvider;
 import com.bendb.dropwizard.redis.jersey.JedisResourceMethodDispatchAdapter;
 import com.codahale.metrics.health.HealthCheckRegistry;
+import com.sun.jersey.spi.inject.SingletonTypeInjectableProvider;
 import io.dropwizard.Configuration;
 import io.dropwizard.jersey.setup.JerseyEnvironment;
 import io.dropwizard.lifecycle.setup.LifecycleEnvironment;
@@ -15,6 +16,8 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import redis.clients.jedis.JedisPool;
+
+import javax.ws.rs.core.Context;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.eq;

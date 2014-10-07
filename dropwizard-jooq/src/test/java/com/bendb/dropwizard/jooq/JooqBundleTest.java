@@ -1,6 +1,6 @@
 package com.bendb.dropwizard.jooq;
 
-import com.bendb.dropwizard.jooq.jersey.DSLContextInjectableProvider;
+import com.bendb.dropwizard.jooq.jersey.DSLContextParameterInjectableProvider;
 import com.codahale.metrics.health.HealthCheckRegistry;
 import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.jersey.setup.JerseyEnvironment;
@@ -59,7 +59,7 @@ public class JooqBundleTest {
     public void registersAnInjectibleProvider() throws Exception {
         jooqBundle.run(new DropwizardConfig(), environment);
 
-        ArgumentCaptor<DSLContextInjectableProvider> captor = ArgumentCaptor.forClass(DSLContextInjectableProvider.class);
+        ArgumentCaptor<DSLContextParameterInjectableProvider> captor = ArgumentCaptor.forClass(DSLContextParameterInjectableProvider.class);
         verify(jerseyEnvironment, atLeastOnce()).register(captor.capture());
     }
 

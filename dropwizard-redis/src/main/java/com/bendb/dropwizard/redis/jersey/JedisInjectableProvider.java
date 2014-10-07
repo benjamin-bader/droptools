@@ -1,5 +1,6 @@
 package com.bendb.dropwizard.redis.jersey;
 
+import com.bendb.dropwizard.common.jersey.PerRequestParamInjectableProvider;
 import com.sun.jersey.api.core.HttpContext;
 import com.sun.jersey.api.model.Parameter;
 import com.sun.jersey.core.spi.component.ComponentContext;
@@ -15,7 +16,7 @@ import javax.ws.rs.ext.Provider;
 import java.lang.reflect.Type;
 
 @Provider
-public class JedisInjectableProvider implements InjectableProvider<Context, Parameter> {
+public class JedisInjectableProvider extends PerRequestParamInjectableProvider<Context, Jedis> {
     private final class JedisInjectable extends AbstractHttpContextInjectable<Jedis> {
         private final JedisPool pool;
 
@@ -36,20 +37,12 @@ public class JedisInjectableProvider implements InjectableProvider<Context, Para
     private final JedisPool pool;
 
     public JedisInjectableProvider(JedisPool pool) {
+        super(Jedis.class);
         this.pool = pool;
     }
 
     @Override
-    public ComponentScope getScope() {
-        return ComponentScope.PerRequest;
-    }
-
-    @Override
-    public Injectable getInjectable(ComponentContext ic, Context context, Parameter param) {
-        if (param.getParameterClass().isAssignableFrom(Jedis.class)) {
-            return new JedisInjectable(pool);
-        }
-
-        return null;
+    public Injectable<Jedis> getInjectable(ComponentContext ic, Context context) {
+        return new JedisInjectable(pool);
     }
 }

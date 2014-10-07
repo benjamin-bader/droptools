@@ -1,4 +1,4 @@
-package com.bendb.dropwizard.jooq.jersey;
+package com.bendb.dropwizard.common.jersey;
 
 import org.junit.Test;
 

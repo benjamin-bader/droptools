@@ -15,7 +15,9 @@ import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
 import javax.ws.rs.core.Context;
+import javax.ws.rs.ext.Provider;
 
+import java.lang.annotation.Annotation;
 import java.util.Map;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -38,6 +40,19 @@ public class JedisInjectableProviderTest {
         when(pool.getResource()).thenReturn(jedis);
 
         provider = new JedisInjectableProvider(pool);
+    }
+
+    @Test
+    public void isAnnotatedWithProvider() {
+        boolean found = false;
+        Annotation[] annotations = JedisInjectableProvider.class.getDeclaredAnnotations();
+        for (Annotation annotation : annotations) {
+            if (annotation.annotationType() == Provider.class) {
+                found = true;
+                break;
+            }
+        }
+        assertThat(found).named("has @Provides annotation").isTrue();
     }
 
     @Test

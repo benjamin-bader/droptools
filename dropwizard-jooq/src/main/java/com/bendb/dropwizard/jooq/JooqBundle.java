@@ -1,6 +1,6 @@
 package com.bendb.dropwizard.jooq;
 
-import com.bendb.dropwizard.jooq.jersey.DSLContextInjectableProvider;
+import com.bendb.dropwizard.jooq.jersey.DSLContextParameterInjectableProvider;
 import com.bendb.dropwizard.jooq.jersey.LoggingDataAccessExceptionMapper;
 import io.dropwizard.ConfiguredBundle;
 import io.dropwizard.db.DataSourceFactory;
@@ -24,7 +24,7 @@ public abstract class JooqBundle<C extends io.dropwizard.Configuration>
         final JooqHealthCheck healthCheck = new JooqHealthCheck(cfg, dataSourceFactory.getValidationQuery());
 
         environment.healthChecks().register("jooq", healthCheck);
-        environment.jersey().register(new DSLContextInjectableProvider(cfg));
+        environment.jersey().register(new DSLContextParameterInjectableProvider(cfg));
         environment.jersey().register(new LoggingDataAccessExceptionMapper());
 
         this.configuration = cfg;

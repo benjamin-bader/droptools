@@ -1,5 +1,6 @@
 package com.bendb.dropwizard.jooq.jersey;
 
+import com.bendb.dropwizard.common.jersey.DefaultInjectable;
 import com.google.common.base.Preconditions;
 import com.sun.jersey.api.model.Parameter;
 import com.sun.jersey.core.spi.component.ComponentContext;
@@ -19,10 +20,10 @@ import javax.ws.rs.ext.Provider;
  * {@link org.jooq.DSLContext}, and {@link org.jooq.ConnectionProvider} values.
  */
 @Provider
-public class DSLContextInjectableProvider implements InjectableProvider<Context, Parameter> {
+public class DSLContextParameterInjectableProvider implements InjectableProvider<Context, Parameter> {
     private final Configuration configuration;
 
-    public DSLContextInjectableProvider(Configuration configuration) {
+    public DSLContextParameterInjectableProvider(Configuration configuration) {
         this.configuration = Preconditions.checkNotNull(configuration, "configuration");
     }
 
@@ -33,16 +34,17 @@ public class DSLContextInjectableProvider implements InjectableProvider<Context,
 
     @Override
     public Injectable getInjectable(ComponentContext ic, Context context, Parameter parameter) {
-        if (parameter.getParameterClass().isAssignableFrom(DSLContext.class)){
-            return new DefaultInjectable<>(DSL.using(configuration));
+        final Class<?> parameterClass = parameter.getParameterClass();
+        if (parameterClass.isAssignableFrom(DSLContext.class)){
+            return DefaultInjectable.of(DSL.using(configuration));
         }
 
-        if (parameter.getParameterClass().isAssignableFrom(Configuration.class)) {
-            return new DefaultInjectable<>(configuration);
+        if (parameterClass.isAssignableFrom(Configuration.class)) {
+            return DefaultInjectable.of(configuration);
         }
 
-        if (parameter.getParameterClass().isAssignableFrom(ConnectionProvider.class)) {
-            return new DefaultInjectable<>(configuration.connectionProvider());
+        if (parameterClass.isAssignableFrom(ConnectionProvider.class)) {
+            return DefaultInjectable.of(configuration.connectionProvider());
         }
 
         return null;
