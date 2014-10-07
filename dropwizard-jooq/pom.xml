@@ -11,7 +11,7 @@
     <parent>
         <artifactId>dropwizard-utils</artifactId>
         <groupId>com.bendb.dropwizard</groupId>
-        <version>0.7.1-1-SNAPSHOT</version>
+        <version>0.7.1-3-SNAPSHOT</version>
     </parent>
 
     <artifactId>dropwizard-jooq</artifactId>
