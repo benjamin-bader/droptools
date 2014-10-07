@@ -66,6 +66,8 @@
         <dropwizard.version>0.7.1</dropwizard.version>
         <jooq.version>3.4.2</jooq.version>
         <coberatura.version>2.6</coberatura.version>
+
+        <github.global.server>github</github.global.server>
     </properties>
 
     <dependencies>
