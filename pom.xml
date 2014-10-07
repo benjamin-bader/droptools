@@ -14,7 +14,7 @@
 
     <groupId>com.bendb.dropwizard</groupId>
     <artifactId>dropwizard-jooq</artifactId>
-    <version>0.7.1-1</version>
+    <version>0.7.1-2-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>Dropwizard jOOQ Bundle</name>
