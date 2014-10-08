@@ -7,6 +7,17 @@ Dropwizard jOOQ Bundle
 An addon bundle in the vein of `dropwizard-hibernate` for using the excellent jOOQ SQL library in Dropwizard applications.
 
 
+Dependency Info
+---------------
+```
+<dependency>
+    <groupId>com.bendb.dropwizard</groupId>
+    <artifactId>dropwizard-jooq</artifactId>
+    <version>0.7.1-2</version>
+</dependency>
+```
+
+
 Usage
 -----
 
