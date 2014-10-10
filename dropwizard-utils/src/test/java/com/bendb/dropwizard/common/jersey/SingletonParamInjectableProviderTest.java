@@ -12,8 +12,8 @@ import static com.google.common.truth.Truth.assertThat;
 public class SingletonParamInjectableProviderTest {
     @Test
     public void isInSingletonScope() {
-        PerRequestParamInjectableProvider<Context, Object> provider =
-                new PerRequestParamInjectableProvider<Context, Object>(Object.class) {
+        SingletonParamInjectableProvider<Context, Object> provider =
+                new SingletonParamInjectableProvider<Context, Object>(Object.class) {
                     @Override
                     protected Injectable<Object> getTypedInjectable(ComponentContext ic, Context annotation) {
                         return null;

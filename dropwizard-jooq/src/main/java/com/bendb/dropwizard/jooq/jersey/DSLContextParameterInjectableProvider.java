@@ -16,8 +16,9 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.ext.Provider;
 
 /**
- * An {@link com.sun.jersey.spi.inject.InjectableProvider} that can inject {@link org.jooq.Configuration},
- * {@link org.jooq.DSLContext}, and {@link org.jooq.ConnectionProvider} values.
+ * An {@link InjectableProvider} that can inject {@link Configuration},
+ * {@link DSLContext}, and {@link ConnectionProvider} values into resource
+ * method parameters.
  */
 @Provider
 public class DSLContextParameterInjectableProvider implements InjectableProvider<Context, Parameter> {

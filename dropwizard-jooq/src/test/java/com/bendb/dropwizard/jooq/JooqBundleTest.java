@@ -1,6 +1,7 @@
 package com.bendb.dropwizard.jooq;
 
 import com.bendb.dropwizard.jooq.jersey.DSLContextParameterInjectableProvider;
+import com.bendb.dropwizard.jooq.jersey.DSLContextTypeInjectableProvider;
 import com.codahale.metrics.health.HealthCheckRegistry;
 import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.jersey.setup.JerseyEnvironment;
@@ -56,11 +57,45 @@ public class JooqBundleTest {
     }
 
     @Test
-    public void registersAnInjectibleProvider() throws Exception {
+    public void doesNothingInBootstrap() {
+        jooqBundle.initialize(bootstrap);
+        verifyZeroInteractions(bootstrap);
+    }
+
+    @Test
+    public void registersAnInjectibleProviderOnParameters() throws Exception {
         jooqBundle.run(new DropwizardConfig(), environment);
 
         ArgumentCaptor<DSLContextParameterInjectableProvider> captor = ArgumentCaptor.forClass(DSLContextParameterInjectableProvider.class);
         verify(jerseyEnvironment, atLeastOnce()).register(captor.capture());
+
+        boolean found = false;
+        for (Object provider : captor.getAllValues()) {
+            if (provider instanceof DSLContextParameterInjectableProvider) {
+                found = true;
+                break;
+            }
+        }
+
+        assertThat(found).named("registers a DSLContextParameterInjectableProvider").isTrue();
+    }
+
+    @Test
+    public void registersAnInjectableProviderOnTypeMembers() throws Exception {
+        jooqBundle.run(new DropwizardConfig(), environment);
+
+        ArgumentCaptor<DSLContextTypeInjectableProvider> captor = ArgumentCaptor.forClass(DSLContextTypeInjectableProvider.class);
+        verify(jerseyEnvironment, atLeastOnce()).register(captor.capture());
+
+        boolean found = false;
+        for (Object provider : captor.getAllValues()) {
+            if (provider instanceof DSLContextTypeInjectableProvider) {
+                found = true;
+                break;
+            }
+        }
+
+        assertThat(found).named("registers a DSLContextTypeInjectableProvider").isTrue();
     }
 
     @Test
@@ -75,7 +110,6 @@ public class JooqBundleTest {
 
     @Test
     public void providesADefaultJooqFactory() throws Exception {
-        JooqFactory defaultFactory = new JooqFactory();
         JooqFactory jooqFactory = new JooqBundle<DropwizardConfig>() {
             @Override
             public DataSourceFactory getDataSourceFactory(DropwizardConfig configuration) {

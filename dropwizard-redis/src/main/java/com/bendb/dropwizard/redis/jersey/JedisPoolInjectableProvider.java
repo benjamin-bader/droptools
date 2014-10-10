@@ -1,7 +1,6 @@
 package com.bendb.dropwizard.redis.jersey;
 
 import com.bendb.dropwizard.common.jersey.DefaultInjectable;
-import com.bendb.dropwizard.common.jersey.PerRequestParamInjectableProvider;
 import com.bendb.dropwizard.common.jersey.SingletonParamInjectableProvider;
 import com.sun.jersey.core.spi.component.ComponentContext;
 import com.sun.jersey.spi.inject.Injectable;

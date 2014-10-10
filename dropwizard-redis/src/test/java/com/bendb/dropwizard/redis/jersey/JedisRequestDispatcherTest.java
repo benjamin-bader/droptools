@@ -9,6 +9,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import redis.clients.jedis.Jedis;
+import redis.clients.jedis.exceptions.JedisException;
 
 import java.util.Map;
 
@@ -70,5 +71,13 @@ public class JedisRequestDispatcherTest {
             assertThat(e).is(exception);
             verify(jedis).close();
         }
+    }
+
+    @Test
+    public void isOkIfClosingJedisFails() {
+        properties.put(Jedis.class.getName(), jedis);
+        doThrow(JedisException.class).when(jedis).close();
+        dispatcher.dispatch(resource, httpContext);
+        // no whammies
     }
 }

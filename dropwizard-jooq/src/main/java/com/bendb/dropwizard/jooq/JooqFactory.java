@@ -241,10 +241,8 @@ public class JooqFactory {
     public Configuration build(Environment environment, DataSourceFactory factory) throws ClassNotFoundException {
         final Settings settings = buildSettings();
         final SQLDialect dialect = determineDialect(factory);
-
         final ManagedDataSource dataSource = factory.build(environment.metrics(), "jooq");
         final ConnectionProvider connectionProvider = new DataSourceConnectionProvider(dataSource);
-
         final Configuration config = new DefaultConfiguration();
         config.set(settings);
         config.set(dialect);

@@ -25,4 +25,14 @@ public class JodaDateTimeConverterTest {
 
         assertThat(converter.from(ts)).isEqualTo(dt);
     }
+
+    @Test
+    public void convertsFromTimestamp() {
+        assertThat(new JodaDateTimeConverter().fromType()).is(Timestamp.class);
+    }
+
+    @Test
+    public void convertsToDateTime() {
+        assertThat(new JodaDateTimeConverter().toType()).is(DateTime.class);
+    }
 }

@@ -9,7 +9,7 @@
     </prerequisites>
 
     <parent>
-        <artifactId>dropwizard-utils</artifactId>
+        <artifactId>dropwizard-parent</artifactId>
         <groupId>com.bendb.dropwizard</groupId>
         <version>0.7.1-3-SNAPSHOT</version>
     </parent>
@@ -26,18 +26,13 @@
 
     <dependencies>
         <dependency>
-            <groupId>io.dropwizard</groupId>
-            <artifactId>dropwizard-core</artifactId>
-            <version>${dropwizard.version}</version>
-        </dependency>
-        <dependency>
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
             <version>${jedis.version}</version>
         </dependency>
         <dependency>
             <groupId>com.bendb.dropwizard</groupId>
-            <artifactId>dropwizard-utils-common</artifactId>
+            <artifactId>dropwizard-utils</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
     </dependencies>

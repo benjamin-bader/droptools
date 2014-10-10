@@ -11,8 +11,14 @@ import org.jooq.DSLContext;
 import org.jooq.impl.DSL;
 
 import javax.ws.rs.core.Context;
+import javax.ws.rs.ext.Provider;
 import java.lang.reflect.Type;
 
+/**
+ * An {@link InjectableProvider} that can inject {@link Configuration},
+ * {@link DSLContext}, and {@link ConnectionProvider} values into resources.
+ */
+@Provider
 public class DSLContextTypeInjectableProvider implements InjectableProvider<Context, Type> {
     private final Configuration configuration;
 

@@ -25,6 +25,7 @@ import static org.mockito.Mockito.when;
 public class DSLContextParameterInjectableProviderTest {
     @Mock Configuration configuration;
     @Mock ConnectionProvider connectionProvider;
+    @Mock Parameter param;
 
     DSLContextParameterInjectableProvider provider;
 
@@ -41,7 +42,6 @@ public class DSLContextParameterInjectableProviderTest {
 
     @Test
     public void injectsDSLContextParam() {
-        Parameter param = mock(Parameter.class);
         doReturn(DSLContext.class).when(param).getParameterClass();
 
         Injectable injectable = provider.getInjectable(mock(ComponentContext.class), mock(Context.class), param);
@@ -51,7 +51,6 @@ public class DSLContextParameterInjectableProviderTest {
 
     @Test
     public void injectsConfigurationParam() {
-        Parameter param = mock(Parameter.class);
         doReturn(Configuration.class).when(param).getParameterClass();
 
         Injectable injectable = provider.getInjectable(mock(ComponentContext.class), mock(Context.class), param);
@@ -61,7 +60,6 @@ public class DSLContextParameterInjectableProviderTest {
 
     @Test
     public void injectsConnectionProvider() {
-        Parameter param = mock(Parameter.class);
         doReturn(ConnectionProvider.class).when(param).getParameterClass();
 
         Injectable injectable = provider.getInjectable(mock(ComponentContext.class), mock(Context.class), param);
@@ -71,7 +69,6 @@ public class DSLContextParameterInjectableProviderTest {
 
     @Test
     public void doesNotInjectOtherTypes() {
-        Parameter param = mock(Parameter.class);
         doReturn(HashMap.class).when(param).getParameterClass();
 
         Injectable injectable = provider.getInjectable(mock(ComponentContext.class), mock(Context.class), param);
