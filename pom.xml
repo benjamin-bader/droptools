@@ -21,6 +21,7 @@
         <module>dropwizard-redis</module>
         <module>dropwizard-jooq</module>
         <module>dropwizard-utils</module>
+        <module>droptools-example</module>
     </modules>
 
     <description>Helpful bundles for Dropwizard</description>

@@ -1,0 +1,51 @@
+server:
+  applicationConnectors:
+    - type: http
+      port: 8080
+
+logging:
+  level: DEBUG
+
+  appenders:
+    - type: file
+      threshold: INFO
+      currentLogFilename: ./logs/example.log
+      archivedLogFilenamePattern: ./logs/example-%d.log.gz
+      archivedFileCount: 5
+      timeZone: UTC
+
+    - type: file
+      threshold: DEBUG
+      currentLogFilename: ./logs/debug.log
+      archivedLogFilenamePattern: ./logs/debug-%d{yyyy-MM-dd-hh}.log.gz
+      archivedFileCount: 6
+      timeZone: UTC
+
+    - type: console
+      target: stdout
+
+database:
+  driverClass: org.postgresql.Driver
+  user: example_user
+  password: s3cr3t
+  url: jdbc:postgresql://localhost:5432/example_app
+
+flyway:
+  # The default prefix is 'V', but I prefer no prefix at all.
+  sqlMigrationPrefix: ""
+  schemas:
+    - ex
+
+jooq:
+  dialect: POSTGRES
+  logExecutedSql: yes
+  renderSchema: yes
+  renderNameStyle: QUOTED
+  renderKeywordStyle: LOWER
+  renderFormatted: no
+  paramType: INDEXED
+  statementType: PREPARED_STATEMENT
+  executeLogging: no
+  executeWithOptimisticLocking: no
+  attachRecords: yes
+  updatablePrimaryKeys: no
