@@ -6,16 +6,6 @@ Droptools
 
 Useful Dropwizard addons, including `dropwizard-jooq` and `dropwizard-redis`.
 
-Dependency Info
----------------
-```
-<dependency>
-    <groupId>com.bendb.dropwizard</groupId>
-    <artifactId>dropwizard-jooq</artifactId>
-    <version>0.7.1-2</version>
-</dependency>
-```
-
 
 Usage
 -----
