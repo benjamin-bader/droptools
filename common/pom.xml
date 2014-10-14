@@ -9,12 +9,12 @@
     </prerequisites>
 
     <parent>
-        <artifactId>dropwizard-parent</artifactId>
+        <artifactId>droptools-parent</artifactId>
         <groupId>com.bendb.dropwizard</groupId>
         <version>0.7.1-3-SNAPSHOT</version>
     </parent>
 
-    <artifactId>dropwizard-utils</artifactId>
+    <artifactId>common</artifactId>
     <packaging>jar</packaging>
 
     <name>Common Jersey utility classes</name>

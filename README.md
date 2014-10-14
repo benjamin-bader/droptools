@@ -1,8 +1,8 @@
-Dropwizard Utils
+Droptools
 ======================
 
-[![Build Status](https://travis-ci.org/benjamin-bader/dropwizard-jooq.svg?branch=master)](https://travis-ci.org/benjamin-bader/dropwizard-jooq)
-[![Coverage Status](https://img.shields.io/coveralls/benjamin-bader/dropwizard-jooq.svg)](https://coveralls.io/r/benjamin-bader/dropwizard-jooq?branch=master)
+[![Build Status](https://travis-ci.org/benjamin-bader/droptools.svg?branch=master)](https://travis-ci.org/benjamin-bader/droptools)
+[![Coverage Status](https://img.shields.io/coveralls/benjamin-bader/droptools.svg)](https://coveralls.io/r/benjamin-bader/droptools?branch=master)
 
 Useful Dropwizard addons, including `dropwizard-jooq` and `dropwizard-redis`.
 
@@ -12,7 +12,7 @@ Usage
 ```xml
 <dependency>
   <groupId>com.bendb.dropwizard</groupId>
-  <artifactId>dropwizard-utils</artifactId>
+  <artifactId>droptools-parent</artifactId>
   <version>0.7.1-1-SNAPSHOT</version>
 </dependency>
 ```
@@ -21,7 +21,7 @@ Usage
 Support
 -------
 
-Please file bug reports and feature requests in [GitHub issues](https://github.com/benjamin-bader/dropwizard-jooq/issues).
+Please file bug reports and feature requests in [GitHub issues](https://github.com/benjamin-bader/droptools-parent/issues).
 
 
 License

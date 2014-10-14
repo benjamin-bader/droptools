@@ -7,7 +7,7 @@ An addon bundle for using the excellent Jedis redis client in Dropwizard applica
 Usage
 -----
 
-Add a [JedisBundle](http://dropwizard-jooq.bendb.com/0.7.1-1/apidocs/com/bendb/dropwizard/redis/JedisBundle.html) to your [Application](http://dropwizard.io/0.7.1/dropwizard-core/apidocs/io/dropwizard/Application.html) class.
+Add a [JedisBundle](http://droptools.bendb.com/0.7.1-1/apidocs/com/bendb/dropwizard/redis/JedisBundle.html) to your [Application](http://dropwizard.io/0.7.1/dropwizard-core/apidocs/io/dropwizard/Application.html) class.
 
 ```java
 @Override
@@ -40,7 +40,7 @@ This will also enable redis health-checking.
 Configuration
 -------------
 
-For configuration the redis connection, there is [JedisFactory](http://dropwizard-jooq.bendb.com/0.7.1-1/apidocs/com/bendb/dropwizard/redis/JedisFactory.html):
+For configuration the redis connection, there is [JedisFactory](http://droptools.bendb.com/0.7.1-1/apidocs/com/bendb/dropwizard/redis/JedisFactory.html):
 
 ```yaml
 redis:
@@ -57,7 +57,7 @@ redis:
 Support
 -------
 
-Please file bug reports and feature requests in [GitHub issues](https://github.com/benjamin-bader/dropwizard-jooq/issues).
+Please file bug reports and feature requests in [GitHub issues](https://github.com/benjamin-bader/droptools/issues).
 
 
 License

@@ -10,7 +10,7 @@ http://maven.apache.org/DECORATION/1.1.0 "
     <custom>
         <fluidoSkin>
             <gitHub>
-                <projectId>benjamin-bader/dropwizard-utils</projectId>
+                <projectId>benjamin-bader/droptools</projectId>
                 <ribbonOrientation>right</ribbonOrientation>
                 <ribbonColor>red</ribbonColor>
             </gitHub>
