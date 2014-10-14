@@ -128,6 +128,11 @@
                     <value>true</value>
                 </property>
             </activation>
+            <modules>
+                <module>dropwizard-jooq</module>
+                <module>dropwizard-redis</module>
+                <module>common</module>
+            </modules>
             <build>
                 <plugins>
                     <plugin>
