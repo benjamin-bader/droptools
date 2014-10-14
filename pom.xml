@@ -18,7 +18,7 @@
     </modules>
 
     <description>Helpful bundles for Dropwizard</description>
-    <url>https://github.com/benjamin-bader/dropwizard-jooq</url>
+    <url>https://github.com/benjamin-bader/droptools</url>
 
     <licenses>
         <license>
@@ -29,20 +29,20 @@
     </licenses>
 
     <scm>
-        <developerConnection>scm:git:git@github.com:benjamin-bader/dropwizard-jooq.git</developerConnection>
-        <connection>scm:git:https://github.com/benjamin-bader/dropwizard-jooq.git</connection>
-        <url>https://github.com/benjamin-bader/dropwizard-jooq</url>
+        <developerConnection>scm:git:git@github.com:benjamin-bader/droptools.git</developerConnection>
+        <connection>scm:git:https://github.com/benjamin-bader/droptools.git</connection>
+        <url>https://github.com/benjamin-bader/droptools</url>
       <tag>HEAD</tag>
   </scm>
 
     <ciManagement>
         <system>Travis CI</system>
-        <url>https://travis-ci.org/benjamin-bader/dropwizard-jooq</url>
+        <url>https://travis-ci.org/benjamin-bader/droptools</url>
     </ciManagement>
 
     <issueManagement>
         <system>GitHub Issues</system>
-        <url>https://github.com/benjamin-bader/dropwizard-jooq/issues</url>
+        <url>https://github.com/benjamin-bader/droptools/issues</url>
     </issueManagement>
 
     <developers>
