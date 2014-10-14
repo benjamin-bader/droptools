@@ -2,7 +2,7 @@ Droptools
 ======================
 
 [![Build Status](https://travis-ci.org/benjamin-bader/droptools.svg?branch=master)](https://travis-ci.org/benjamin-bader/droptools)
-[![Coverage Status](https://img.shields.io/coveralls/benjamin-bader/droptools.svg)](https://coveralls.io/r/benjamin-bader/droptools?branch=master)
+[![Coverage Status](https://img.shields.io/coveralls/benjamin-bader/droptools.svg)](https://coveralls.io/r/benjamin-bader/droptools)
 
 Useful Dropwizard addons, including `dropwizard-jooq` and `dropwizard-redis`.
 
