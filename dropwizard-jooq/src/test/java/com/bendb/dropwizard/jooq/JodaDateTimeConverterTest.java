@@ -1,6 +1,7 @@
 package com.bendb.dropwizard.jooq;
 
 import org.joda.time.DateTime;
+import org.jooq.Converter;
 import org.junit.Test;
 
 import java.sql.Timestamp;
@@ -10,7 +11,7 @@ import static com.google.common.truth.Truth.assertThat;
 public class JodaDateTimeConverterTest {
     @Test
     public void roundTripFromTimestampWorks() {
-        JodaDateTimeConverter converter = new JodaDateTimeConverter();
+        Converter<Timestamp, DateTime> converter = new JodaDateTimeConverter();
         Timestamp ts = new Timestamp(12345L);
         DateTime dt = converter.from(ts);
 
@@ -19,7 +20,7 @@ public class JodaDateTimeConverterTest {
 
     @Test
     public void roundTripFromDateTimeWorks() {
-        JodaDateTimeConverter converter = new JodaDateTimeConverter();
+        Converter<Timestamp, DateTime> converter = new JodaDateTimeConverter();
         DateTime dt = DateTime.now();
         Timestamp ts = converter.to(dt);
 

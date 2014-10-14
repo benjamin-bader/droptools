@@ -8,6 +8,7 @@ import com.sun.jersey.spi.inject.SingletonTypeInjectableProvider;
 import io.dropwizard.Configuration;
 import io.dropwizard.jersey.setup.JerseyEnvironment;
 import io.dropwizard.lifecycle.setup.LifecycleEnvironment;
+import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,14 +22,13 @@ import javax.ws.rs.core.Context;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.atLeastOnce;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class JedisBundleTest {
     static class TestConfig extends Configuration {}
 
+    @Mock Bootstrap<?> bootstrap;
     @Mock Environment environment;
     @Mock JerseyEnvironment jerseyEnvironment;
     @Mock LifecycleEnvironment lifecycleEnvironment;
@@ -53,6 +53,12 @@ public class JedisBundleTest {
         when(environment.lifecycle()).thenReturn(lifecycleEnvironment);
 
         when(jedisFactory.build(environment)).thenReturn(pool);
+    }
+
+    @Test
+    public void bootstrapsNothing() throws Exception {
+        bundle.initialize(bootstrap);
+        verifyZeroInteractions(bootstrap);
     }
 
     @Test
