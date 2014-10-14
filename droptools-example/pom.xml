@@ -15,8 +15,10 @@
     <description>Example using dropwizard-jooq</description>
 
     <properties>
+        <autovalue.version>1.0-rc1</autovalue.version>
         <dropwizard.version>0.7.1</dropwizard.version>
-        <dropwizard.jooq.version>0.7.1-2</dropwizard.jooq.version>
+        <dropwizard.flyway.version>0.7.0-1</dropwizard.flyway.version>
+        <dropwizard.jooq.version>0.7.1-3-SNAPSHOT</dropwizard.jooq.version>
         <junit.version>4.10</junit.version>
         <mockito.version>1.9.5</mockito.version>
         <truth.version>0.23</truth.version>
@@ -29,18 +31,18 @@
         <dependency>
             <groupId>io.dropwizard</groupId>
             <artifactId>dropwizard-core</artifactId>
-            <version>0.7.1</version>
+            <version>${dropwizard.version}</version>
         </dependency>
         <dependency>
             <groupId>com.bendb.dropwizard</groupId>
             <artifactId>dropwizard-jooq</artifactId>
-            <version>0.7.1-3-SNAPSHOT</version>
+            <version>${dropwizard.jooq.version}</version>
         </dependency>
 
         <dependency>
             <groupId>io.dropwizard.modules</groupId>
             <artifactId>dropwizard-flyway</artifactId>
-            <version>0.7.0-1</version>
+            <version>${dropwizard.flyway.version}</version>
         </dependency>
         <dependency>
             <groupId>org.postgresql</groupId>
@@ -51,7 +53,7 @@
         <dependency>
             <groupId>com.google.auto.value</groupId>
             <artifactId>auto-value</artifactId>
-            <version>1.0-rc1</version>
+            <version>${autovalue.version}</version>
         </dependency>
     </dependencies>
 
@@ -99,7 +101,6 @@
                         <database>
                             <name>org.jooq.util.postgres.PostgresDatabase</name>
                             <includes>.*</includes>
-                            <excludes></excludes>
                             <inputSchema>ex</inputSchema>
 
                             <customTypes>

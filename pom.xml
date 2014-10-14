@@ -21,7 +21,6 @@
         <module>dropwizard-redis</module>
         <module>dropwizard-jooq</module>
         <module>dropwizard-utils</module>
-        <module>droptools-example</module>
     </modules>
 
     <description>Helpful bundles for Dropwizard</description>
@@ -97,6 +96,23 @@
 
     <profiles>
         <profile>
+            <id>default</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <modules>
+                <module>dropwizard-jooq</module>
+                <module>dropwizard-redis</module>
+                <module>dropwizard-utils</module>
+                <module>droptools-example</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>release</id>
+            <!-- This profile excludes the `droptools-example` module, and should
+                 be used for CI builds, site builds, and releases. -->
+        </profile>
+        <profile>
             <id>java8-disable-strict-javadoc</id>
             <activation>
                 <jdk>[1.8,)</jdk>
@@ -104,6 +120,11 @@
             <properties>
                 <javadoc.doclint.none>-Xdoclint:none</javadoc.doclint.none>
             </properties>
+            <modules>
+                <module>dropwizard-jooq</module>
+                <module>dropwizard-redis</module>
+                <module>dropwizard-utils</module>
+            </modules>
         </profile>
     </profiles>
 

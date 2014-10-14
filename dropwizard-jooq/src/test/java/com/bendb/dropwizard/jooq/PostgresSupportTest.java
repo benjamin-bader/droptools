@@ -1,34 +1,29 @@
 package com.bendb.dropwizard.jooq;
 
-import org.jooq.DataType;
 import org.jooq.Field;
-import org.jooq.impl.SQLDataType;
-import org.junit.Before;
-import org.junit.Ignore;
+import org.jooq.test.data.Table1;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
-@RunWith(MockitoJUnitRunner.class)
 public class PostgresSupportTest {
-    @Mock Field<String> field;
-    @Mock DataType<String> dataType;
-
-    @Before
-    public void setup() {
-        when(field.getDataType()).thenReturn(SQLDataType.CLOB);
-        when(field.toString()).thenReturn("TEXT");
+    @Test
+    public void appliesArrayAggGroupingFunction() {
+        Field<Integer[]> agg = PostgresSupport.arrayAgg(Table1.FIELD_ID1);
+        assertThat(agg.toString()).isEqualTo("array_agg(" + Table1.FIELD_ID1.toString() + ")");
     }
 
     @Test
-    @Ignore("Don't know how to properly test this :(")
-    public void appliesArrayAggGroupingFunction() {
-        Field<String[]> agg = PostgresSupport.arrayAgg(field);
-        // ..then what?
+    public void stripsNullsFromArraysWhenRequested() {
+        Field<Integer[]> agg = PostgresSupport.arrayAggNoNulls(Table1.FIELD_ID1);
+        String columnName = Table1.FIELD_ID1.toString();
+        assertThat(agg.toString()).isEqualTo("array_remove(array_agg(" + columnName + "), NULL)");
+    }
+
+    @Test
+    public void joinsStringsWithGivenDelimiter() {
+        Field<String> agg = PostgresSupport.stringAgg(Table1.FIELD_NAME1, ":");
+        String columnName = Table1.FIELD_NAME1.toString();
+        assertThat(agg.toString()).isEqualTo("string_agg(" + columnName + ", ':')");
     }
 }
