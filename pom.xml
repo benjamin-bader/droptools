@@ -17,6 +17,7 @@
         <module>dropwizard-jooq</module>
     </modules>
 
+    <name>Droptoolst</name>
     <description>Helpful bundles for Dropwizard</description>
     <url>https://github.com/benjamin-bader/droptools</url>
 
@@ -33,7 +34,7 @@
         <connection>scm:git:https://github.com/benjamin-bader/droptools.git</connection>
         <url>https://github.com/benjamin-bader/droptools</url>
       <tag>HEAD</tag>
-  </scm>
+    </scm>
 
     <ciManagement>
         <system>Travis CI</system>
