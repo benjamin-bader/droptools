@@ -8,7 +8,7 @@
 
     <groupId>com.bendb.dropwizard</groupId>
     <artifactId>droptools-parent</artifactId>
-    <version>0.7.1-3-SNAPSHOT</version>
+    <version>0.7.1-3</version>
     <packaging>pom</packaging>
 
     <modules>
@@ -32,7 +32,8 @@
         <developerConnection>scm:git:git@github.com:benjamin-bader/dropwizard-jooq.git</developerConnection>
         <connection>scm:git:https://github.com/benjamin-bader/dropwizard-jooq.git</connection>
         <url>https://github.com/benjamin-bader/dropwizard-jooq</url>
-    </scm>
+      <tag>v0.7.1-3</tag>
+  </scm>
 
     <ciManagement>
         <system>Travis CI</system>
