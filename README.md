@@ -14,7 +14,7 @@ Usage
 <dependency>
   <groupId>com.bendb.dropwizard</groupId>
   <artifactId>droptools-parent</artifactId>
-  <version>0.7.1-1-SNAPSHOT</version>
+  <version>0.7.1-3</version>
 </dependency>
 ```
 

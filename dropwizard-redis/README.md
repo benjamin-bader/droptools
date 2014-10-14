@@ -4,10 +4,22 @@ Dropwizard Redis Bundle
 An addon bundle for using the excellent Jedis redis client in Dropwizard applications.
 
 
+Dependency Info
+---------------
+
+```xml
+<dependency>
+  <groupId>com.bendb.dropwizard</groupId>
+  <artifactId>dropwizard-redis</artifactId>
+  <version>0.7.1-3</version>
+</dependency>
+```
+
+
 Usage
 -----
 
-Add a [JedisBundle](http://droptools.bendb.com/0.7.1-1/apidocs/com/bendb/dropwizard/redis/JedisBundle.html) to your [Application](http://dropwizard.io/0.7.1/dropwizard-core/apidocs/io/dropwizard/Application.html) class.
+Add a [JedisBundle](http://droptools.bendb.com/0.7.1-3/apidocs/com/bendb/dropwizard/redis/JedisBundle.html) to your [Application](http://dropwizard.io/0.7.1/dropwizard-core/apidocs/io/dropwizard/Application.html) class.
 
 ```java
 @Override
@@ -26,7 +38,7 @@ This will enable `@Context` injection of pooled [Jedis](http://todo) and [JedisP
 
 ```java
 @GET
-@Path("/posts/{id})
+@Path("/posts/{id}")
 public BlogPost getPost(@QueryParam("id") int postId, @Context Jedis jedis) {
   String cachedBlogContent = jedis.get("post-" + postId);
   // do stuff
@@ -40,7 +52,7 @@ This will also enable redis health-checking.
 Configuration
 -------------
 
-For configuration the redis connection, there is [JedisFactory](http://droptools.bendb.com/0.7.1-1/apidocs/com/bendb/dropwizard/redis/JedisFactory.html):
+For configuration the redis connection, there is [JedisFactory](http://droptools.bendb.com/0.7.1-3/apidocs/com/bendb/dropwizard/redis/JedisFactory.html):
 
 ```yaml
 redis:
