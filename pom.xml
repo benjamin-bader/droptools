@@ -118,7 +118,9 @@
         <profile>
             <id>default</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <property>
+                    <name>!performRelease</name>
+                </property>
             </activation>
             <modules>
                 <module>dropwizard-jooq</module>
