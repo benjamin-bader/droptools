@@ -8,7 +8,7 @@
 
     <groupId>com.bendb.dropwizard</groupId>
     <artifactId>droptools-parent</artifactId>
-    <version>0.7.1-4</version>
+    <version>0.7.1-5-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
@@ -33,7 +33,7 @@
         <developerConnection>scm:git:git@github.com:benjamin-bader/droptools.git</developerConnection>
         <connection>scm:git:https://github.com/benjamin-bader/droptools.git</connection>
         <url>https://github.com/benjamin-bader/droptools</url>
-      <tag>v0.7.1-4</tag>
+      <tag>HEAD</tag>
     </scm>
 
     <ciManagement>
