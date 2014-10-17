@@ -2,6 +2,7 @@ language: java
 before_script:
   - psql -c "create database example_app;" -U postgres
   - psql -c "create user example_user with password 's3cr3t';" -U postgres
+  - psql -d example_app -U postgres -f droptools-example/src/main/resources/db/migration/20141010__init.sql
   - psql -c "grant all on database example_app to example_user;" -U postgres
 install:
   - "mvn install"
