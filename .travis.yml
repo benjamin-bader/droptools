@@ -10,3 +10,5 @@ after_success: mvn -DperformRelease=true cobertura:cobertura coveralls:cobertura
 jdk:
   - oraclejdk8
   - oraclejdk7
+addons:
+  postgresql: "9.3"
