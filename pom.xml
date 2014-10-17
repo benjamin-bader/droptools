@@ -17,7 +17,7 @@
         <module>dropwizard-jooq</module>
     </modules>
 
-    <name>Droptoolst</name>
+    <name>droptools</name>
     <description>Helpful bundles for Dropwizard</description>
     <url>https://github.com/benjamin-bader/droptools</url>
 
