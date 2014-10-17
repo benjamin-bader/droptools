@@ -22,11 +22,13 @@ A bundle that manages a redis connection pool and makes [Jedis](https://github.c
 Usage
 -----
 
+To use the entire `droptools` family:
+
 ```xml
 <dependency>
   <groupId>com.bendb.dropwizard</groupId>
   <artifactId>droptools-parent</artifactId>
-  <version>0.7.1-3</version>
+  <version>0.7.1-4</version>
 </dependency>
 ```
 
