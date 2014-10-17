@@ -128,11 +128,6 @@
             </modules>
         </profile>
         <profile>
-            <id>release</id>
-            <!-- This profile excludes the `droptools-example` module, and should
-                 be used for CI builds, site builds, and releases. -->
-        </profile>
-        <profile>
             <id>java8-disable-strict-javadoc</id>
             <activation>
                 <jdk>[1.8,)</jdk>
