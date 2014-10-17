@@ -1,1 +1,2 @@
-com.bendb.dropwizard.common.jersey
+com.bendb.dropwizard.redis
+com.bendb.dropwizard.redis.jersey
