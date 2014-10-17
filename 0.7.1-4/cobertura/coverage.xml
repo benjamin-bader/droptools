@@ -1,29 +1,111 @@
 <?xml version="1.0"?>
 <!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
 
-<coverage line-rate="0.9655172413793104" branch-rate="1.0" lines-covered="112" lines-valid="116" branches-covered="30" branches-valid="30" complexity="1.4" version="2.0.3" timestamp="1413511658087">
+<coverage line-rate="0.968421052631579" branch-rate="0.88" lines-covered="184" lines-valid="190" branches-covered="44" branches-valid="50" complexity="1.3061224489795917" version="2.0.3" timestamp="1413512374108">
 	<sources>
 		<source>--source</source>
-		<source>/Users/ben/Development/droptools/target/checkout/dropwizard-jooq/src/main/java</source>
+		<source>/Users/ben/Development/droptools/dropwizard-jooq/src/main/java</source>
+		<source>/Users/ben/Development/droptools/dropwizard-redis/src/main/java</source>
+		<source>/Users/ben/Development/droptools/common/src/main/java</source>
 	</sources>
 	<packages>
+		<package name="com.bendb.dropwizard.common.jersey" line-rate="0.9" branch-rate="1.0" complexity="1.2">
+			<classes>
+				<class name="com.bendb.dropwizard.common.jersey.DefaultInjectable" filename="com/bendb/dropwizard/common/jersey/DefaultInjectable.java" line-rate="1.0" branch-rate="1.0" complexity="1.0">
+					<methods>
+						<method name="of" signature="(Ljava/lang/Object;)Lcom/bendb/dropwizard/common/jersey/DefaultInjectable;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="23" hits="3" branch="false"/>
+							</lines>
+						</method>
+					</methods>
+					<lines>
+						<line number="23" hits="3" branch="false"/>
+					</lines>
+				</class>
+				<class name="com.bendb.dropwizard.common.jersey.PerRequestParamInjectableProvider" filename="com/bendb/dropwizard/common/jersey/PerRequestParamInjectableProvider.java" line-rate="1.0" branch-rate="1.0" complexity="1.0">
+					<methods>
+						<method name="getScope" signature="()Lcom/sun/jersey/core/spi/component/ComponentScope;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="21" hits="3" branch="false"/>
+							</lines>
+						</method>
+					</methods>
+					<lines>
+						<line number="21" hits="3" branch="false"/>
+					</lines>
+				</class>
+				<class name="com.bendb.dropwizard.common.jersey.SingletonParamInjectableProvider" filename="com/bendb/dropwizard/common/jersey/SingletonParamInjectableProvider.java" line-rate="1.0" branch-rate="1.0" complexity="1.0">
+					<methods>
+						<method name="getScope" signature="()Lcom/sun/jersey/core/spi/component/ComponentScope;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="21" hits="3" branch="false"/>
+							</lines>
+						</method>
+					</methods>
+					<lines>
+						<line number="21" hits="3" branch="false"/>
+					</lines>
+				</class>
+				<class name="com.bendb.dropwizard.common.jersey.TypedParamInjectableProvider" filename="com/bendb/dropwizard/common/jersey/TypedParamInjectableProvider.java" line-rate="0.8571428571428571" branch-rate="1.0" complexity="1.6666666666666667">
+					<methods>
+						<method name="&lt;init&gt;" signature="(Ljava/lang/Class;)V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="20" hits="15" branch="false"/>
+								<line number="21" hits="15" branch="false"/>
+								<line number="22" hits="12" branch="false"/>
+							</lines>
+						</method>
+						<method name="getInjectable" signature="(Lcom/sun/jersey/core/spi/component/ComponentContext;Ljava/lang/annotation/Annotation;Lcom/sun/jersey/api/model/Parameter;)Lcom/sun/jersey/spi/inject/Injectable;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="26" hits="6" branch="true" condition-coverage="100% (2/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="100%"/>
+									</conditions>
+								</line>
+								<line number="27" hits="3" branch="false"/>
+								<line number="29" hits="3" branch="false"/>
+							</lines>
+						</method>
+						<method name="getInjectable" signature="(Lcom/sun/jersey/core/spi/component/ComponentContext;Ljava/lang/annotation/Annotation;Ljava/lang/Object;)Lcom/sun/jersey/spi/inject/Injectable;" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="17" hits="0" branch="false"/>
+							</lines>
+						</method>
+					</methods>
+					<lines>
+						<line number="17" hits="0" branch="false"/>
+						<line number="20" hits="15" branch="false"/>
+						<line number="21" hits="15" branch="false"/>
+						<line number="22" hits="12" branch="false"/>
+						<line number="26" hits="6" branch="true" condition-coverage="100% (2/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="100%"/>
+							</conditions>
+						</line>
+						<line number="27" hits="3" branch="false"/>
+						<line number="29" hits="3" branch="false"/>
+					</lines>
+				</class>
+			</classes>
+		</package>
 		<package name="com.bendb.dropwizard.jooq" line-rate="0.9879518072289156" branch-rate="1.0" complexity="1.1702127659574468">
 			<classes>
 				<class name="com.bendb.dropwizard.jooq.JodaDateTimeConverter" filename="com/bendb/dropwizard/jooq/JodaDateTimeConverter.java" line-rate="1.0" branch-rate="1.0" complexity="1.0">
 					<methods>
 						<method name="from" signature="(Ljava/lang/Object;)Ljava/lang/Object;" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="11" hits="4" branch="false"/>
+								<line number="11" hits="12" branch="false"/>
 							</lines>
 						</method>
 						<method name="from" signature="(Ljava/sql/Timestamp;)Lorg/joda/time/DateTime;" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="14" hits="2" branch="false"/>
+								<line number="14" hits="6" branch="false"/>
 							</lines>
 						</method>
 						<method name="fromType" signature="()Ljava/lang/Class;" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="24" hits="1" branch="false"/>
+								<line number="24" hits="3" branch="false"/>
 							</lines>
 						</method>
 						<method name="to" signature="(Ljava/lang/Object;)Ljava/lang/Object;" line-rate="1.0" branch-rate="1.0">
@@ -32,47 +114,47 @@
 						</method>
 						<method name="to" signature="(Lorg/joda/time/DateTime;)Ljava/sql/Timestamp;" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="19" hits="2" branch="false"/>
+								<line number="19" hits="6" branch="false"/>
 							</lines>
 						</method>
 						<method name="toType" signature="()Ljava/lang/Class;" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="29" hits="1" branch="false"/>
+								<line number="29" hits="3" branch="false"/>
 							</lines>
 						</method>
 					</methods>
 					<lines>
-						<line number="11" hits="4" branch="false"/>
-						<line number="14" hits="2" branch="false"/>
-						<line number="19" hits="2" branch="false"/>
-						<line number="24" hits="1" branch="false"/>
-						<line number="29" hits="1" branch="false"/>
+						<line number="11" hits="12" branch="false"/>
+						<line number="14" hits="6" branch="false"/>
+						<line number="19" hits="6" branch="false"/>
+						<line number="24" hits="3" branch="false"/>
+						<line number="29" hits="3" branch="false"/>
 					</lines>
 				</class>
 				<class name="com.bendb.dropwizard.jooq.JooqBundle" filename="com/bendb/dropwizard/jooq/JooqBundle.java" line-rate="0.9230769230769231" branch-rate="1.0" complexity="1.0">
 					<methods>
 						<method name="getJooqFactory" signature="(Lio/dropwizard/Configuration;)Lcom/bendb/dropwizard/jooq/JooqFactory;" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="38" hits="1" branch="false"/>
+								<line number="38" hits="3" branch="false"/>
 							</lines>
 						</method>
 						<method name="initialize" signature="(Lio/dropwizard/setup/Bootstrap;)V" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="18" hits="1" branch="false"/>
+								<line number="18" hits="3" branch="false"/>
 							</lines>
 						</method>
 						<method name="run" signature="(Lio/dropwizard/Configuration;Lio/dropwizard/setup/Environment;)V" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="22" hits="5" branch="false"/>
-								<line number="23" hits="5" branch="false"/>
-								<line number="24" hits="5" branch="false"/>
-								<line number="25" hits="5" branch="false"/>
-								<line number="27" hits="5" branch="false"/>
-								<line number="28" hits="5" branch="false"/>
-								<line number="29" hits="5" branch="false"/>
-								<line number="30" hits="5" branch="false"/>
-								<line number="32" hits="5" branch="false"/>
-								<line number="33" hits="5" branch="false"/>
+								<line number="22" hits="15" branch="false"/>
+								<line number="23" hits="15" branch="false"/>
+								<line number="24" hits="15" branch="false"/>
+								<line number="25" hits="15" branch="false"/>
+								<line number="27" hits="15" branch="false"/>
+								<line number="28" hits="15" branch="false"/>
+								<line number="29" hits="15" branch="false"/>
+								<line number="30" hits="15" branch="false"/>
+								<line number="32" hits="15" branch="false"/>
+								<line number="33" hits="15" branch="false"/>
 							</lines>
 						</method>
 						<method name="run" signature="(Ljava/lang/Object;Lio/dropwizard/setup/Environment;)V" line-rate="0.0" branch-rate="1.0">
@@ -83,18 +165,18 @@
 					</methods>
 					<lines>
 						<line number="12" hits="0" branch="false"/>
-						<line number="18" hits="1" branch="false"/>
-						<line number="22" hits="5" branch="false"/>
-						<line number="23" hits="5" branch="false"/>
-						<line number="24" hits="5" branch="false"/>
-						<line number="25" hits="5" branch="false"/>
-						<line number="27" hits="5" branch="false"/>
-						<line number="28" hits="5" branch="false"/>
-						<line number="29" hits="5" branch="false"/>
-						<line number="30" hits="5" branch="false"/>
-						<line number="32" hits="5" branch="false"/>
-						<line number="33" hits="5" branch="false"/>
-						<line number="38" hits="1" branch="false"/>
+						<line number="18" hits="3" branch="false"/>
+						<line number="22" hits="15" branch="false"/>
+						<line number="23" hits="15" branch="false"/>
+						<line number="24" hits="15" branch="false"/>
+						<line number="25" hits="15" branch="false"/>
+						<line number="27" hits="15" branch="false"/>
+						<line number="28" hits="15" branch="false"/>
+						<line number="29" hits="15" branch="false"/>
+						<line number="30" hits="15" branch="false"/>
+						<line number="32" hits="15" branch="false"/>
+						<line number="33" hits="15" branch="false"/>
+						<line number="38" hits="3" branch="false"/>
 					</lines>
 				</class>
 				<class name="com.bendb.dropwizard.jooq.JooqConfiguration" filename="com/bendb/dropwizard/jooq/JooqConfiguration.java" line-rate="1.0" branch-rate="1.0" complexity="1.0">
@@ -107,262 +189,262 @@
 					<methods>
 						<method name="&lt;init&gt;" signature="()V" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="115" hits="7" branch="false"/>
-								<line number="116" hits="7" branch="false"/>
-								<line number="119" hits="7" branch="false"/>
-								<line number="121" hits="7" branch="false"/>
-								<line number="123" hits="7" branch="false"/>
-								<line number="126" hits="7" branch="false"/>
-								<line number="129" hits="7" branch="false"/>
-								<line number="131" hits="7" branch="false"/>
-								<line number="134" hits="7" branch="false"/>
-								<line number="137" hits="7" branch="false"/>
-								<line number="139" hits="7" branch="false"/>
-								<line number="141" hits="7" branch="false"/>
-								<line number="143" hits="7" branch="false"/>
+								<line number="115" hits="21" branch="false"/>
+								<line number="116" hits="21" branch="false"/>
+								<line number="119" hits="21" branch="false"/>
+								<line number="121" hits="21" branch="false"/>
+								<line number="123" hits="21" branch="false"/>
+								<line number="126" hits="21" branch="false"/>
+								<line number="129" hits="21" branch="false"/>
+								<line number="131" hits="21" branch="false"/>
+								<line number="134" hits="21" branch="false"/>
+								<line number="137" hits="21" branch="false"/>
+								<line number="139" hits="21" branch="false"/>
+								<line number="141" hits="21" branch="false"/>
+								<line number="143" hits="21" branch="false"/>
 							</lines>
 						</method>
 						<method name="build" signature="(Lio/dropwizard/setup/Environment;Lio/dropwizard/db/DataSourceFactory;)Lorg/jooq/Configuration;" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="242" hits="6" branch="false"/>
-								<line number="243" hits="6" branch="false"/>
-								<line number="244" hits="6" branch="false"/>
-								<line number="245" hits="6" branch="false"/>
-								<line number="246" hits="6" branch="false"/>
-								<line number="247" hits="6" branch="false"/>
-								<line number="248" hits="6" branch="false"/>
-								<line number="249" hits="6" branch="false"/>
-								<line number="251" hits="6" branch="true" condition-coverage="100% (4/4)">
+								<line number="242" hits="18" branch="false"/>
+								<line number="243" hits="18" branch="false"/>
+								<line number="244" hits="18" branch="false"/>
+								<line number="245" hits="18" branch="false"/>
+								<line number="246" hits="18" branch="false"/>
+								<line number="247" hits="18" branch="false"/>
+								<line number="248" hits="18" branch="false"/>
+								<line number="249" hits="18" branch="false"/>
+								<line number="251" hits="18" branch="true" condition-coverage="100% (4/4)">
 									<conditions>
 										<condition number="0" type="jump" coverage="100%"/>
 										<condition number="1" type="jump" coverage="100%"/>
 									</conditions>
 								</line>
-								<line number="252" hits="1" branch="false"/>
-								<line number="253" hits="1" branch="false"/>
-								<line number="255" hits="1" branch="false"/>
-								<line number="256" hits="1" branch="false"/>
-								<line number="258" hits="1" branch="false"/>
-								<line number="261" hits="6" branch="false"/>
-								<line number="263" hits="6" branch="false"/>
+								<line number="252" hits="3" branch="false"/>
+								<line number="253" hits="3" branch="false"/>
+								<line number="255" hits="3" branch="false"/>
+								<line number="256" hits="3" branch="false"/>
+								<line number="258" hits="3" branch="false"/>
+								<line number="261" hits="18" branch="false"/>
+								<line number="263" hits="18" branch="false"/>
 							</lines>
 						</method>
 						<method name="buildSettings" signature="()Lorg/jooq/conf/Settings;" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="275" hits="6" branch="false"/>
-								<line number="276" hits="6" branch="false"/>
-								<line number="277" hits="6" branch="false"/>
-								<line number="278" hits="6" branch="false"/>
-								<line number="279" hits="6" branch="false"/>
-								<line number="280" hits="6" branch="false"/>
-								<line number="281" hits="6" branch="false"/>
-								<line number="282" hits="6" branch="false"/>
-								<line number="283" hits="6" branch="false"/>
-								<line number="284" hits="6" branch="false"/>
-								<line number="285" hits="6" branch="false"/>
-								<line number="287" hits="6" branch="false"/>
+								<line number="275" hits="18" branch="false"/>
+								<line number="276" hits="18" branch="false"/>
+								<line number="277" hits="18" branch="false"/>
+								<line number="278" hits="18" branch="false"/>
+								<line number="279" hits="18" branch="false"/>
+								<line number="280" hits="18" branch="false"/>
+								<line number="281" hits="18" branch="false"/>
+								<line number="282" hits="18" branch="false"/>
+								<line number="283" hits="18" branch="false"/>
+								<line number="284" hits="18" branch="false"/>
+								<line number="285" hits="18" branch="false"/>
+								<line number="287" hits="18" branch="false"/>
 							</lines>
 						</method>
 						<method name="determineDialect" signature="(Lio/dropwizard/db/DataSourceFactory;)Lorg/jooq/SQLDialect;" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="267" hits="6" branch="true" condition-coverage="100% (2/2)">
+								<line number="267" hits="18" branch="true" condition-coverage="100% (2/2)">
 									<conditions>
 										<condition number="0" type="jump" coverage="100%"/>
 									</conditions>
 								</line>
-								<line number="268" hits="5" branch="false"/>
-								<line number="271" hits="1" branch="false"/>
+								<line number="268" hits="15" branch="false"/>
+								<line number="271" hits="3" branch="false"/>
 							</lines>
 						</method>
 					</methods>
 					<lines>
-						<line number="115" hits="7" branch="false"/>
-						<line number="116" hits="7" branch="false"/>
-						<line number="119" hits="7" branch="false"/>
-						<line number="121" hits="7" branch="false"/>
-						<line number="123" hits="7" branch="false"/>
-						<line number="126" hits="7" branch="false"/>
-						<line number="129" hits="7" branch="false"/>
-						<line number="131" hits="7" branch="false"/>
-						<line number="134" hits="7" branch="false"/>
-						<line number="137" hits="7" branch="false"/>
-						<line number="139" hits="7" branch="false"/>
-						<line number="141" hits="7" branch="false"/>
-						<line number="143" hits="7" branch="false"/>
-						<line number="242" hits="6" branch="false"/>
-						<line number="243" hits="6" branch="false"/>
-						<line number="244" hits="6" branch="false"/>
-						<line number="245" hits="6" branch="false"/>
-						<line number="246" hits="6" branch="false"/>
-						<line number="247" hits="6" branch="false"/>
-						<line number="248" hits="6" branch="false"/>
-						<line number="249" hits="6" branch="false"/>
-						<line number="251" hits="6" branch="true" condition-coverage="100% (4/4)">
+						<line number="115" hits="21" branch="false"/>
+						<line number="116" hits="21" branch="false"/>
+						<line number="119" hits="21" branch="false"/>
+						<line number="121" hits="21" branch="false"/>
+						<line number="123" hits="21" branch="false"/>
+						<line number="126" hits="21" branch="false"/>
+						<line number="129" hits="21" branch="false"/>
+						<line number="131" hits="21" branch="false"/>
+						<line number="134" hits="21" branch="false"/>
+						<line number="137" hits="21" branch="false"/>
+						<line number="139" hits="21" branch="false"/>
+						<line number="141" hits="21" branch="false"/>
+						<line number="143" hits="21" branch="false"/>
+						<line number="242" hits="18" branch="false"/>
+						<line number="243" hits="18" branch="false"/>
+						<line number="244" hits="18" branch="false"/>
+						<line number="245" hits="18" branch="false"/>
+						<line number="246" hits="18" branch="false"/>
+						<line number="247" hits="18" branch="false"/>
+						<line number="248" hits="18" branch="false"/>
+						<line number="249" hits="18" branch="false"/>
+						<line number="251" hits="18" branch="true" condition-coverage="100% (4/4)">
 							<conditions>
 								<condition number="0" type="jump" coverage="100%"/>
 								<condition number="1" type="jump" coverage="100%"/>
 							</conditions>
 						</line>
-						<line number="252" hits="1" branch="false"/>
-						<line number="253" hits="1" branch="false"/>
-						<line number="255" hits="1" branch="false"/>
-						<line number="256" hits="1" branch="false"/>
-						<line number="258" hits="1" branch="false"/>
-						<line number="261" hits="6" branch="false"/>
-						<line number="263" hits="6" branch="false"/>
-						<line number="267" hits="6" branch="true" condition-coverage="100% (2/2)">
+						<line number="252" hits="3" branch="false"/>
+						<line number="253" hits="3" branch="false"/>
+						<line number="255" hits="3" branch="false"/>
+						<line number="256" hits="3" branch="false"/>
+						<line number="258" hits="3" branch="false"/>
+						<line number="261" hits="18" branch="false"/>
+						<line number="263" hits="18" branch="false"/>
+						<line number="267" hits="18" branch="true" condition-coverage="100% (2/2)">
 							<conditions>
 								<condition number="0" type="jump" coverage="100%"/>
 							</conditions>
 						</line>
-						<line number="268" hits="5" branch="false"/>
-						<line number="271" hits="1" branch="false"/>
-						<line number="275" hits="6" branch="false"/>
-						<line number="276" hits="6" branch="false"/>
-						<line number="277" hits="6" branch="false"/>
-						<line number="278" hits="6" branch="false"/>
-						<line number="279" hits="6" branch="false"/>
-						<line number="280" hits="6" branch="false"/>
-						<line number="281" hits="6" branch="false"/>
-						<line number="282" hits="6" branch="false"/>
-						<line number="283" hits="6" branch="false"/>
-						<line number="284" hits="6" branch="false"/>
-						<line number="285" hits="6" branch="false"/>
-						<line number="287" hits="6" branch="false"/>
+						<line number="268" hits="15" branch="false"/>
+						<line number="271" hits="3" branch="false"/>
+						<line number="275" hits="18" branch="false"/>
+						<line number="276" hits="18" branch="false"/>
+						<line number="277" hits="18" branch="false"/>
+						<line number="278" hits="18" branch="false"/>
+						<line number="279" hits="18" branch="false"/>
+						<line number="280" hits="18" branch="false"/>
+						<line number="281" hits="18" branch="false"/>
+						<line number="282" hits="18" branch="false"/>
+						<line number="283" hits="18" branch="false"/>
+						<line number="284" hits="18" branch="false"/>
+						<line number="285" hits="18" branch="false"/>
+						<line number="287" hits="18" branch="false"/>
 					</lines>
 				</class>
 				<class name="com.bendb.dropwizard.jooq.JooqHealthCheck" filename="com/bendb/dropwizard/jooq/JooqHealthCheck.java" line-rate="1.0" branch-rate="1.0" complexity="1.0">
 					<methods>
 						<method name="access$000" signature="(Lcom/bendb/dropwizard/jooq/JooqHealthCheck;)Ljava/lang/String;" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="8" hits="2" branch="false"/>
+								<line number="8" hits="6" branch="false"/>
 							</lines>
 						</method>
 						<method name="check" signature="()Lcom/codahale/metrics/health/HealthCheck$Result;" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="23" hits="2" branch="false"/>
-								<line number="30" hits="1" branch="false"/>
+								<line number="23" hits="6" branch="false"/>
+								<line number="30" hits="3" branch="false"/>
 							</lines>
 						</method>
 					</methods>
 					<lines>
-						<line number="8" hits="2" branch="false"/>
-						<line number="23" hits="2" branch="false"/>
-						<line number="30" hits="1" branch="false"/>
+						<line number="8" hits="6" branch="false"/>
+						<line number="23" hits="6" branch="false"/>
+						<line number="30" hits="3" branch="false"/>
 					</lines>
 				</class>
 				<class name="com.bendb.dropwizard.jooq.JooqHealthCheck$1" filename="com/bendb/dropwizard/jooq/JooqHealthCheck.java" line-rate="1.0" branch-rate="1.0" complexity="1.0">
 					<methods>
 						<method name="run" signature="(Lorg/jooq/Configuration;)V" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="26" hits="2" branch="false"/>
-								<line number="27" hits="1" branch="false"/>
+								<line number="26" hits="6" branch="false"/>
+								<line number="27" hits="3" branch="false"/>
 							</lines>
 						</method>
 					</methods>
 					<lines>
-						<line number="26" hits="2" branch="false"/>
-						<line number="27" hits="1" branch="false"/>
+						<line number="26" hits="6" branch="false"/>
+						<line number="27" hits="3" branch="false"/>
 					</lines>
 				</class>
 				<class name="com.bendb.dropwizard.jooq.LoggingExecutionListener" filename="com/bendb/dropwizard/jooq/LoggingExecutionListener.java" line-rate="1.0" branch-rate="1.0" complexity="2.3333333333333335">
 					<methods>
 						<method name="&lt;clinit&gt;" signature="()V" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="12" hits="1" branch="false"/>
+								<line number="12" hits="3" branch="false"/>
 							</lines>
 						</method>
 						<method name="executeStart" signature="(Lorg/jooq/ExecuteContext;)V" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="22" hits="6" branch="false"/>
-								<line number="23" hits="6" branch="true" condition-coverage="100% (2/2)">
+								<line number="22" hits="18" branch="false"/>
+								<line number="23" hits="18" branch="true" condition-coverage="100% (2/2)">
 									<conditions>
 										<condition number="0" type="jump" coverage="100%"/>
 									</conditions>
 								</line>
-								<line number="24" hits="2" branch="false"/>
-								<line number="25" hits="4" branch="true" condition-coverage="100% (2/2)">
+								<line number="24" hits="6" branch="false"/>
+								<line number="25" hits="12" branch="true" condition-coverage="100% (2/2)">
 									<conditions>
 										<condition number="0" type="jump" coverage="100%"/>
 									</conditions>
 								</line>
-								<line number="26" hits="2" branch="false"/>
-								<line number="27" hits="2" branch="true" condition-coverage="100% (2/2)">
+								<line number="26" hits="6" branch="false"/>
+								<line number="27" hits="6" branch="true" condition-coverage="100% (2/2)">
 									<conditions>
 										<condition number="0" type="jump" coverage="100%"/>
 									</conditions>
 								</line>
-								<line number="28" hits="1" branch="false"/>
-								<line number="31" hits="6" branch="true" condition-coverage="100% (2/2)">
+								<line number="28" hits="3" branch="false"/>
+								<line number="31" hits="18" branch="true" condition-coverage="100% (2/2)">
 									<conditions>
 										<condition number="0" type="jump" coverage="100%"/>
 									</conditions>
 								</line>
-								<line number="32" hits="5" branch="false"/>
-								<line number="34" hits="6" branch="false"/>
+								<line number="32" hits="15" branch="false"/>
+								<line number="34" hits="18" branch="false"/>
 							</lines>
 						</method>
 						<method name="setLogger" signature="(Lorg/slf4j/Logger;)V" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="38" hits="12" branch="false"/>
-								<line number="39" hits="12" branch="false"/>
+								<line number="38" hits="36" branch="false"/>
+								<line number="39" hits="36" branch="false"/>
 							</lines>
 						</method>
 					</methods>
 					<lines>
-						<line number="12" hits="1" branch="false"/>
-						<line number="22" hits="6" branch="false"/>
-						<line number="23" hits="6" branch="true" condition-coverage="100% (2/2)">
+						<line number="12" hits="3" branch="false"/>
+						<line number="22" hits="18" branch="false"/>
+						<line number="23" hits="18" branch="true" condition-coverage="100% (2/2)">
 							<conditions>
 								<condition number="0" type="jump" coverage="100%"/>
 							</conditions>
 						</line>
-						<line number="24" hits="2" branch="false"/>
-						<line number="25" hits="4" branch="true" condition-coverage="100% (2/2)">
+						<line number="24" hits="6" branch="false"/>
+						<line number="25" hits="12" branch="true" condition-coverage="100% (2/2)">
 							<conditions>
 								<condition number="0" type="jump" coverage="100%"/>
 							</conditions>
 						</line>
-						<line number="26" hits="2" branch="false"/>
-						<line number="27" hits="2" branch="true" condition-coverage="100% (2/2)">
+						<line number="26" hits="6" branch="false"/>
+						<line number="27" hits="6" branch="true" condition-coverage="100% (2/2)">
 							<conditions>
 								<condition number="0" type="jump" coverage="100%"/>
 							</conditions>
 						</line>
-						<line number="28" hits="1" branch="false"/>
-						<line number="31" hits="6" branch="true" condition-coverage="100% (2/2)">
+						<line number="28" hits="3" branch="false"/>
+						<line number="31" hits="18" branch="true" condition-coverage="100% (2/2)">
 							<conditions>
 								<condition number="0" type="jump" coverage="100%"/>
 							</conditions>
 						</line>
-						<line number="32" hits="5" branch="false"/>
-						<line number="34" hits="6" branch="false"/>
-						<line number="38" hits="12" branch="false"/>
-						<line number="39" hits="12" branch="false"/>
+						<line number="32" hits="15" branch="false"/>
+						<line number="34" hits="18" branch="false"/>
+						<line number="38" hits="36" branch="false"/>
+						<line number="39" hits="36" branch="false"/>
 					</lines>
 				</class>
 				<class name="com.bendb.dropwizard.jooq.PostgresSupport" filename="com/bendb/dropwizard/jooq/PostgresSupport.java" line-rate="1.0" branch-rate="1.0" complexity="1.0">
 					<methods>
 						<method name="arrayAgg" signature="(Lorg/jooq/Field;)Lorg/jooq/Field;" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="28" hits="1" branch="false"/>
+								<line number="28" hits="3" branch="false"/>
 							</lines>
 						</method>
 						<method name="arrayAggNoNulls" signature="(Lorg/jooq/Field;)Lorg/jooq/Field;" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="43" hits="1" branch="false"/>
+								<line number="43" hits="3" branch="false"/>
 							</lines>
 						</method>
 						<method name="stringAgg" signature="(Lorg/jooq/Field;Ljava/lang/String;)Lorg/jooq/Field;" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="55" hits="1" branch="false"/>
+								<line number="55" hits="3" branch="false"/>
 							</lines>
 						</method>
 					</methods>
 					<lines>
-						<line number="28" hits="1" branch="false"/>
-						<line number="43" hits="1" branch="false"/>
-						<line number="55" hits="1" branch="false"/>
+						<line number="28" hits="3" branch="false"/>
+						<line number="43" hits="3" branch="false"/>
+						<line number="55" hits="3" branch="false"/>
 					</lines>
 				</class>
 			</classes>
@@ -373,9 +455,9 @@
 					<methods>
 						<method name="&lt;init&gt;" signature="(Lorg/jooq/Configuration;)V" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="27" hits="10" branch="false"/>
-								<line number="28" hits="10" branch="false"/>
-								<line number="29" hits="10" branch="false"/>
+								<line number="27" hits="30" branch="false"/>
+								<line number="28" hits="30" branch="false"/>
+								<line number="29" hits="30" branch="false"/>
 							</lines>
 						</method>
 						<method name="getInjectable" signature="(Lcom/sun/jersey/core/spi/component/ComponentContext;Ljava/lang/annotation/Annotation;Ljava/lang/Object;)Lcom/sun/jersey/spi/inject/Injectable;" line-rate="0.0" branch-rate="1.0">
@@ -385,60 +467,60 @@
 						</method>
 						<method name="getInjectable" signature="(Lcom/sun/jersey/core/spi/component/ComponentContext;Ljavax/ws/rs/core/Context;Lcom/sun/jersey/api/model/Parameter;)Lcom/sun/jersey/spi/inject/Injectable;" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="38" hits="4" branch="false"/>
-								<line number="39" hits="4" branch="true" condition-coverage="100% (2/2)">
+								<line number="38" hits="12" branch="false"/>
+								<line number="39" hits="12" branch="true" condition-coverage="100% (2/2)">
 									<conditions>
 										<condition number="0" type="jump" coverage="100%"/>
 									</conditions>
 								</line>
-								<line number="40" hits="1" branch="false"/>
-								<line number="43" hits="3" branch="true" condition-coverage="100% (2/2)">
+								<line number="40" hits="3" branch="false"/>
+								<line number="43" hits="9" branch="true" condition-coverage="100% (2/2)">
 									<conditions>
 										<condition number="0" type="jump" coverage="100%"/>
 									</conditions>
 								</line>
-								<line number="44" hits="1" branch="false"/>
-								<line number="47" hits="2" branch="true" condition-coverage="100% (2/2)">
+								<line number="44" hits="3" branch="false"/>
+								<line number="47" hits="6" branch="true" condition-coverage="100% (2/2)">
 									<conditions>
 										<condition number="0" type="jump" coverage="100%"/>
 									</conditions>
 								</line>
-								<line number="48" hits="1" branch="false"/>
-								<line number="51" hits="1" branch="false"/>
+								<line number="48" hits="3" branch="false"/>
+								<line number="51" hits="3" branch="false"/>
 							</lines>
 						</method>
 						<method name="getScope" signature="()Lcom/sun/jersey/core/spi/component/ComponentScope;" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="33" hits="1" branch="false"/>
+								<line number="33" hits="3" branch="false"/>
 							</lines>
 						</method>
 					</methods>
 					<lines>
 						<line number="23" hits="0" branch="false"/>
-						<line number="27" hits="10" branch="false"/>
-						<line number="28" hits="10" branch="false"/>
-						<line number="29" hits="10" branch="false"/>
-						<line number="33" hits="1" branch="false"/>
-						<line number="38" hits="4" branch="false"/>
-						<line number="39" hits="4" branch="true" condition-coverage="100% (2/2)">
+						<line number="27" hits="30" branch="false"/>
+						<line number="28" hits="30" branch="false"/>
+						<line number="29" hits="30" branch="false"/>
+						<line number="33" hits="3" branch="false"/>
+						<line number="38" hits="12" branch="false"/>
+						<line number="39" hits="12" branch="true" condition-coverage="100% (2/2)">
 							<conditions>
 								<condition number="0" type="jump" coverage="100%"/>
 							</conditions>
 						</line>
-						<line number="40" hits="1" branch="false"/>
-						<line number="43" hits="3" branch="true" condition-coverage="100% (2/2)">
+						<line number="40" hits="3" branch="false"/>
+						<line number="43" hits="9" branch="true" condition-coverage="100% (2/2)">
 							<conditions>
 								<condition number="0" type="jump" coverage="100%"/>
 							</conditions>
 						</line>
-						<line number="44" hits="1" branch="false"/>
-						<line number="47" hits="2" branch="true" condition-coverage="100% (2/2)">
+						<line number="44" hits="3" branch="false"/>
+						<line number="47" hits="6" branch="true" condition-coverage="100% (2/2)">
 							<conditions>
 								<condition number="0" type="jump" coverage="100%"/>
 							</conditions>
 						</line>
-						<line number="48" hits="1" branch="false"/>
-						<line number="51" hits="1" branch="false"/>
+						<line number="48" hits="3" branch="false"/>
+						<line number="51" hits="3" branch="false"/>
 					</lines>
 				</class>
 				<class name="com.bendb.dropwizard.jooq.jersey.DSLContextTypeInjectableProvider" filename="com/bendb/dropwizard/jooq/jersey/DSLContextTypeInjectableProvider.java" line-rate="0.8888888888888888" branch-rate="1.0" complexity="3.0">
@@ -450,62 +532,62 @@
 						</method>
 						<method name="getInjectable" signature="(Lcom/sun/jersey/core/spi/component/ComponentContext;Ljavax/ws/rs/core/Context;Ljava/lang/reflect/Type;)Lcom/sun/jersey/spi/inject/Injectable;" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="36" hits="4" branch="true" condition-coverage="100% (2/2)">
+								<line number="36" hits="12" branch="true" condition-coverage="100% (2/2)">
 									<conditions>
 										<condition number="0" type="jump" coverage="100%"/>
 									</conditions>
 								</line>
-								<line number="37" hits="1" branch="false"/>
-								<line number="40" hits="3" branch="true" condition-coverage="100% (2/2)">
+								<line number="37" hits="3" branch="false"/>
+								<line number="40" hits="9" branch="true" condition-coverage="100% (2/2)">
 									<conditions>
 										<condition number="0" type="jump" coverage="100%"/>
 									</conditions>
 								</line>
-								<line number="41" hits="1" branch="false"/>
-								<line number="44" hits="2" branch="true" condition-coverage="100% (2/2)">
+								<line number="41" hits="3" branch="false"/>
+								<line number="44" hits="6" branch="true" condition-coverage="100% (2/2)">
 									<conditions>
 										<condition number="0" type="jump" coverage="100%"/>
 									</conditions>
 								</line>
-								<line number="45" hits="1" branch="false"/>
-								<line number="48" hits="1" branch="false"/>
+								<line number="45" hits="3" branch="false"/>
+								<line number="48" hits="3" branch="false"/>
 							</lines>
 						</method>
 						<method name="getScope" signature="()Lcom/sun/jersey/core/spi/component/ComponentScope;" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="31" hits="1" branch="false"/>
+								<line number="31" hits="3" branch="false"/>
 							</lines>
 						</method>
 					</methods>
 					<lines>
 						<line number="21" hits="0" branch="false"/>
-						<line number="31" hits="1" branch="false"/>
-						<line number="36" hits="4" branch="true" condition-coverage="100% (2/2)">
+						<line number="31" hits="3" branch="false"/>
+						<line number="36" hits="12" branch="true" condition-coverage="100% (2/2)">
 							<conditions>
 								<condition number="0" type="jump" coverage="100%"/>
 							</conditions>
 						</line>
-						<line number="37" hits="1" branch="false"/>
-						<line number="40" hits="3" branch="true" condition-coverage="100% (2/2)">
+						<line number="37" hits="3" branch="false"/>
+						<line number="40" hits="9" branch="true" condition-coverage="100% (2/2)">
 							<conditions>
 								<condition number="0" type="jump" coverage="100%"/>
 							</conditions>
 						</line>
-						<line number="41" hits="1" branch="false"/>
-						<line number="44" hits="2" branch="true" condition-coverage="100% (2/2)">
+						<line number="41" hits="3" branch="false"/>
+						<line number="44" hits="6" branch="true" condition-coverage="100% (2/2)">
 							<conditions>
 								<condition number="0" type="jump" coverage="100%"/>
 							</conditions>
 						</line>
-						<line number="45" hits="1" branch="false"/>
-						<line number="48" hits="1" branch="false"/>
+						<line number="45" hits="3" branch="false"/>
+						<line number="48" hits="3" branch="false"/>
 					</lines>
 				</class>
 				<class name="com.bendb.dropwizard.jooq.jersey.LoggingDataAccessExceptionMapper" filename="com/bendb/dropwizard/jooq/jersey/LoggingDataAccessExceptionMapper.java" line-rate="0.9090909090909091" branch-rate="1.0" complexity="2.0">
 					<methods>
 						<method name="&lt;clinit&gt;" signature="()V" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="14" hits="1" branch="false"/>
+								<line number="14" hits="3" branch="false"/>
 							</lines>
 						</method>
 						<method name="logException" signature="(JLjava/lang/Throwable;)V" line-rate="0.0" branch-rate="1.0">
@@ -515,50 +597,396 @@
 						</method>
 						<method name="logException" signature="(JLorg/jooq/exception/DataAccessException;)V" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="18" hits="3" branch="false"/>
-								<line number="19" hits="3" branch="true" condition-coverage="100% (2/2)">
+								<line number="18" hits="9" branch="false"/>
+								<line number="19" hits="9" branch="true" condition-coverage="100% (2/2)">
 									<conditions>
 										<condition number="0" type="jump" coverage="100%"/>
 									</conditions>
 								</line>
-								<line number="20" hits="2" branch="true" condition-coverage="100% (2/2)">
+								<line number="20" hits="6" branch="true" condition-coverage="100% (2/2)">
 									<conditions>
 										<condition number="0" type="jump" coverage="100%"/>
 									</conditions>
 								</line>
-								<line number="21" hits="4" branch="false"/>
-								<line number="22" hits="4" branch="false"/>
-								<line number="24" hits="1" branch="false"/>
-								<line number="26" hits="3" branch="false"/>
+								<line number="21" hits="12" branch="false"/>
+								<line number="22" hits="12" branch="false"/>
+								<line number="24" hits="3" branch="false"/>
+								<line number="26" hits="9" branch="false"/>
 							</lines>
 						</method>
 						<method name="setLogger" signature="(Lorg/slf4j/Logger;)V" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="30" hits="6" branch="false"/>
-								<line number="31" hits="6" branch="false"/>
+								<line number="30" hits="18" branch="false"/>
+								<line number="31" hits="18" branch="false"/>
 							</lines>
 						</method>
 					</methods>
 					<lines>
 						<line number="12" hits="0" branch="false"/>
-						<line number="14" hits="1" branch="false"/>
-						<line number="18" hits="3" branch="false"/>
-						<line number="19" hits="3" branch="true" condition-coverage="100% (2/2)">
+						<line number="14" hits="3" branch="false"/>
+						<line number="18" hits="9" branch="false"/>
+						<line number="19" hits="9" branch="true" condition-coverage="100% (2/2)">
 							<conditions>
 								<condition number="0" type="jump" coverage="100%"/>
 							</conditions>
 						</line>
-						<line number="20" hits="2" branch="true" condition-coverage="100% (2/2)">
+						<line number="20" hits="6" branch="true" condition-coverage="100% (2/2)">
 							<conditions>
 								<condition number="0" type="jump" coverage="100%"/>
 							</conditions>
 						</line>
-						<line number="21" hits="4" branch="false"/>
-						<line number="22" hits="4" branch="false"/>
-						<line number="24" hits="1" branch="false"/>
+						<line number="21" hits="12" branch="false"/>
+						<line number="22" hits="12" branch="false"/>
+						<line number="24" hits="3" branch="false"/>
+						<line number="26" hits="9" branch="false"/>
+						<line number="30" hits="18" branch="false"/>
+						<line number="31" hits="18" branch="false"/>
+					</lines>
+				</class>
+			</classes>
+		</package>
+		<package name="com.bendb.dropwizard.redis" line-rate="0.9666666666666667" branch-rate="0.5714285714285714" complexity="1.1">
+			<classes>
+				<class name="com.bendb.dropwizard.redis.JedisBundle" filename="com/bendb/dropwizard/redis/JedisBundle.java" line-rate="0.875" branch-rate="1.0" complexity="1.0">
+					<methods>
+						<method name="initialize" signature="(Lio/dropwizard/setup/Bootstrap;)V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="22" hits="3" branch="false"/>
+							</lines>
+						</method>
+						<method name="run" signature="(Lio/dropwizard/Configuration;Lio/dropwizard/setup/Environment;)V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="26" hits="15" branch="false"/>
+								<line number="28" hits="15" branch="false"/>
+								<line number="29" hits="15" branch="false"/>
+								<line number="30" hits="15" branch="false"/>
+								<line number="31" hits="15" branch="false"/>
+								<line number="32" hits="15" branch="false"/>
+							</lines>
+						</method>
+						<method name="run" signature="(Ljava/lang/Object;Lio/dropwizard/setup/Environment;)V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="12" hits="0" branch="false"/>
+							</lines>
+						</method>
+					</methods>
+					<lines>
+						<line number="12" hits="0" branch="false"/>
+						<line number="22" hits="3" branch="false"/>
+						<line number="26" hits="15" branch="false"/>
+						<line number="28" hits="15" branch="false"/>
+						<line number="29" hits="15" branch="false"/>
+						<line number="30" hits="15" branch="false"/>
+						<line number="31" hits="15" branch="false"/>
+						<line number="32" hits="15" branch="false"/>
+					</lines>
+				</class>
+				<class name="com.bendb.dropwizard.redis.JedisConfiguration" filename="com/bendb/dropwizard/redis/JedisConfiguration.java" line-rate="1.0" branch-rate="1.0" complexity="1.0">
+					<methods>
+					</methods>
+					<lines>
+					</lines>
+				</class>
+				<class name="com.bendb.dropwizard.redis.JedisFactory" filename="com/bendb/dropwizard/redis/JedisFactory.java" line-rate="1.0" branch-rate="1.0" complexity="1.0">
+					<methods>
+						<method name="&lt;init&gt;" signature="()V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="47" hits="9" branch="false"/>
+								<line number="55" hits="9" branch="false"/>
+								<line number="58" hits="9" branch="false"/>
+								<line number="61" hits="9" branch="false"/>
+							</lines>
+						</method>
+						<method name="build" signature="(Lio/dropwizard/setup/Environment;)Lredis/clients/jedis/JedisPool;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="105" hits="3" branch="false"/>
+								<line number="106" hits="3" branch="false"/>
+								<line number="107" hits="3" branch="false"/>
+								<line number="108" hits="3" branch="false"/>
+								<line number="110" hits="3" branch="false"/>
+								<line number="112" hits="3" branch="false"/>
+								<line number="114" hits="3" branch="false"/>
+							</lines>
+						</method>
+						<method name="getHost" signature="()Ljava/lang/String;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="73" hits="6" branch="false"/>
+							</lines>
+						</method>
+						<method name="getPort" signature="()I" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="77" hits="9" branch="false"/>
+							</lines>
+						</method>
+					</methods>
+					<lines>
+						<line number="47" hits="9" branch="false"/>
+						<line number="55" hits="9" branch="false"/>
+						<line number="58" hits="9" branch="false"/>
+						<line number="61" hits="9" branch="false"/>
+						<line number="73" hits="6" branch="false"/>
+						<line number="77" hits="9" branch="false"/>
+						<line number="105" hits="3" branch="false"/>
+						<line number="106" hits="3" branch="false"/>
+						<line number="107" hits="3" branch="false"/>
+						<line number="108" hits="3" branch="false"/>
+						<line number="110" hits="3" branch="false"/>
+						<line number="112" hits="3" branch="false"/>
+						<line number="114" hits="3" branch="false"/>
+					</lines>
+				</class>
+				<class name="com.bendb.dropwizard.redis.JedisHealthCheck" filename="com/bendb/dropwizard/redis/JedisHealthCheck.java" line-rate="1.0" branch-rate="0.5714285714285714" complexity="2.0">
+					<methods>
+						<method name="check" signature="()Lcom/codahale/metrics/health/HealthCheck$Result;" line-rate="1.0" branch-rate="0.5714285714285714">
+							<lines>
+								<line number="16" hits="24" branch="false"/>
+								<line number="17" hits="15" branch="false"/>
+								<line number="18" hits="9" branch="true" condition-coverage="100% (2/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="100%"/>
+									</conditions>
+								</line>
+								<line number="19" hits="6" branch="false"/>
+								<line number="21" hits="12" branch="true" condition-coverage="50% (6/12)">
+									<conditions>
+										<condition number="0" type="jump" coverage="50%"/>
+										<condition number="1" type="jump" coverage="50%"/>
+										<condition number="2" type="jump" coverage="50%"/>
+										<condition number="3" type="jump" coverage="50%"/>
+										<condition number="4" type="jump" coverage="50%"/>
+										<condition number="5" type="jump" coverage="50%"/>
+									</conditions>
+								</line>
+								<line number="23" hits="3" branch="false"/>
+							</lines>
+						</method>
+					</methods>
+					<lines>
+						<line number="16" hits="24" branch="false"/>
+						<line number="17" hits="15" branch="false"/>
+						<line number="18" hits="9" branch="true" condition-coverage="100% (2/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="100%"/>
+							</conditions>
+						</line>
+						<line number="19" hits="6" branch="false"/>
+						<line number="21" hits="12" branch="true" condition-coverage="50% (6/12)">
+							<conditions>
+								<condition number="0" type="jump" coverage="50%"/>
+								<condition number="1" type="jump" coverage="50%"/>
+								<condition number="2" type="jump" coverage="50%"/>
+								<condition number="3" type="jump" coverage="50%"/>
+								<condition number="4" type="jump" coverage="50%"/>
+								<condition number="5" type="jump" coverage="50%"/>
+							</conditions>
+						</line>
+						<line number="23" hits="3" branch="false"/>
+					</lines>
+				</class>
+				<class name="com.bendb.dropwizard.redis.JedisPoolManager" filename="com/bendb/dropwizard/redis/JedisPoolManager.java" line-rate="1.0" branch-rate="1.0" complexity="1.0">
+					<methods>
+						<method name="start" signature="()V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="16" hits="3" branch="false"/>
+							</lines>
+						</method>
+						<method name="stop" signature="()V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="20" hits="3" branch="false"/>
+								<line number="21" hits="3" branch="false"/>
+							</lines>
+						</method>
+					</methods>
+					<lines>
+						<line number="16" hits="3" branch="false"/>
+						<line number="20" hits="3" branch="false"/>
+						<line number="21" hits="3" branch="false"/>
+					</lines>
+				</class>
+			</classes>
+		</package>
+		<package name="com.bendb.dropwizard.redis.jersey" line-rate="1.0" branch-rate="1.0" complexity="1.3076923076923077">
+			<classes>
+				<class name="com.bendb.dropwizard.redis.jersey.JedisInjectableProvider" filename="com/bendb/dropwizard/redis/jersey/JedisInjectableProvider.java" line-rate="1.0" branch-rate="1.0" complexity="1.0">
+					<methods>
+						<method name="&lt;init&gt;" signature="(Lredis/clients/jedis/JedisPool;)V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="36" hits="33" branch="false"/>
+								<line number="37" hits="33" branch="false"/>
+								<line number="38" hits="33" branch="false"/>
+							</lines>
+						</method>
+						<method name="getTypedInjectable" signature="(Lcom/sun/jersey/core/spi/component/ComponentContext;Ljava/lang/annotation/Annotation;)Lcom/sun/jersey/spi/inject/Injectable;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="14" hits="9" branch="false"/>
+							</lines>
+						</method>
+						<method name="getTypedInjectable" signature="(Lcom/sun/jersey/core/spi/component/ComponentContext;Ljavax/ws/rs/core/Context;)Lcom/sun/jersey/spi/inject/Injectable;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="42" hits="9" branch="false"/>
+							</lines>
+						</method>
+					</methods>
+					<lines>
+						<line number="14" hits="9" branch="false"/>
+						<line number="36" hits="33" branch="false"/>
+						<line number="37" hits="33" branch="false"/>
+						<line number="38" hits="33" branch="false"/>
+						<line number="42" hits="9" branch="false"/>
+					</lines>
+				</class>
+				<class name="com.bendb.dropwizard.redis.jersey.JedisInjectableProvider$1" filename="com/bendb/dropwizard/redis/jersey/JedisInjectableProvider.java" line-rate="1.0" branch-rate="1.0" complexity="1.0">
+					<methods>
+					</methods>
+					<lines>
+					</lines>
+				</class>
+				<class name="com.bendb.dropwizard.redis.jersey.JedisInjectableProvider$JedisInjectable" filename="com/bendb/dropwizard/redis/jersey/JedisInjectableProvider.java" line-rate="1.0" branch-rate="1.0" complexity="1.0">
+					<methods>
+						<method name="&lt;init&gt;" signature="(Lcom/bendb/dropwizard/redis/jersey/JedisInjectableProvider;Lredis/clients/jedis/JedisPool;Lcom/bendb/dropwizard/redis/jersey/JedisInjectableProvider$1;)V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="16" hits="15" branch="false"/>
+							</lines>
+						</method>
+						<method name="getValue" signature="(Lcom/sun/jersey/api/core/HttpContext;)Ljava/lang/Object;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+							</lines>
+						</method>
+						<method name="getValue" signature="(Lcom/sun/jersey/api/core/HttpContext;)Lredis/clients/jedis/Jedis;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="25" hits="6" branch="false"/>
+								<line number="27" hits="6" branch="false"/>
+								<line number="29" hits="6" branch="false"/>
+							</lines>
+						</method>
+					</methods>
+					<lines>
+						<line number="16" hits="15" branch="false"/>
+						<line number="25" hits="6" branch="false"/>
+						<line number="27" hits="6" branch="false"/>
+						<line number="29" hits="6" branch="false"/>
+					</lines>
+				</class>
+				<class name="com.bendb.dropwizard.redis.jersey.JedisPoolInjectableProvider" filename="com/bendb/dropwizard/redis/jersey/JedisPoolInjectableProvider.java" line-rate="1.0" branch-rate="1.0" complexity="1.0">
+					<methods>
+						<method name="&lt;init&gt;" signature="(Lredis/clients/jedis/JedisPool;)V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="17" hits="27" branch="false"/>
+								<line number="18" hits="27" branch="false"/>
+								<line number="19" hits="27" branch="false"/>
+							</lines>
+						</method>
+						<method name="getTypedInjectable" signature="(Lcom/sun/jersey/core/spi/component/ComponentContext;Ljava/lang/annotation/Annotation;)Lcom/sun/jersey/spi/inject/Injectable;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="12" hits="6" branch="false"/>
+							</lines>
+						</method>
+						<method name="getTypedInjectable" signature="(Lcom/sun/jersey/core/spi/component/ComponentContext;Ljavax/ws/rs/core/Context;)Lcom/sun/jersey/spi/inject/Injectable;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="23" hits="6" branch="false"/>
+							</lines>
+						</method>
+					</methods>
+					<lines>
+						<line number="12" hits="6" branch="false"/>
+						<line number="17" hits="27" branch="false"/>
+						<line number="18" hits="27" branch="false"/>
+						<line number="19" hits="27" branch="false"/>
+						<line number="23" hits="6" branch="false"/>
+					</lines>
+				</class>
+				<class name="com.bendb.dropwizard.redis.jersey.JedisRequestDispatcher" filename="com/bendb/dropwizard/redis/jersey/JedisRequestDispatcher.java" line-rate="1.0" branch-rate="1.0" complexity="1.5">
+					<methods>
+						<method name="&lt;init&gt;" signature="(Lcom/sun/jersey/spi/dispatch/RequestDispatcher;)V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="11" hits="18" branch="false"/>
+								<line number="15" hits="18" branch="false"/>
+								<line number="16" hits="18" branch="false"/>
+								<line number="17" hits="18" branch="false"/>
+							</lines>
+						</method>
+						<method name="cleanUp" signature="(Lcom/sun/jersey/api/core/HttpContext;)V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="35" hits="15" branch="false"/>
+								<line number="37" hits="15" branch="true" condition-coverage="100% (2/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="100%"/>
+									</conditions>
+								</line>
+								<line number="38" hits="12" branch="false"/>
+								<line number="40" hits="3" branch="false"/>
+								<line number="41" hits="3" branch="false"/>
+								<line number="42" hits="12" branch="false"/>
+								<line number="43" hits="15" branch="false"/>
+							</lines>
+						</method>
+						<method name="dispatch" signature="(Ljava/lang/Object;Lcom/sun/jersey/api/core/HttpContext;)V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="27" hits="15" branch="false"/>
+								<line number="29" hits="15" branch="false"/>
+								<line number="30" hits="12" branch="false"/>
+								<line number="31" hits="12" branch="false"/>
+							</lines>
+						</method>
+					</methods>
+					<lines>
+						<line number="11" hits="18" branch="false"/>
+						<line number="15" hits="18" branch="false"/>
+						<line number="16" hits="18" branch="false"/>
+						<line number="17" hits="18" branch="false"/>
+						<line number="27" hits="15" branch="false"/>
+						<line number="29" hits="15" branch="false"/>
+						<line number="30" hits="12" branch="false"/>
+						<line number="31" hits="12" branch="false"/>
+						<line number="35" hits="15" branch="false"/>
+						<line number="37" hits="15" branch="true" condition-coverage="100% (2/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="100%"/>
+							</conditions>
+						</line>
+						<line number="38" hits="12" branch="false"/>
+						<line number="40" hits="3" branch="false"/>
+						<line number="41" hits="3" branch="false"/>
+						<line number="42" hits="12" branch="false"/>
+						<line number="43" hits="15" branch="false"/>
+					</lines>
+				</class>
+				<class name="com.bendb.dropwizard.redis.jersey.JedisResourceMethodDispatchAdapter" filename="com/bendb/dropwizard/redis/jersey/JedisResourceMethodDispatchAdapter.java" line-rate="1.0" branch-rate="1.0" complexity="1.0">
+					<methods>
+						<method name="adapt" signature="(Lcom/sun/jersey/spi/container/ResourceMethodDispatchProvider;)Lcom/sun/jersey/spi/container/ResourceMethodDispatchProvider;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="9" hits="3" branch="false"/>
+							</lines>
+						</method>
+					</methods>
+					<lines>
+						<line number="9" hits="3" branch="false"/>
+					</lines>
+				</class>
+				<class name="com.bendb.dropwizard.redis.jersey.JedisResourceMethodDispatchProvider" filename="com/bendb/dropwizard/redis/jersey/JedisResourceMethodDispatchProvider.java" line-rate="1.0" branch-rate="1.0" complexity="2.0">
+					<methods>
+						<method name="create" signature="(Lcom/sun/jersey/api/model/AbstractResourceMethod;)Lcom/sun/jersey/spi/dispatch/RequestDispatcher;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="20" hits="6" branch="false"/>
+								<line number="22" hits="6" branch="true" condition-coverage="100% (2/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="100%"/>
+									</conditions>
+								</line>
+								<line number="23" hits="3" branch="false"/>
+								<line number="26" hits="3" branch="false"/>
+							</lines>
+						</method>
+					</methods>
+					<lines>
+						<line number="20" hits="6" branch="false"/>
+						<line number="22" hits="6" branch="true" condition-coverage="100% (2/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="100%"/>
+							</conditions>
+						</line>
+						<line number="23" hits="3" branch="false"/>
 						<line number="26" hits="3" branch="false"/>
-						<line number="30" hits="6" branch="false"/>
-						<line number="31" hits="6" branch="false"/>
 					</lines>
 				</class>
 			</classes>

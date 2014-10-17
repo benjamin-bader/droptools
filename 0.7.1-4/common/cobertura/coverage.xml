@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
+
+<coverage line-rate="0.9" branch-rate="1.0" lines-covered="9" lines-valid="10" branches-covered="2" branches-valid="2" complexity="1.2" version="2.0.3" timestamp="1413512354111">
+	<sources>
+		<source>--source</source>
+		<source>/Users/ben/Development/droptools/common/src/main/java</source>
+	</sources>
+	<packages>
+		<package name="com.bendb.dropwizard.common.jersey" line-rate="0.9" branch-rate="1.0" complexity="1.2">
+			<classes>
+				<class name="com.bendb.dropwizard.common.jersey.DefaultInjectable" filename="com/bendb/dropwizard/common/jersey/DefaultInjectable.java" line-rate="1.0" branch-rate="1.0" complexity="1.0">
+					<methods>
+						<method name="of" signature="(Ljava/lang/Object;)Lcom/bendb/dropwizard/common/jersey/DefaultInjectable;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="23" hits="3" branch="false"/>
+							</lines>
+						</method>
+					</methods>
+					<lines>
+						<line number="23" hits="3" branch="false"/>
+					</lines>
+				</class>
+				<class name="com.bendb.dropwizard.common.jersey.PerRequestParamInjectableProvider" filename="com/bendb/dropwizard/common/jersey/PerRequestParamInjectableProvider.java" line-rate="1.0" branch-rate="1.0" complexity="1.0">
+					<methods>
+						<method name="getScope" signature="()Lcom/sun/jersey/core/spi/component/ComponentScope;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="21" hits="3" branch="false"/>
+							</lines>
+						</method>
+					</methods>
+					<lines>
+						<line number="21" hits="3" branch="false"/>
+					</lines>
+				</class>
+				<class name="com.bendb.dropwizard.common.jersey.SingletonParamInjectableProvider" filename="com/bendb/dropwizard/common/jersey/SingletonParamInjectableProvider.java" line-rate="1.0" branch-rate="1.0" complexity="1.0">
+					<methods>
+						<method name="getScope" signature="()Lcom/sun/jersey/core/spi/component/ComponentScope;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="21" hits="3" branch="false"/>
+							</lines>
+						</method>
+					</methods>
+					<lines>
+						<line number="21" hits="3" branch="false"/>
+					</lines>
+				</class>
+				<class name="com.bendb.dropwizard.common.jersey.TypedParamInjectableProvider" filename="com/bendb/dropwizard/common/jersey/TypedParamInjectableProvider.java" line-rate="0.8571428571428571" branch-rate="1.0" complexity="1.6666666666666667">
+					<methods>
+						<method name="&lt;init&gt;" signature="(Ljava/lang/Class;)V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="20" hits="15" branch="false"/>
+								<line number="21" hits="15" branch="false"/>
+								<line number="22" hits="12" branch="false"/>
+							</lines>
+						</method>
+						<method name="getInjectable" signature="(Lcom/sun/jersey/core/spi/component/ComponentContext;Ljava/lang/annotation/Annotation;Lcom/sun/jersey/api/model/Parameter;)Lcom/sun/jersey/spi/inject/Injectable;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="26" hits="6" branch="true" condition-coverage="100% (2/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="100%"/>
+									</conditions>
+								</line>
+								<line number="27" hits="3" branch="false"/>
+								<line number="29" hits="3" branch="false"/>
+							</lines>
+						</method>
+						<method name="getInjectable" signature="(Lcom/sun/jersey/core/spi/component/ComponentContext;Ljava/lang/annotation/Annotation;Ljava/lang/Object;)Lcom/sun/jersey/spi/inject/Injectable;" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="17" hits="0" branch="false"/>
+							</lines>
+						</method>
+					</methods>
+					<lines>
+						<line number="17" hits="0" branch="false"/>
+						<line number="20" hits="15" branch="false"/>
+						<line number="21" hits="15" branch="false"/>
+						<line number="22" hits="12" branch="false"/>
+						<line number="26" hits="6" branch="true" condition-coverage="100% (2/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="100%"/>
+							</conditions>
+						</line>
+						<line number="27" hits="3" branch="false"/>
+						<line number="29" hits="3" branch="false"/>
+					</lines>
+				</class>
+			</classes>
+		</package>
+	</packages>
+</coverage>
