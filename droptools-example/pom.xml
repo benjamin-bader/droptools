@@ -18,7 +18,7 @@
         <autovalue.version>1.0-rc1</autovalue.version>
         <dropwizard.version>0.7.1</dropwizard.version>
         <dropwizard.flyway.version>0.7.0-1</dropwizard.flyway.version>
-        <dropwizard.jooq.version>0.7.1-3-SNAPSHOT</dropwizard.jooq.version>
+        <dropwizard.jooq.version>${project.parent.version}</dropwizard.jooq.version>
         <junit.version>4.10</junit.version>
         <mockito.version>1.9.5</mockito.version>
         <truth.version>0.23</truth.version>
