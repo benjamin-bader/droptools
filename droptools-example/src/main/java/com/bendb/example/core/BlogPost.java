@@ -23,6 +23,8 @@ public abstract class BlogPost {
     @JsonProperty
     public abstract ImmutableList<String> tags();
 
+    BlogPost() {}
+
     public static BlogPost create(
             int postId,
             String text,

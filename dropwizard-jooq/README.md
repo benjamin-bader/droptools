@@ -60,6 +60,23 @@ public BlogPost getPost(@QueryParam("id") int postId, @Context DSLContext databa
 
 This will also enable database healthchecks and install exception mappers.
 
+Finally, because I <3 postgres and jOOQ can lag behind some of its features, [PostgresSupport](http://droptools.bendb.com/0.7.1-3/apidocs/com/bendb/dropwizard/jooq/PostgresSupport.html) provides a few helpers for aggregating array values in queries.
+
+For example (taken from the sample project):
+
+```java
+import static com.bendb.dropwizard.jooq.PostgresSupport.arrayAgg;
+
+database
+    .select(BLOG_POST.ID, BLOG_POST.BODY, BLOG_POST.CREATED_AT, arrayAgg(POST_TAG.TAG_NAME))
+    .from(BLOG_POST)
+    .leftOuterJoin(POST_TAG)
+    .on(BLOG_POST.ID.equal(POST_TAG.POST_ID))
+    .where(BLOG_POST.ID.equal(id.get()))
+    .groupBy(BLOG_POST.ID, BLOG_POST.BODY, BLOG_POST.CREATED_AT)
+    .fetchOne();
+```
+
 
 Code Generation
 ---------------
