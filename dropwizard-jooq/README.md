@@ -14,7 +14,7 @@ Dependency Info
 <dependency>
   <groupId>com.bendb.dropwizard</groupId>
   <artifactId>dropwizard-jooq</artifactId>
-  <version>0.7.1-4</version>
+  <version>0.7.1-5</version>
 </dependency>
 ```
 
@@ -22,7 +22,7 @@ Dependency Info
 Usage
 -----
 
-Add a [JooqBundle](http://droptools.bendb.com/0.7.1-3/apidocs/com/bendb/dropwizard/jooq/JooqFactory.html) to your [Application](http://dropwizard.io/0.7.1/dropwizard-core/apidocs/io/dropwizard/Application.html) class.
+Add a [JooqBundle](http://droptools.bendb.com/0.7.1-5/apidocs/com/bendb/dropwizard/jooq/JooqFactory.html) to your [Application](http://dropwizard.io/0.7.1/dropwizard-core/apidocs/io/dropwizard/Application.html) class.
 
 ```java
 @Override
@@ -83,7 +83,7 @@ Code Generation
 
 [`dropwizard-jooq`](http://droptools.bendb.com/) provides some classes for making generated pojos, DAOs, etc. more convenient to use.
 
-[JodaDateTimeConverter](http://droptools.bendb.com/0.7.1-3/apidocs/com/bendb/dropwizard/jooq/JooqFactory.html) can be used to map between `java.sql.Timestamp` and Joda `DateTime` objects.  This is currently the only converter bundled; contributions in this area are welcome!
+[JodaDateTimeConverter](http://droptools.bendb.com/0.7.1-5/apidocs/com/bendb/dropwizard/jooq/JooqFactory.html) can be used to map between `java.sql.Timestamp` and Joda `DateTime` objects.  This is currently the only converter bundled; contributions in this area are welcome!
 
 
 Configuration
@@ -91,7 +91,7 @@ Configuration
 
 [`dropwizard-jooq`](http://droptools.bendb.com/) uses the same [DataSourceFactory](http://dropwizard.io/0.7.1/dropwizard-db/apidocs/io/dropwizard/db/DataSourceFactory.html) from [`dropwizard-db`](http://dropwizard.io/0.7.1/dropwizard-db/) for configuring its [DataSource](http://docs.oracle.com/javase/7/docs/api/javax/sql/DataSource.html).
 
-For modifying jOOQ configuration settings, there is [JooqFactory](http://droptools.bendb.com/0.7.1-3/apidocs/com/bendb/dropwizard/jooq/JooqFactory.html):
+For modifying jOOQ configuration settings, there is [JooqFactory](http://droptools.bendb.com/0.7.1-5/apidocs/com/bendb/dropwizard/jooq/JooqFactory.html):
 
 ```yaml
 jooq:
