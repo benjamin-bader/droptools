@@ -28,7 +28,7 @@ To use the entire `droptools` family:
 <dependency>
   <groupId>com.bendb.dropwizard</groupId>
   <artifactId>droptools-parent</artifactId>
-  <version>0.7.1-4</version>
+  <version>0.7.1-5</version>
 </dependency>
 ```
 
