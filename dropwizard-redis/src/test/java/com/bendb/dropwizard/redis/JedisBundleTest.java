@@ -1,10 +1,6 @@
 package com.bendb.dropwizard.redis;
 
-import com.bendb.dropwizard.redis.jersey.JedisInjectableProvider;
-import com.bendb.dropwizard.redis.jersey.JedisPoolInjectableProvider;
-import com.bendb.dropwizard.redis.jersey.JedisResourceMethodDispatchAdapter;
 import com.codahale.metrics.health.HealthCheckRegistry;
-import com.sun.jersey.spi.inject.SingletonTypeInjectableProvider;
 import io.dropwizard.Configuration;
 import io.dropwizard.jersey.setup.JerseyEnvironment;
 import io.dropwizard.lifecycle.setup.LifecycleEnvironment;
@@ -18,11 +14,12 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import redis.clients.jedis.JedisPool;
 
-import javax.ws.rs.core.Context;
-
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyZeroInteractions;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class JedisBundleTest {
@@ -82,27 +79,7 @@ public class JedisBundleTest {
     public void registersJedisInjectableProvider() throws Exception {
         bundle.run(config, environment);
 
-        ArgumentCaptor<JedisInjectableProvider> captor = ArgumentCaptor.forClass(JedisInjectableProvider.class);
-        verify(jerseyEnvironment, atLeastOnce()).register(captor.capture());
-
-        assertThat(captor.getValue()).isNotNull();
-    }
-
-    @Test
-    public void registersJedisPoolInjectableProvider() throws Exception {
-        bundle.run(config, environment);
-
-        ArgumentCaptor<JedisPoolInjectableProvider> captor = ArgumentCaptor.forClass(JedisPoolInjectableProvider.class);
-        verify(jerseyEnvironment, atLeastOnce()).register(captor.capture());
-
-        assertThat(captor.getValue()).isNotNull();
-    }
-
-    @Test
-    public void registersMethodAdapter() throws Exception {
-        bundle.run(config, environment);
-
-        ArgumentCaptor<JedisResourceMethodDispatchAdapter> captor = ArgumentCaptor.forClass(JedisResourceMethodDispatchAdapter.class);
+        ArgumentCaptor<JedisFactory> captor = ArgumentCaptor.forClass(JedisFactory.class);
         verify(jerseyEnvironment, atLeastOnce()).register(captor.capture());
 
         assertThat(captor.getValue()).isNotNull();
