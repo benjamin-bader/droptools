@@ -45,4 +45,40 @@ public class JedisFactorySubject extends Subject<JedisFactorySubject, JedisFacto
             fail("has the default redis port");
         }
     }
+
+    public void hasDefaultMinIdleConnections() {
+        final JedisFactory subject = getSubject();
+        if (subject != null) {
+            final int idle = subject.getMinIdle();
+            if (idle != 0) {
+                fail("has the default minimum idle redis connections");
+            }
+        } else {
+            fail("has the default minimum idle redis connections");
+        }
+    }
+
+    public void hasDefaultMaxIdleConnections() {
+        final JedisFactory subject = getSubject();
+        if (subject != null) {
+            final int idle = subject.getMaxIdle();
+            if (idle != 0) {
+                fail("has the default maximum idle redis connections");
+            }
+        } else {
+            fail("has the default maximum idle redis connections");
+        }
+    }
+
+    public void hasDefaultTotalConnections() {
+        final JedisFactory subject = getSubject();
+        if (subject != null) {
+            final int total = subject.getMinIdle();
+            if (total != 0) {
+                fail("has the default total redis connections");
+            }
+        } else {
+            fail("has the default total redis connections");
+        }
+    }
 }

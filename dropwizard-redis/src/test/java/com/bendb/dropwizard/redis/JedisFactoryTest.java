@@ -50,11 +50,18 @@ public class JedisFactoryTest {
     @Test
     public void managesCreatedJedisPool() {
         factory.setEndpoint(HostAndPort.fromString("localhost"));
-        JedisPool pool = factory.build(environment);
+        factory.build(environment);
 
         ArgumentCaptor<JedisPoolManager> managerCaptor = ArgumentCaptor.forClass(JedisPoolManager.class);
         verify(lifecycleEnvironment).manage(managerCaptor.capture());
 
         assertThat(managerCaptor.getValue()).isNotNull();
+    }
+
+    @Test
+    public void setsDefaultIdleAndTotalConnections() {
+        assert_().about(jedisFactory()).that(factory).hasDefaultMinIdleConnections();
+        assert_().about(jedisFactory()).that(factory).hasDefaultMaxIdleConnections();
+        assert_().about(jedisFactory()).that(factory).hasDefaultTotalConnections();
     }
 }
