@@ -1,6 +1,6 @@
 package com.bendb.dropwizard.redis;
 
-import com.bendb.dropwizard.redis.jersey.JedisFactory;
+import com.bendb.dropwizard.redis.jersey.JedisPoolBinder;
 import io.dropwizard.Configuration;
 import io.dropwizard.ConfiguredBundle;
 import io.dropwizard.setup.Bootstrap;
@@ -24,6 +24,6 @@ public abstract class JedisBundle<C extends Configuration>
         pool = getJedisFactory(configuration).build(environment);
 
         environment.healthChecks().register("redis", new JedisHealthCheck(pool));
-        environment.jersey().register(new JedisFactory(pool));
+        environment.jersey().register(new JedisPoolBinder(pool));
     }
 }
