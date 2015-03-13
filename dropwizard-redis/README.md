@@ -58,6 +58,8 @@ For configuration the redis connection, there is [JedisFactory](http://droptools
 redis:
   # The redis server's address; required.
   endpoint: localhost:6379
+  # Auth password for redis server connection.  (default: null)
+  password: null
   # The minimum number of idle connections to maintain in the pool.  (default: 0)
   minIdle: 0
   # The maximum number of idle connections allowed in the pool.  (default: 0)
