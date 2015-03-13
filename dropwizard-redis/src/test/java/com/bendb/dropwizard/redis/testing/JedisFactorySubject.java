@@ -46,6 +46,30 @@ public class JedisFactorySubject extends Subject<JedisFactorySubject, JedisFacto
         }
     }
 
+    public void hasNullPassword() {
+        final JedisFactory subject = getSubject();
+        if (subject != null) {
+            final String password = subject.getPassword();
+            if (password != null) {
+                fail("has null password");
+            }
+        } else {
+            fail("has null password");
+        }
+    }
+
+    public void hasPassword(String passwordToCheck) {
+        final JedisFactory subject = getSubject();
+        if (subject != null) {
+            final String password = subject.getPassword();
+            if (password != passwordToCheck) {
+                fail("has proper password");
+            }
+        } else {
+            fail("has proper password");
+        }
+    }
+
     public void hasDefaultMinIdleConnections() {
         final JedisFactory subject = getSubject();
         if (subject != null) {

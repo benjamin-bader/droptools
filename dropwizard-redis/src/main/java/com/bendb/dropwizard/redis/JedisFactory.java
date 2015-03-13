@@ -5,6 +5,7 @@ import com.google.common.net.HostAndPort;
 import io.dropwizard.setup.Environment;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
+import redis.clients.jedis.Protocol;
 
 import javax.validation.constraints.NotNull;
 
@@ -26,6 +27,11 @@ import javax.validation.constraints.NotNull;
  *             The redis server's host and port, i.e. <code>localhost:6379</code>.
  *             If no port is given, the default redis port {@value #DEFAULT_PORT} is assumed.
  *         </td>
+ *     </tr>
+ *     <tr>
+ *         <td>password</td>
+ *         <td><code>null</code></td>
+ *         <td>password: [null] - Auth password for redis server connection; Default is null.</td>
  *     </tr>
  *     <tr>
  *         <td>minIdle</td>
@@ -53,6 +59,9 @@ public class JedisFactory {
     private HostAndPort endpoint;
 
     @JsonProperty
+    private String password;
+
+    @JsonProperty
     private int minIdle = 0;
 
     @JsonProperty
@@ -75,6 +84,13 @@ public class JedisFactory {
 
     public int getPort() {
         return endpoint.getPortOrDefault(DEFAULT_PORT);
+    }
+
+    public String getPassword() {
+        return password;
+    }
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public int getMinIdle() {
@@ -107,7 +123,7 @@ public class JedisFactory {
         poolConfig.setMaxIdle(getMaxIdle());
         poolConfig.setMaxTotal(getMaxTotal());
 
-        final JedisPool pool = new JedisPool(poolConfig, getHost(), getPort());
+        final JedisPool pool = new JedisPool(poolConfig, getHost(), getPort(), Protocol.DEFAULT_TIMEOUT, getPassword());
 
         environment.lifecycle().manage(new JedisPoolManager(pool));
 
