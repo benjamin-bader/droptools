@@ -10,7 +10,6 @@ import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import redis.clients.jedis.JedisPool;
 
 import static com.bendb.dropwizard.redis.testing.Subjects.jedisFactory;
 import static com.google.common.truth.Truth.assertThat;
@@ -37,6 +36,14 @@ public class JedisFactoryTest {
         factory.setEndpoint(HostAndPort.fromString("localhost"));
 
         assert_().about(jedisFactory()).that(factory).hasDefaultRedisPort();
+    }
+
+    @Test
+    public void checkPasswordIfSet() {
+        factory.setPassword(null);
+        assert_().about(jedisFactory()).that(factory).hasNullPassword();
+        factory.setPassword("swordfish");
+        assert_().about(jedisFactory()).that(factory).hasPassword("swordfish");
     }
 
     @Test
