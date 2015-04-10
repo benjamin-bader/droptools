@@ -55,7 +55,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <dropwizard.version>0.8.0-rc1</dropwizard.version>
+        <dropwizard.version>0.8.1</dropwizard.version>
         <coberatura.version>2.6</coberatura.version>
 
         <github.global.server>github</github.global.server>
@@ -182,6 +182,7 @@
                 <configuration>
                     <source>1.7</source>
                     <target>1.7</target>
+                    <fork>true</fork>
                 </configuration>
             </plugin>
             <plugin>
