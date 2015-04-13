@@ -11,12 +11,16 @@ import java.sql.Timestamp;
 public class JodaDateTimeConverter implements Converter<Timestamp, DateTime> {
     @Override
     public DateTime from(Timestamp timestamp) {
-        return new DateTime(timestamp.getTime());
+        return timestamp != null
+                ? new DateTime(timestamp.getTime())
+                : null;
     }
 
     @Override
     public Timestamp to(DateTime dateTime) {
-        return new Timestamp(dateTime.getMillis());
+        return dateTime != null
+                ? new Timestamp(dateTime.getMillis())
+                : null;
     }
 
     @Override

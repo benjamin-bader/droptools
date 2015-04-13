@@ -2,6 +2,7 @@ package com.bendb.dropwizard.jooq;
 
 import org.joda.time.DateTime;
 import org.jooq.Converter;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.sql.Timestamp;
@@ -9,9 +10,15 @@ import java.sql.Timestamp;
 import static com.google.common.truth.Truth.assertThat;
 
 public class JodaDateTimeConverterTest {
+    private JodaDateTimeConverter converter;
+
+    @Before
+    public void setup() {
+        converter = new JodaDateTimeConverter();
+    }
+
     @Test
     public void roundTripFromTimestampWorks() {
-        Converter<Timestamp, DateTime> converter = new JodaDateTimeConverter();
         Timestamp ts = new Timestamp(12345L);
         DateTime dt = converter.from(ts);
 
@@ -20,7 +27,6 @@ public class JodaDateTimeConverterTest {
 
     @Test
     public void roundTripFromDateTimeWorks() {
-        Converter<Timestamp, DateTime> converter = new JodaDateTimeConverter();
         DateTime dt = DateTime.now();
         Timestamp ts = converter.to(dt);
 
@@ -29,11 +35,21 @@ public class JodaDateTimeConverterTest {
 
     @Test
     public void convertsFromTimestamp() {
-        assertThat(new JodaDateTimeConverter().fromType()).is(Timestamp.class);
+        assertThat(converter.fromType()).is(Timestamp.class);
     }
 
     @Test
     public void convertsToDateTime() {
-        assertThat(new JodaDateTimeConverter().toType()).is(DateTime.class);
+        assertThat(converter.toType()).is(DateTime.class);
+    }
+
+    @Test
+    public void nullTimestampReturnsNullDateTime() {
+        assertThat(converter.from(null)).isNull();
+    }
+
+    @Test
+    public void nullDateTimeReturnsNullTimestamp() {
+        assertThat(converter.to(null)).isNull();
     }
 }
