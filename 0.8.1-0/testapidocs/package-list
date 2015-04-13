@@ -1,0 +1,3 @@
+com.bendb.dropwizard.jooq
+com.bendb.dropwizard.jooq.jersey
+org.jooq.test.data
