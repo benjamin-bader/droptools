@@ -1,0 +1,4 @@
+com.bendb.dropwizard.jooq
+com.bendb.dropwizard.jooq.jersey
+com.bendb.dropwizard.redis
+com.bendb.dropwizard.redis.jersey
