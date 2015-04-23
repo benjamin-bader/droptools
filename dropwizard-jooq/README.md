@@ -22,7 +22,7 @@ Dependency Info
 Usage
 -----
 
-Add a [JooqBundle](http://droptools.bendb.com/0.8.1-0/apidocs/com/bendb/dropwizard/jooq/JooqFactory.html) to your [Application](http://dropwizard.io/0.8.1/dropwizard-core/apidocs/io/dropwizard/Application.html) class.
+Add a [JooqBundle](http://droptools.bendb.com/0.8.1-0/apidocs/com/bendb/dropwizard/jooq/JooqBundle.html) to your [Application](http://dropwizard.io/0.8.1/dropwizard-core/apidocs/io/dropwizard/Application.html) class.
 
 ```java
 @Override
@@ -43,7 +43,7 @@ public void initialize(Bootstrap<MyConfiguration> bootstrap) {
 ```
 
 
-This will enable `@Context` injection of jOOQ [Configuration](http://www.jooq.org/javadoc/3.4.0/org/jooq/Configuration.html) and [DSLContext](http://www.jooq.org/javadoc/3.4.0/org/jooq/DSLContext.html) parameters in resource methods:
+This will enable `@Context` injection of jOOQ [Configuration](http://www.jooq.org/javadoc/3.5.0/org/jooq/Configuration.html) and [DSLContext](http://www.jooq.org/javadoc/3.5.0/org/jooq/DSLContext.html) parameters in resource methods:
 
 ```java
 @GET
