@@ -28,7 +28,7 @@ To use the entire `droptools` family:
 <dependency>
   <groupId>com.bendb.dropwizard</groupId>
   <artifactId>droptools-parent</artifactId>
-  <version>0.8.1-0-SNAPSHOT</version>
+  <version>0.8.1-0</version>
 </dependency>
 ```
 
@@ -42,7 +42,7 @@ Please file bug reports and feature requests in [GitHub issues](https://github.c
 License
 -------
 
-Copyright (c) 2014 Benjamin Bader
+Copyright (c) 2014-2015 Benjamin Bader
 
 This library is licensed under the Apache License, Version 2.0.
 
