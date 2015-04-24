@@ -142,6 +142,8 @@ public class JooqFactory {
 
     private boolean updatablePrimaryKeys = false;
 
+    private boolean fetchWarnings = true;
+
     public Optional<SQLDialect> getDialect() {
         return dialect;
     }
@@ -238,6 +240,14 @@ public class JooqFactory {
         this.updatablePrimaryKeys = updatablePrimaryKeys;
     }
 
+    public boolean isFetchWarnings() {
+        return fetchWarnings;
+    }
+
+    public void setFetchWarnings(boolean fetchWarnings) {
+        this.fetchWarnings = fetchWarnings;
+    }
+
     public Configuration build(Environment environment, DataSourceFactory factory) throws ClassNotFoundException {
         final Settings settings = buildSettings();
         final SQLDialect dialect = determineDialect(factory);
@@ -283,6 +293,7 @@ public class JooqFactory {
         settings.setExecuteWithOptimisticLocking(executeWithOptimisticLocking);
         settings.setAttachRecords(attachRecords);
         settings.setUpdatablePrimaryKeys(updatablePrimaryKeys);
+        settings.setFetchWarnings(fetchWarnings);
 
         return settings;
     }
