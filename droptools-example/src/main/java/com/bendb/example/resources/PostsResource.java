@@ -1,5 +1,6 @@
 package com.bendb.example.resources;
 
+import com.bendb.dropwizard.jooq.jersey.JooqInject;
 import com.bendb.example.core.BlogPost;
 import com.bendb.example.db.tables.PostTag;
 import com.bendb.example.db.tables.records.BlogPostRecord;
@@ -8,7 +9,6 @@ import io.dropwizard.jersey.params.IntParam;
 import org.joda.time.DateTime;
 import org.jooq.*;
 import org.jooq.impl.DSL;
-
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -25,12 +25,13 @@ import static org.jooq.impl.DSL.*;
 @Path("posts")
 @Produces(MediaType.APPLICATION_JSON)
 public class PostsResource {
+
     @GET
-    public List<BlogPost> findPostsByTag(@QueryParam("tag") String tag, @Context DSLContext create) {
+    public List<BlogPost> findPostsByTag(@QueryParam("tag") String tag, @JooqInject("slave") DSLContext slave) {
         final PostTag pt = POST_TAG.as("pt");
 
         // Try *that* in JPA
-        return create.with("postIds").as(
+        return slave.with("postIds").as(
                     select(POST_TAG.POST_ID.as("id"))
                         .from(POST_TAG)
                         .where(POST_TAG.TAG_NAME.equal(DSL.lower(tag))))
@@ -61,9 +62,9 @@ public class PostsResource {
     public Response createPost(
             final @FormParam("text") String text,
             final @FormParam("tags") List<String> tags,
-            @Context DSLContext create) {
+            @JooqInject("master") DSLContext master) {
         // TODO(ben): implement something like @UnitOfWork
-        return create.transactionResult(new TransactionalCallable<Response>() {
+        return master.transactionResult(new TransactionalCallable<Response>() {
             @Override
             public Response run(Configuration configuration) throws Exception {
                 DSLContext cxt = DSL.using(configuration);

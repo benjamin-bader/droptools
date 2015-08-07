@@ -2,9 +2,12 @@ package com.bendb.dropwizard.jooq.jersey;
 
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import org.glassfish.jersey.process.internal.RequestScoped;
+import org.glassfish.jersey.server.spi.internal.ValueFactoryProvider;
 import org.jooq.Configuration;
 import org.jooq.ConnectionProvider;
 import org.jooq.DSLContext;
+import java.util.Map;
+import java.util.SortedMap;
 
 /**
  * Create bindings for {@link DSLContext} (via
@@ -13,23 +16,30 @@ import org.jooq.DSLContext;
  */
 public class JooqBinder extends AbstractBinder {
 
-    private final Configuration configuration;
+    private final SortedMap<String, Configuration> configurationMap;
 
-    public JooqBinder(Configuration configuration) {
-        this.configuration = configuration;
+    public JooqBinder(final SortedMap<String, Configuration> configurationMap) {
+        this.configurationMap = configurationMap;
     }
 
     @Override
     protected void configure() {
-        bindFactory(new DSLContextFactory(configuration))
+        // bind default Configuration to DSLContext
+        bindFactory(new DSLContextFactory(configurationMap.values().stream().findFirst().orElse(null)))
                 .to(DSLContext.class)
                 .in(RequestScoped.class);
 
-        // Configuration and ConnectionProvider are single instance, used everywhere
+        // bind multiple instances of Configuration and ConnectionProvider for Named DSLContext(s)
+        for (final Configuration configuration : configurationMap.values()) {
 
-        bind(configuration).to(Configuration.class);
+            bind(configuration).to(Configuration.class);
 
-        bind(configuration.connectionProvider())
-                .to(ConnectionProvider.class);
+            bind(configuration.connectionProvider())
+                    .to(ConnectionProvider.class);
+        }
+
+        // bind a ValueFactoryProvider for Named DSLContext(s)
+        bind(new DSLContextValueFactoryProvider(configurationMap))
+                .to(ValueFactoryProvider.class);
     }
 }

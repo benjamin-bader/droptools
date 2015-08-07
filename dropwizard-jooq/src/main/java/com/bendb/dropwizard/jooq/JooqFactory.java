@@ -113,6 +113,8 @@ import javax.validation.constraints.NotNull;
  * </table>
  */
 public class JooqFactory {
+    private static final String DEFAULT_NAME = "jooq";
+
     @NotNull
     private Optional<SQLDialect> dialect = Optional.absent();
 
@@ -249,9 +251,13 @@ public class JooqFactory {
     }
 
     public Configuration build(Environment environment, DataSourceFactory factory) throws ClassNotFoundException {
+        return build(environment, factory, DEFAULT_NAME);
+    }
+
+    public Configuration build(Environment environment, DataSourceFactory factory, String name) throws ClassNotFoundException {
         final Settings settings = buildSettings();
         final SQLDialect dialect = determineDialect(factory);
-        final ManagedDataSource dataSource = factory.build(environment.metrics(), "jooq");
+        final ManagedDataSource dataSource = factory.build(environment.metrics(), name);
         final ConnectionProvider connectionProvider = new DataSourceConnectionProvider(dataSource);
         final Configuration config = new DefaultConfiguration();
         config.set(settings);
