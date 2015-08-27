@@ -33,13 +33,32 @@ public class ExampleApp extends Application<ExampleConfig> {
 
         bootstrap.addBundle(new JooqBundle<ExampleConfig>() {
 
+            /**
+             * Required override to define default DataSourceFactory.
+             */
             @Override
-            public SortedMap<String,DataSourceFactory> getDataSourceFactories(ExampleConfig configuration) {
+            public DataSourceFactory getDataSourceFactory(ExampleConfig configuration) {
+                return configuration.dataSourceFactoryMaster();
+            }
+
+            /**
+             * Optional override to define secondary DataSourceFactories.
+             */
+            @Override
+            public SortedMap<String,DataSourceFactory> getSecondaryDataSourceFactories(ExampleConfig configuration) {
                 // override this method to define database configurations
                 final SortedMap<String,DataSourceFactory> dataSourceFactoryMap = new TreeMap<>();
-                dataSourceFactoryMap.put("master", configuration.dataSourceFactoryMaster());
                 dataSourceFactoryMap.put("slave", configuration.dataSourceFactorySlave());
                 return dataSourceFactoryMap;
+            }
+
+            /**
+             * Optional override to define reference name of the default DataSourceFactory.
+             * Defaults to "jooq".
+             */
+            @Override
+            public String primaryDataSourceName() {
+                return "master";
             }
 
             @Override

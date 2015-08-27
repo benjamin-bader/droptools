@@ -24,23 +24,36 @@ public abstract class JooqBundle<C extends io.dropwizard.Configuration>
 
     @Override
     public void run(C configuration, Environment environment) throws Exception {
-        final SortedMap<String,DataSourceFactory> dataSourceFactoryMap = getDataSourceFactories(configuration);
 
-        for (final Map.Entry<String,DataSourceFactory> dataSourceFactoryEntry : dataSourceFactoryMap.entrySet()) {
-            final String name = dataSourceFactoryEntry.getKey();
-            final DataSourceFactory dataSourceFactory = dataSourceFactoryEntry.getValue();
+        // configure primary data source factory
+        configureDataSourceFactory(
+                configuration,
+                environment,
+                primaryDataSourceName(),
+                getDataSourceFactory(configuration));
 
-            final JooqFactory jooqFactory = getJooqFactory(configuration);
-            final Configuration cfg = jooqFactory.build(environment, dataSourceFactory, name);
-            final JooqHealthCheck healthCheck = new JooqHealthCheck(cfg, dataSourceFactory.getValidationQuery());
-
-            environment.healthChecks().register(name, healthCheck);
-
-            jooqFactoryConfigurationMap.put(name, cfg);
-        }
+        // configure secondary data source factories
+        getSecondaryDataSourceFactories(configuration)
+                .entrySet()
+                .stream()
+                .forEach(
+                        e -> configureDataSourceFactory(
+                                configuration,
+                                environment,
+                                e.getKey(),
+                                e.getValue()
+                        )
+                );
 
         environment.jersey().register(new JooqBinder(jooqFactoryConfigurationMap));
         environment.jersey().register(new LoggingDataAccessExceptionMapper());
+    }
+
+    /**
+     * Override this method to change the default data source name.
+     */
+    public String primaryDataSourceName() {
+        return DEFAULT_NAME;
     }
 
     /**
@@ -51,33 +64,31 @@ public abstract class JooqBundle<C extends io.dropwizard.Configuration>
         return new JooqFactory();
     }
 
-    /**
-     * Override this method to use a single database.
-     * Deprecated: use getDataSourceFactories instead.
-     */
-    @Deprecated
-    @Override
-    public DataSourceFactory getDataSourceFactory(C configuration) {
-        return null;
-    }
-
-    /**
-     * Override this method to use multiple databases, with instances referenced by name.
-     */
-    @Override
-    public SortedMap<String,DataSourceFactory> getDataSourceFactories(C configuration) {
-        final SortedMap<String,DataSourceFactory> dataSourceFactoryMap = new TreeMap<>();
-
-        // calls deprecated method to ensure backwards compatibility
-        dataSourceFactoryMap.put(DEFAULT_NAME, getDataSourceFactory(configuration));
-        return dataSourceFactoryMap;
-    }
-
     public Configuration getConfiguration() {
         return jooqFactoryConfigurationMap.values().stream().findFirst().orElse(null);
     }
 
     public Map<String,Configuration> getConfigurationMap() {
         return jooqFactoryConfigurationMap;
+    }
+
+    private void configureDataSourceFactory(
+            final C configuration,
+            final Environment environment,
+            final String name,
+            final DataSourceFactory dataSourceFactory
+    ) throws RuntimeException {
+
+        try {
+            final JooqFactory jooqFactory = getJooqFactory(configuration);
+            final Configuration cfg = jooqFactory.build(environment, dataSourceFactory, name);
+            final JooqHealthCheck healthCheck = new JooqHealthCheck(cfg, dataSourceFactory.getValidationQuery());
+
+            environment.healthChecks().register(name, healthCheck);
+
+            jooqFactoryConfigurationMap.put(name, cfg);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

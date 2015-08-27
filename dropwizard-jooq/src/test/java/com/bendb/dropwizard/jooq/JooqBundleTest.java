@@ -59,15 +59,19 @@ public class JooqBundleTest {
 
         @Override
         public DataSourceFactory getDataSourceFactory(DropwizardConfig configuration) {
-            return null;
+            return dataSourceFactoryMaster;
         }
 
         @Override
-        public SortedMap<String,DataSourceFactory> getDataSourceFactories(DropwizardConfig configuration) {
+        public SortedMap<String,DataSourceFactory> getSecondaryDataSourceFactories(DropwizardConfig configuration) {
             final SortedMap<String,DataSourceFactory> dataSourceFactoryMap = new TreeMap<>();
-            dataSourceFactoryMap.put(DATASOURCE_MASTER, dataSourceFactoryMaster);
             dataSourceFactoryMap.put(DATASOURCE_SLAVE, dataSourceFactorySlave);
             return dataSourceFactoryMap;
+        }
+
+        @Override
+        public String primaryDataSourceName() {
+            return DATASOURCE_MASTER;
         }
     };
 

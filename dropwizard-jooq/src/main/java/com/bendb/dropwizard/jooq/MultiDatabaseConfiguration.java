@@ -12,5 +12,5 @@ public interface MultiDatabaseConfiguration<T extends Configuration> {
      * @param configuration a Configuration
      * @return a SortedMap containing DataSourceFactories, with the key being a String name.
      */
-    SortedMap<String,DataSourceFactory> getDataSourceFactories(T configuration);
+    SortedMap<String,DataSourceFactory> getSecondaryDataSourceFactories(T configuration);
 }
