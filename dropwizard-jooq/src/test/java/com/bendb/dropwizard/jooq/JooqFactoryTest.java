@@ -28,6 +28,7 @@ public class JooqFactoryTest {
     @Mock ManagedDataSource managedDataSource;
     @Mock Environment environment;
     @Mock LifecycleEnvironment lifecycle;
+    final static String DATASOURCE_NAME = "database";
 
     private JooqFactory factory;
 
@@ -43,6 +44,13 @@ public class JooqFactoryTest {
     @Test
     public void buildsConfigurationUsingDataSourceFactory() throws Exception {
         Configuration config = factory.build(environment, dataSourceFactory);
+        DataSourceConnectionProvider provider = (DataSourceConnectionProvider) config.connectionProvider();
+        assertThat(provider.dataSource()).is(managedDataSource);
+    }
+
+    @Test
+    public void buildsConfigurationUsingDataSourceFactoryAndName() throws Exception {
+        Configuration config = factory.build(environment, dataSourceFactory, DATASOURCE_NAME);
         DataSourceConnectionProvider provider = (DataSourceConnectionProvider) config.connectionProvider();
         assertThat(provider.dataSource()).is(managedDataSource);
     }
@@ -95,4 +103,5 @@ public class JooqFactoryTest {
         ExecuteListenerProvider[] providers = config.executeListenerProviders();
         assertThat(providers.length).isEqualTo(0);
     }
+
 }

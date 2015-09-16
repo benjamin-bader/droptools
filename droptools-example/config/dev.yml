@@ -24,11 +24,17 @@ logging:
     - type: console
       target: stdout
 
-database:
+databaseMaster:
   driverClass: org.postgresql.Driver
   user: example_user
   password: s3cr3t
-  url: jdbc:postgresql://localhost:5432/example_app
+  url: jdbc:postgresql://localhost:5432/example_app1
+
+databaseSlave:
+  driverClass: org.postgresql.Driver
+  user: example_user
+  password: s3cr3t
+  url: jdbc:postgresql://localhost:5432/example_app2
 
 flyway:
   # The default prefix is 'V', but I prefer no prefix at all.
