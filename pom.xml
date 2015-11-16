@@ -226,6 +226,7 @@
                     <mavenExecutorId>forked-path</mavenExecutorId>
                     <tagNameFormat>v@{project.version}</tagNameFormat>
                     <preparationGoals>clean test</preparationGoals>
+                    <useReleaseProfile>true</useReleaseProfile>
                 </configuration>
             </plugin>
             <plugin>
