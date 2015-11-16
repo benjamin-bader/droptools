@@ -227,7 +227,7 @@
                     <tagNameFormat>v@{project.version}</tagNameFormat>
                     <preparationGoals>clean test</preparationGoals>
                     <useReleaseProfile>true</useReleaseProfile>
-                    <arguments>-DperformRelease=true</arguments>
+                    <arguments>-X -DperformRelease=true</arguments>
                 </configuration>
             </plugin>
             <plugin>
