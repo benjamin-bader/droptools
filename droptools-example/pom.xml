@@ -5,7 +5,7 @@
     <parent>
         <artifactId>droptools-parent</artifactId>
         <groupId>com.bendb.dropwizard</groupId>
-        <version>0.8.1-2-SNAPSHOT</version>
+        <version>0.9.1-1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -16,8 +16,8 @@
 
     <properties>
         <autovalue.version>1.0-rc1</autovalue.version>
-        <dropwizard.version>0.8.1</dropwizard.version>
-        <dropwizard.flyway.version>0.8.0-2</dropwizard.flyway.version>
+        <dropwizard.version>0.9.1</dropwizard.version>
+        <dropwizard.flyway.version>0.9.0-1</dropwizard.flyway.version>
         <dropwizard.jooq.version>${project.parent.version}</dropwizard.jooq.version>
         <junit.version>4.11</junit.version>
         <mockito.version>1.9.5</mockito.version>

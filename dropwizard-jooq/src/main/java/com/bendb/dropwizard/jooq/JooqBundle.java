@@ -4,6 +4,7 @@ import com.bendb.dropwizard.jooq.jersey.JooqBinder;
 import com.bendb.dropwizard.jooq.jersey.LoggingDataAccessExceptionMapper;
 import io.dropwizard.ConfiguredBundle;
 import io.dropwizard.db.DataSourceFactory;
+import io.dropwizard.db.PooledDataSourceFactory;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import org.jooq.Configuration;
@@ -76,7 +77,7 @@ public abstract class JooqBundle<C extends io.dropwizard.Configuration>
             final C configuration,
             final Environment environment,
             final String name,
-            final DataSourceFactory dataSourceFactory
+            final PooledDataSourceFactory dataSourceFactory
     ) throws RuntimeException {
 
         try {

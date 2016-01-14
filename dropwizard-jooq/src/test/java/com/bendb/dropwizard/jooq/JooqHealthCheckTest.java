@@ -11,6 +11,7 @@ import org.jooq.tools.jdbc.MockResult;
 import org.junit.Test;
 
 import java.sql.SQLException;
+import java.sql.Savepoint;
 
 import static com.google.common.truth.Truth.assertThat;
 import static com.google.common.truth.Truth.assert_;
@@ -50,7 +51,23 @@ public class JooqHealthCheckTest {
     }
 
     private HealthCheck.Result runHealthCheck(MockDataProvider provider) throws Exception {
-        MockConnection mockConnection = new MockConnection(provider);
+        MockConnection mockConnection = new MockConnection(provider) {
+            @Override
+            public Savepoint setSavepoint() throws SQLException {
+                return new Savepoint() {
+                    @Override
+                    public int getSavepointId() throws SQLException {
+                        return 0;
+                    }
+
+                    @Override
+                    public String getSavepointName() throws SQLException {
+                        return "savepoint";
+                    }
+                };
+            }
+        };
+
         Configuration configuration = new DefaultConfiguration().set(mockConnection);
         configuration.settings().setExecuteLogging(false);
         JooqHealthCheck healthCheck = new JooqHealthCheck(configuration, validationQuery);
