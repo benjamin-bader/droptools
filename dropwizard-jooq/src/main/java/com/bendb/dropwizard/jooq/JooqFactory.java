@@ -1,8 +1,10 @@
 package com.bendb.dropwizard.jooq;
 
+import com.codahale.metrics.MetricRegistry;
 import com.google.common.base.Optional;
 import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.db.ManagedDataSource;
+import io.dropwizard.db.PooledDataSourceFactory;
 import io.dropwizard.setup.Environment;
 import org.jooq.Configuration;
 import org.jooq.ConnectionProvider;
@@ -16,6 +18,9 @@ import org.jooq.impl.DefaultExecuteListenerProvider;
 import org.jooq.tools.jdbc.JDBCUtils;
 
 import javax.validation.constraints.NotNull;
+import java.sql.Connection;
+import java.sql.DatabaseMetaData;
+import java.sql.SQLException;
 
 /**
  * A factory for jOOQ {@link org.jooq.Configuration} objects.
@@ -254,10 +259,10 @@ public class JooqFactory {
         return build(environment, factory, DEFAULT_NAME);
     }
 
-    public Configuration build(Environment environment, DataSourceFactory factory, String name) throws ClassNotFoundException {
+    public Configuration build(Environment environment, PooledDataSourceFactory factory, String name) throws ClassNotFoundException {
         final Settings settings = buildSettings();
-        final SQLDialect dialect = determineDialect(factory);
         final ManagedDataSource dataSource = factory.build(environment.metrics(), name);
+        final SQLDialect dialect = determineDialect(factory, dataSource);
         final ConnectionProvider connectionProvider = new DataSourceConnectionProvider(dataSource);
         final Configuration config = new DefaultConfiguration();
         config.set(settings);
@@ -279,12 +284,35 @@ public class JooqFactory {
         return config;
     }
 
-    private SQLDialect determineDialect(DataSourceFactory dataSourceFactory) {
+    private SQLDialect determineDialect(PooledDataSourceFactory dataSourceFactory, ManagedDataSource dataSource) {
+        // If a dialect was specified, great!
         if (getDialect().isPresent()) {
             return dialect.get();
         }
 
-        return JDBCUtils.dialect(dataSourceFactory.getUrl());
+        // TODO: When DW >= 0.9.2 ships, revert this
+        // return JDBCUtils.dialect(dataSourceFactory.getUrl());
+
+        // We need to use the JDBC url to determine which SQL dialect to use.
+        // PooledDataSourceFactory doesn't expose the connection's url, but
+        // the sole implementation of this interface does - use that.
+        if (dataSourceFactory instanceof DataSourceFactory) {
+            String url = ((DataSourceFactory) dataSourceFactory).getUrl();
+            return JDBCUtils.dialect(url);
+        }
+
+        // If we have a custom implementation, no choice but to establish a
+        // connection and get the url that way.
+        try (Connection connection = dataSource.getConnection()) {
+            DatabaseMetaData metaData = connection.getMetaData();
+            String url = metaData.getURL();
+            return JDBCUtils.dialect(url);
+        } catch (SQLException e) {
+            // If all else fails - fail.
+            throw new IllegalStateException(
+                    "Could not determine which SQL dialect to use - please configure 'jooq.dialect'!",
+                    e);
+        }
     }
 
     private Settings buildSettings() {
