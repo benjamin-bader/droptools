@@ -11,7 +11,7 @@ Dependency Info
 <dependency>
   <groupId>com.bendb.dropwizard</groupId>
   <artifactId>dropwizard-redis</artifactId>
-  <version>0.7.1-5</version>
+  <version>0.9.1-1</version>
 </dependency>
 ```
 
