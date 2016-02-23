@@ -1,5 +1,7 @@
 package com.bendb.dropwizard.redis;
 
+import com.codahale.metrics.Gauge;
+import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.health.HealthCheckRegistry;
 import io.dropwizard.Configuration;
 import io.dropwizard.jersey.setup.JerseyEnvironment;
@@ -11,15 +13,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 import redis.clients.jedis.JedisPool;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.atLeastOnce;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyZeroInteractions;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class JedisBundleTest {
@@ -29,6 +29,7 @@ public class JedisBundleTest {
     @Mock Environment environment;
     @Mock JerseyEnvironment jerseyEnvironment;
     @Mock LifecycleEnvironment lifecycleEnvironment;
+    @Mock MetricRegistry metricRegistry;
     @Mock HealthCheckRegistry healthChecks;
     @Mock TestConfig config;
     @Mock JedisFactory jedisFactory;
@@ -48,8 +49,12 @@ public class JedisBundleTest {
         when(environment.healthChecks()).thenReturn(healthChecks);
         when(environment.jersey()).thenReturn(jerseyEnvironment);
         when(environment.lifecycle()).thenReturn(lifecycleEnvironment);
+        when(environment.metrics()).thenReturn(metricRegistry);
 
         when(jedisFactory.build(environment)).thenReturn(pool);
+        when(pool.getNumActive()).thenReturn(10);
+        when(pool.getNumIdle()).thenReturn(5);
+        when(pool.getNumWaiters()).thenReturn(1);
     }
 
     @Test
@@ -62,6 +67,7 @@ public class JedisBundleTest {
     public void createsJedisPoolFromFactory() throws Exception {
         bundle.run(config, environment);
         verify(jedisFactory).build(environment);
+        verify(metricRegistry, times(3)).register(Mockito.anyString(), Mockito.any(Gauge.class));
         assertThat(bundle.getPool()).is(pool);
     }
 
