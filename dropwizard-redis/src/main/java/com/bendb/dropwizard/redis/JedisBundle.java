@@ -23,12 +23,11 @@ public abstract class JedisBundle<C extends Configuration>
     @Override
     public void run(C configuration, Environment environment) throws Exception {
         pool = getJedisFactory(configuration).build(environment);
+        environment.healthChecks().register("redis", new JedisHealthCheck(pool));
+        environment.jersey().register(new JedisPoolBinder(pool));
 
         environment.metrics().register("redis.connection.idle", (Gauge) () -> pool.getNumIdle());
         environment.metrics().register("redis.connection.active", (Gauge) () -> pool.getNumActive());
         environment.metrics().register("redis.connection.wait", (Gauge) () -> pool.getNumWaiters());
-
-        environment.healthChecks().register("redis", new JedisHealthCheck(pool));
-        environment.jersey().register(new JedisPoolBinder(pool));
     }
 }
