@@ -17,7 +17,6 @@ import java.net.URL;
 import static com.bendb.dropwizard.redis.testing.Subjects.jedisFactory;
 import static com.google.common.truth.Truth.assertThat;
 import static com.google.common.truth.Truth.assert_;
-import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -47,8 +46,7 @@ public class JedisFactoryTest {
     public void setsPasswordFromUrl() throws MalformedURLException {
         factory.setUrl(new URL("http://u:swordfish@foohost:1234"));
 
-        assertEquals("swordfish", factory.getPassword());
-//        assert_().about(jedisFactory()).that(factory).hasPassword("swordfish");
+        assert_().about(jedisFactory()).that(factory).hasPassword("swordfish");
     }
 
     @Test
