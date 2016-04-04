@@ -11,6 +11,9 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import static com.bendb.dropwizard.redis.testing.Subjects.jedisFactory;
 import static com.google.common.truth.Truth.assertThat;
 import static com.google.common.truth.Truth.assert_;
@@ -29,6 +32,21 @@ public class JedisFactoryTest {
     public void setup() {
         when(environment.lifecycle()).thenReturn(lifecycleEnvironment);
         factory = new JedisFactory();
+    }
+
+    @Test
+    public void setsEndpointFromUrl() throws MalformedURLException {
+        factory.setUrl(new URL("http://foohost:1234"));
+
+        assert_().about(jedisFactory()).that(factory).hasHost("foohost");
+        assert_().about(jedisFactory()).that(factory).hasPort(1234);
+    }
+
+    @Test
+    public void setsPasswordFromUrl() throws MalformedURLException {
+        factory.setUrl(new URL("http://u:swordfish@foohost:1234"));
+
+        assert_().about(jedisFactory()).that(factory).hasPassword("swordfish");
     }
 
     @Test

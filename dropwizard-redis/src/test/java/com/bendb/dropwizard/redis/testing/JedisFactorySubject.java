@@ -62,7 +62,7 @@ public class JedisFactorySubject extends Subject<JedisFactorySubject, JedisFacto
         final JedisFactory subject = getSubject();
         if (subject != null) {
             final String password = subject.getPassword();
-            if (password != passwordToCheck) {
+            if (!password.equals(passwordToCheck)) {
                 fail("has proper password");
             }
         } else {
