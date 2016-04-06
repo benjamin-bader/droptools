@@ -8,7 +8,7 @@ import redis.clients.jedis.JedisPoolConfig;
 import redis.clients.jedis.Protocol;
 
 import javax.validation.constraints.NotNull;
-import java.net.URL;
+import java.net.URI;
 
 /**
  * A factory for creating configured {@link JedisPool} instances.
@@ -72,9 +72,9 @@ public class JedisFactory {
     private int maxTotal = DEFAULT_MAX_TOTAL;
 
     @JsonProperty
-    public void setUrl(URL url) {
-        this.endpoint = HostAndPort.fromParts(url.getHost(), url.getPort());
-        String userInfo = url.getUserInfo();
+    public void setUrl(URI uri) {
+        this.endpoint = HostAndPort.fromParts(uri.getHost(), uri.getPort());
+        String userInfo = uri.getUserInfo();
         if (userInfo != null && !userInfo.isEmpty()) {
             String[] credentials = userInfo.split(":");
             this.password = credentials[1];
