@@ -1,11 +1,11 @@
 package com.bendb.dropwizard.jooq;
 
-import com.codahale.metrics.MetricRegistry;
 import com.google.common.base.Optional;
 import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.db.ManagedDataSource;
 import io.dropwizard.db.PooledDataSourceFactory;
 import io.dropwizard.setup.Environment;
+import org.hibernate.validator.valuehandling.UnwrapValidatedValue;
 import org.jooq.Configuration;
 import org.jooq.ConnectionProvider;
 import org.jooq.DSLContext;
@@ -121,6 +121,7 @@ public class JooqFactory {
     private static final String DEFAULT_NAME = "jooq";
 
     @NotNull
+    @UnwrapValidatedValue(false)
     private Optional<SQLDialect> dialect = Optional.absent();
 
     private boolean logExecutedSql = false;
