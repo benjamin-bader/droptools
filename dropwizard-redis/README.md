@@ -28,7 +28,7 @@ Add a [JedisFactory](http://droptools.bendb.com/0.7.1-5/apidocs/com/bendb/dropwi
 private JedisFactory redis;
 
 public JedisFactory getJedisFactory() {
-	return jedis;
+	return redis;
 }
 
 public void setJedisFactory(JedisFactory jedisFactory) {
