@@ -19,6 +19,23 @@ Dependency Info
 Usage
 -----
 
+
+Add a [JedisFactory](http://droptools.bendb.com/0.7.1-5/apidocs/com/bendb/dropwizard/redis/JedisFactory.html) to your [Configuration](http://dropwizard.io/0.7.1/dropwizard-core/apidocs/io/dropwizard/Configuration.html) class.
+
+```java
+@NotNull
+@JsonProperty
+private JedisFactory redis;
+
+public JedisFactory getJedisFactory() {
+	return jedis;
+}
+
+public void setJedisFactory(JedisFactory jedisFactory) {
+	this.redis = jedisFactory;
+}
+```
+
 Add a [JedisBundle](http://droptools.bendb.com/0.7.1-5/apidocs/com/bendb/dropwizard/redis/JedisBundle.html) to your [Application](http://dropwizard.io/0.7.1/dropwizard-core/apidocs/io/dropwizard/Application.html) class.
 
 ```java
