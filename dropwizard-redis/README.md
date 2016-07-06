@@ -11,7 +11,7 @@ Dependency Info
 <dependency>
   <groupId>com.bendb.dropwizard</groupId>
   <artifactId>dropwizard-redis</artifactId>
-  <version>0.9.1-1</version>
+  <version>0.9.3-0</version>
 </dependency>
 ```
 
@@ -94,7 +94,7 @@ Please file bug reports and feature requests in [GitHub issues](https://github.c
 License
 -------
 
-Copyright (c) 2014 Benjamin Bader
+Copyright (c) 2014-2016 Benjamin Bader
 
 This library is licensed under the Apache License, Version 2.0.
 
