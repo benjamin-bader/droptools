@@ -8,7 +8,7 @@
 
     <groupId>com.bendb.dropwizard</groupId>
     <artifactId>droptools-parent</artifactId>
-    <version>0.9.1-2-SNAPSHOT</version>
+    <version>0.9.3-0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
@@ -55,7 +55,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <dropwizard.version>0.9.1</dropwizard.version>
+        <dropwizard.version>0.9.3</dropwizard.version>
         <coberatura.version>2.6</coberatura.version>
 
         <github.global.server>github</github.global.server>
@@ -79,6 +79,12 @@
             <artifactId>truth</artifactId>
             <version>0.23</version>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.google.guava</groupId>
+                    <artifactId>guava</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
     </dependencies>
 
