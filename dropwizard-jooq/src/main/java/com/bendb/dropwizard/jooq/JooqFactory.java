@@ -291,29 +291,7 @@ public class JooqFactory {
             return dialect.get();
         }
 
-        // TODO: When DW >= 0.9.2 ships, revert this
-        // return JDBCUtils.dialect(dataSourceFactory.getUrl());
-
-        // We need to use the JDBC url to determine which SQL dialect to use.
-        // PooledDataSourceFactory doesn't expose the connection's url, but
-        // the sole implementation of this interface does - use that.
-        if (dataSourceFactory instanceof DataSourceFactory) {
-            String url = ((DataSourceFactory) dataSourceFactory).getUrl();
-            return JDBCUtils.dialect(url);
-        }
-
-        // If we have a custom implementation, no choice but to establish a
-        // connection and get the url that way.
-        try (Connection connection = dataSource.getConnection()) {
-            DatabaseMetaData metaData = connection.getMetaData();
-            String url = metaData.getURL();
-            return JDBCUtils.dialect(url);
-        } catch (SQLException e) {
-            // If all else fails - fail.
-            throw new IllegalStateException(
-                    "Could not determine which SQL dialect to use - please configure 'jooq.dialect'!",
-                    e);
-        }
+        return JDBCUtils.dialect(dataSourceFactory.getUrl());
     }
 
     private Settings buildSettings() {
