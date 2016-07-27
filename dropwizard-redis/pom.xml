@@ -9,7 +9,7 @@
     <parent>
         <artifactId>droptools-parent</artifactId>
         <groupId>com.bendb.dropwizard</groupId>
-        <version>0.9.3-1-SNAPSHOT</version>
+        <version>1.0.0-0-SNAPSHOT</version>
     </parent>
 
     <artifactId>dropwizard-redis</artifactId>
@@ -19,7 +19,7 @@
     <description>Addon bundle for Dropwizard to support use of Redis</description>
 
     <properties>
-        <jedis.version>2.8.0</jedis.version>
+        <jedis.version>2.9.0</jedis.version>
     </properties>
 
     <dependencies>

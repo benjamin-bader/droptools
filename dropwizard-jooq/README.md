@@ -14,7 +14,7 @@ Dependency Info
 <dependency>
   <groupId>com.bendb.dropwizard</groupId>
   <artifactId>dropwizard-jooq</artifactId>
-  <version>0.9.3-0</version>
+  <version>1.0.0-1</version>
 </dependency>
 ```
 
