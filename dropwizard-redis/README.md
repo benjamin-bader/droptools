@@ -83,6 +83,8 @@ redis:
   maxIdle: 0
   # The maximum number of connections allowed in the pool.  (default: 1024)
   maxTotal: 1924
+  # Enables SSL connection. (default: false)
+  ssl: false
 ```
 
 Support
