@@ -56,6 +56,21 @@ public class JedisFactoryTest {
     }
 
     @Test
+    public void setsSslFromConfiguration() throws Exception {
+        factory.setSsl(true);
+
+        assert_().about(jedisFactory()).that(factory).hasSsl(true);
+    }
+
+    @Test
+    public void setsSslFromConfigurationAndIgnoresSchemeFromUrl() throws Exception {
+        factory.setSsl(true);
+        factory.setUrl(new URI("redis://u:swordfish@foohost:1234"));
+
+        assert_().about(jedisFactory()).that(factory).hasSsl(true);
+    }
+
+    @Test
     public void assumesDefaultPortIfNoneGiven() {
         factory.setEndpoint(HostAndPort.fromString("localhost"));
 

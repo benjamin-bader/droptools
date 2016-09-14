@@ -83,7 +83,9 @@ public class JedisFactory {
             String[] credentials = userInfo.split(":");
             this.password = credentials[1];
         }
-        this.ssl = uri.getScheme().equals(REDIS_SSL);
+        if (uri.getScheme().equals(REDIS_SSL)) {
+            this.ssl = true;
+        }
     }
 
     public HostAndPort getEndpoint() {
