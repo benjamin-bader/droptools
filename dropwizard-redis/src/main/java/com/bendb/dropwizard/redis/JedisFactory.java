@@ -54,6 +54,7 @@ import java.net.URI;
 public class JedisFactory {
     public static final int DEFAULT_PORT = 6379;
     public static final int DEFAULT_MAX_TOTAL = 1024;
+    private static final String REDIS_SSL = "rediss";
 
     @JsonProperty
     @NotNull
@@ -72,12 +73,18 @@ public class JedisFactory {
     private int maxTotal = DEFAULT_MAX_TOTAL;
 
     @JsonProperty
+    private boolean ssl = false;
+
+    @JsonProperty
     public void setUrl(URI uri) {
         this.endpoint = HostAndPort.fromParts(uri.getHost(), uri.getPort());
         String userInfo = uri.getUserInfo();
         if (userInfo != null && !userInfo.isEmpty()) {
             String[] credentials = userInfo.split(":");
             this.password = credentials[1];
+        }
+        if (uri.getScheme().equals(REDIS_SSL)) {
+            this.ssl = true;
         }
     }
 
@@ -128,13 +135,21 @@ public class JedisFactory {
         this.maxTotal = maxTotal;
     }
 
+    public boolean getSsl() {
+        return ssl;
+    }
+
+    public void setSsl(boolean ssl) {
+        this.ssl = ssl;
+    }
+
     public JedisPool build(Environment environment) {
         final JedisPoolConfig poolConfig = new JedisPoolConfig();
         poolConfig.setMinIdle(getMinIdle());
         poolConfig.setMaxIdle(getMaxIdle());
         poolConfig.setMaxTotal(getMaxTotal());
 
-        final JedisPool pool = new JedisPool(poolConfig, getHost(), getPort(), Protocol.DEFAULT_TIMEOUT, getPassword());
+        final JedisPool pool = new JedisPool(poolConfig, getHost(), getPort(), Protocol.DEFAULT_TIMEOUT, getPassword(), ssl);
 
         environment.lifecycle().manage(new JedisPoolManager(pool));
 

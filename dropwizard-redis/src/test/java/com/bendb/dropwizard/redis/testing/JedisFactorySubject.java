@@ -70,6 +70,18 @@ public class JedisFactorySubject extends Subject<JedisFactorySubject, JedisFacto
         }
     }
 
+    public void hasSsl(boolean sslToCheck) {
+        final JedisFactory subject = getSubject();
+        if (subject != null) {
+            final boolean ssl = subject.getSsl();
+            if (ssl != sslToCheck) {
+                fail("has ssl configuration");
+            }
+        } else {
+            fail("has ssl configuration");
+        }
+    }
+
     public void hasDefaultMinIdleConnections() {
         final JedisFactory subject = getSubject();
         if (subject != null) {
