@@ -9,7 +9,7 @@
     <parent>
         <artifactId>droptools-parent</artifactId>
         <groupId>com.bendb.dropwizard</groupId>
-        <version>1.0.0-1</version>
+        <version>1.0.0-2-SNAPSHOT</version>
     </parent>
 
     <artifactId>dropwizard-jooq</artifactId>
