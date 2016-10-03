@@ -49,6 +49,11 @@ import java.net.URI;
  *         <td><code>{@value JedisFactory#DEFAULT_MAX_TOTAL}</code></td>
  *         <td>The maximum number of connections allowed in the connection pool.</td>
  *     </tr>
+ *     <tr>
+ *         <td>timeout</td>
+ *         <td><code>{@value redis.clients.jedis.Protocol#DEFAULT_TIMEOUT}</code></td>
+ *         <td>The configured timeout (in milliseconds) for redis connections in the connection pool.</td>
+ *     </tr>
  * </table>
  */
 public class JedisFactory {
@@ -74,6 +79,9 @@ public class JedisFactory {
 
     @JsonProperty
     private boolean ssl = false;
+
+    @JsonProperty
+    private int timeout = Protocol.DEFAULT_TIMEOUT;
 
     @JsonProperty
     public void setUrl(URI uri) {
@@ -143,13 +151,21 @@ public class JedisFactory {
         this.ssl = ssl;
     }
 
+    public int getTimeout() {
+        return timeout;
+    }
+
+    public void setTimeout(int timeout) {
+        this.timeout = timeout;
+    }
+
     public JedisPool build(Environment environment) {
         final JedisPoolConfig poolConfig = new JedisPoolConfig();
         poolConfig.setMinIdle(getMinIdle());
         poolConfig.setMaxIdle(getMaxIdle());
         poolConfig.setMaxTotal(getMaxTotal());
 
-        final JedisPool pool = new JedisPool(poolConfig, getHost(), getPort(), Protocol.DEFAULT_TIMEOUT, getPassword(), ssl);
+        final JedisPool pool = new JedisPool(poolConfig, getHost(), getPort(), getTimeout(), getPassword(), ssl);
 
         environment.lifecycle().manage(new JedisPoolManager(pool));
 
