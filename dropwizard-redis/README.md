@@ -85,6 +85,8 @@ redis:
   maxTotal: 1924
   # Enables SSL connection. (default: false)
   ssl: false
+  # The configured timeout (in milliseconds) for redis connections in the connection pool.  (default: 2000)
+  timeout: 2000
 ```
 
 Support
