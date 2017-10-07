@@ -105,7 +105,7 @@ public class JedisFactory {
     }
 
     public String getHost() {
-        return endpoint.getHostText();
+        return endpoint.getHost();
     }
 
     public int getPort() {
