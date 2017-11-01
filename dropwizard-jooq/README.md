@@ -97,7 +97,7 @@ For modifying jOOQ configuration settings, there is [JooqFactory](http://droptoo
 jooq:
   # The flavor of SQL to generate. If not specified, it will be inferred from the JDBC connection URL.  (default: null)
   dialect: POSTGRES
-  # Whether to write generated SQL to a logger before execution.  (default: no)
+  # DEPRECATED: Use `executeLogging` instead (default: no)
   logExecutedSql: yes
   # Whether to include schema names in generated SQL.  (default: yes)
   renderSchema: yes
