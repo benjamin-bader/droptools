@@ -43,7 +43,7 @@ import java.sql.SQLException;
  *     <tr>
  *         <td>logExecutedSql</td>
  *         <td>{@code false}</td>
- *         <td>Whether to log generated SQL statements as they are executed.</td>
+ *         <td><strong>DEPRECATED:</strong> Use {@code executeLogging} instead.</td>
  *     </tr>
  *     <tr>
  *         <td>renderSchema</td>
@@ -91,7 +91,10 @@ import java.sql.SQLException;
  *     <tr>
  *         <td>executeLogging</td>
  *         <td>{@code false}</td>
- *         <td>Whether to enable jOOQ's built-in logging.</td>
+ *         <td>
+ *             Whether to enable logging of jOOQ's generated SQL queries, as
+ *             well as other built-in logging.
+ *         </td>
  *     </tr>
  *     <tr>
  *         <td>executeWithOptimisticLocking</td>
@@ -123,8 +126,6 @@ public class JooqFactory {
     @NotNull
     @UnwrapValidatedValue(false)
     private Optional<SQLDialect> dialect = Optional.absent();
-
-    private boolean logExecutedSql = false;
 
     private boolean renderSchema = true;
 
@@ -160,12 +161,22 @@ public class JooqFactory {
         this.dialect = dialect;
     }
 
+    /**
+     * Deprecated; this is now a synonym for {@link #isExecuteLogging()}.
+     * @deprecated use {@link #isExecuteLogging()} instead.
+     */
+    @Deprecated
     public boolean isLogExecutedSql() {
-        return logExecutedSql;
+        return executeLogging;
     }
 
+    /**
+     * Deprecated; this is now a synonym for {@link #setExecuteLogging(boolean)}.
+     * @deprecated use {@link #setExecuteLogging(boolean)} instead.
+     */
+    @Deprecated
     public void setLogExecutedSql(boolean logExecutedSql) {
-        this.logExecutedSql = logExecutedSql;
+        this.executeLogging = logExecutedSql;
     }
 
     public boolean isRenderSchema() {
@@ -265,20 +276,10 @@ public class JooqFactory {
         final ManagedDataSource dataSource = factory.build(environment.metrics(), name);
         final SQLDialect dialect = determineDialect(factory, dataSource);
         final ConnectionProvider connectionProvider = new DataSourceConnectionProvider(dataSource);
-        final Configuration config = new DefaultConfiguration();
-        config.set(settings);
-        config.set(dialect);
-        config.set(connectionProvider);
-
-        if (logExecutedSql && !executeLogging) {
-            final Settings loggerSettings = (Settings) settings.clone();
-            loggerSettings.setRenderFormatted(true);
-
-            final DSLContext loggerContext = DSL.using(dialect, loggerSettings);
-            final LoggingExecutionListener listener = new LoggingExecutionListener(loggerContext);
-
-            config.set(new DefaultExecuteListenerProvider(listener));
-        }
+        final Configuration config = new DefaultConfiguration()
+                .set(settings)
+                .set(dialect)
+                .set(connectionProvider);
 
         environment.lifecycle().manage(dataSource);
 

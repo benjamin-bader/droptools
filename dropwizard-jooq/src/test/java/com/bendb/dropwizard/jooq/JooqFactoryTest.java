@@ -80,28 +80,21 @@ public class JooqFactoryTest {
     }
 
     @Test
-    public void addsExecutionLoggerWhenSqlLoggingEnabled() throws Exception {
+    public void logExecutedSqlIsASynonymOfExecuteLogging() throws Exception {
         factory.setLogExecutedSql(true);
+        assertThat(factory.isLogExecutedSql()).isTrue();
+        assertThat(factory.isExecuteLogging()).isTrue();
 
-        Configuration config = factory.build(environment, dataSourceFactory);
+        factory.setLogExecutedSql(false);
+        assertThat(factory.isLogExecutedSql()).isFalse();
+        assertThat(factory.isExecuteLogging()).isFalse();
 
-        ExecuteListenerProvider[] providers = config.executeListenerProviders();
-        assertThat(providers.length).isEqualTo(1);
-
-        DefaultExecuteListenerProvider provider = (DefaultExecuteListenerProvider) providers[0];
-        ExecuteListener listener = provider.provide();
-        assertThat(listener).isA(LoggingExecutionListener.class);
-    }
-
-    @Test
-    public void doesNotAddExecutionLoggerWhenDefaultLoggingEnabled() throws Exception {
-        factory.setLogExecutedSql(true);
         factory.setExecuteLogging(true);
+        assertThat(factory.isLogExecutedSql()).isTrue();
+        assertThat(factory.isExecuteLogging()).isTrue();
 
-        Configuration config = factory.build(environment, dataSourceFactory);
-
-        ExecuteListenerProvider[] providers = config.executeListenerProviders();
-        assertThat(providers.length).isEqualTo(0);
+        factory.setExecuteLogging(false);
+        assertThat(factory.isLogExecutedSql()).isFalse();
+        assertThat(factory.isExecuteLogging()).isFalse();
     }
-
 }
