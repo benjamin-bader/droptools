@@ -6,7 +6,7 @@ import com.bendb.example.db.tables.PostTag;
 import com.bendb.example.db.tables.records.BlogPostRecord;
 import com.bendb.example.db.tables.records.PostTagRecord;
 import io.dropwizard.jersey.params.IntParam;
-import org.joda.time.DateTime;
+import java.time.OffsetDateTime;
 import org.jooq.*;
 import org.jooq.impl.DSL;
 import javax.ws.rs.*;
@@ -44,12 +44,12 @@ public class PostsResource {
                         .where(field("id").equal(BLOG_POST.ID)))
                 .groupBy(BLOG_POST.ID, BLOG_POST.BODY, BLOG_POST.CREATED_AT)
                 .orderBy(BLOG_POST.CREATED_AT.desc())
-                .fetch(new RecordMapper<Record4<Integer, String, DateTime, String[]>, BlogPost>() {
+                .fetch(new RecordMapper<Record4<Integer, String, OffsetDateTime, String[]>, BlogPost>() {
                     @Override
-                    public BlogPost map(Record4<Integer, String, DateTime, String[]> record) {
+                    public BlogPost map(Record4<Integer, String, OffsetDateTime, String[]> record) {
                         final Integer postId = record.value1();
                         final String text = record.value2();
-                        final DateTime createdAt = record.value3();
+                        final OffsetDateTime createdAt = record.value3();
                         final List<String> tags = Arrays.asList(record.value4());
 
                         return BlogPost.create(postId, text, createdAt, tags);
@@ -96,7 +96,7 @@ public class PostsResource {
     @GET
     @Path("/{id}")
     public BlogPost getPost(@PathParam("id") IntParam id, @Context DSLContext create) {
-        final Record4<Integer, String, DateTime, String[]> record = create
+        final Record4<Integer, String, OffsetDateTime, String[]> record = create
                 .select(BLOG_POST.ID, BLOG_POST.BODY, BLOG_POST.CREATED_AT, arrayAgg(POST_TAG.TAG_NAME))
                 .from(BLOG_POST)
                 .leftOuterJoin(POST_TAG)
@@ -111,7 +111,7 @@ public class PostsResource {
 
         final Integer postId = record.value1();
         final String text = record.value2();
-        final DateTime createdAt = record.value3();
+        final OffsetDateTime createdAt = record.value3();
         final List<String> tags = Arrays.asList(record.value4());
 
         return BlogPost.create(postId, text, createdAt, tags);
