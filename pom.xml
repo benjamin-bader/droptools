@@ -55,7 +55,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <dropwizard.version>1.2.0</dropwizard.version>
+        <dropwizard.version>1.3.5</dropwizard.version>
         <coberatura.version>2.7</coberatura.version>
 
         <github.global.server>github</github.global.server>
