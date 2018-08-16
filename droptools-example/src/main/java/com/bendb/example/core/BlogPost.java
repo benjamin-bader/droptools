@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.auto.value.AutoValue;
 import com.google.common.collect.ImmutableList;
 import io.dropwizard.jackson.JsonSnakeCase;
-import org.joda.time.DateTime;
+import java.time.OffsetDateTime;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ public abstract class BlogPost {
     public abstract String text();
 
     @JsonProperty
-    public abstract DateTime createdAt();
+    public abstract OffsetDateTime createdAt();
 
     @JsonProperty
     public abstract ImmutableList<String> tags();
@@ -28,7 +28,7 @@ public abstract class BlogPost {
     public static BlogPost create(
             int postId,
             String text,
-            DateTime createdAt,
+            OffsetDateTime createdAt,
             List<String> tags) {
         return new AutoValue_BlogPost(postId, text, createdAt, immutableCopy(tags));
     }
