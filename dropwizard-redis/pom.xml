@@ -9,7 +9,7 @@
     <parent>
         <artifactId>droptools-parent</artifactId>
         <groupId>com.bendb.dropwizard</groupId>
-        <version>1.3.5-0</version>
+        <version>1.3.5-1-SNAPSHOT</version>
     </parent>
 
     <artifactId>dropwizard-redis</artifactId>
