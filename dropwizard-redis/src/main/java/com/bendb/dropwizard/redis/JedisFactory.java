@@ -164,6 +164,7 @@ public class JedisFactory {
         poolConfig.setMinIdle(getMinIdle());
         poolConfig.setMaxIdle(getMaxIdle());
         poolConfig.setMaxTotal(getMaxTotal());
+        poolConfig.setMaxWaitMillis(getTimeout()); // Use configured timeout value as the time to wait for a connection
 
         final JedisPool pool = new JedisPool(poolConfig, getHost(), getPort(), getTimeout(), getPassword(), ssl);
 
