@@ -65,7 +65,7 @@ subprojects { sp ->
 
 apply plugin: "jacoco"
 
-task codeCoverateReport(type: JacocoReport) {
+task codeCoverageReport(type: JacocoReport) {
     executionData fileTree(project.rootDir.absolutePath).include("**/build/jacoco/*.exec")
 
     subprojects.each {
