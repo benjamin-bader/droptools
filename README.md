@@ -6,7 +6,6 @@ Droptools
 
 Useful Dropwizard addons, including `dropwizard-jooq` and `dropwizard-redis`.
 
-
 [`dropwizard-jooq`](https://github.com/benjamin-bader/droptools/tree/master/dropwizard-jooq)
 -----------------
 
@@ -17,20 +16,6 @@ A bundle that adds support for relational database access via the excellent [jOO
 ------------------
 
 A bundle that manages a redis connection pool and makes [Jedis](https://github.com/xetorthio/jedis) clients available to resource methods, without the hassle of pooling logic in your code.
-
-
-Usage
------
-
-To use the entire `droptools` family:
-
-```xml
-<dependency>
-  <groupId>com.bendb.dropwizard</groupId>
-  <artifactId>droptools-parent</artifactId>
-  <version>1.1.0-0</version>
-</dependency>
-```
 
 
 Support

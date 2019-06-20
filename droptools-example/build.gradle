@@ -49,23 +49,22 @@ dependencies {
 jooq {
     version = jooqVersion
     example(sourceSets.main) {
-    jdbc {
-        driver = "org.postgresql.Driver"
-        url = "jdbc:postgresql://localhost:5432/example_app"
-        user = "example_user"
-        password = "s3cr3t"
-    }
+        jdbc {
+            driver = "org.postgresql.Driver"
+            url = "jdbc:postgresql://localhost:5432/example_app"
+            user = "example_user"
+            password = "s3cr3t"
+        }
 
-    generator {
-    database {
-        name = "org.jooq.meta.postgres.PostgresDatabase"
-        inputSchema = "ex"
-    }
+        generator {
+            database {
+                name = "org.jooq.meta.postgres.PostgresDatabase"
+                inputSchema = "ex"
+            }
 
-    target {
-        packageName = "com.bendb.example.db"
-    }
-    }
+            target {
+                packageName = "com.bendb.example.db"
+            }
+        }
     }
 }
-
