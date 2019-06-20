@@ -1,0 +1,9 @@
+description = "Addon bundle for Dropwizard to support use of Redis"
+
+dependencies {
+    api libs.jedis
+    implementation libs.dropwizardCore
+
+    testImplementation libs.testing
+}
+

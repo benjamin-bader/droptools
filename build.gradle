@@ -1,0 +1,96 @@
+allprojects {
+    repositories {
+        mavenCentral()
+    }
+
+    group GROUP
+    version VERSION
+
+    project.ext {
+        dropwizardVersion = "1.3.5"
+        coberaturaVersion = "2.7"
+        jooqVersion = "3.11.3"
+        jedisVersion = "2.9.0"
+
+        libs = [
+            testing: [
+                "junit:junit:4.12",
+                "org.mockito:mockito-all:1.9.5",
+                dependencies.create("com.google.truth:truth:0.23") {
+                    exclude module: "guava"
+                },
+            ],
+            
+            dropwizardDb: "io.dropwizard:dropwizard-db:$dropwizardVersion",
+            jooq: "org.jooq:jooq:$jooqVersion",
+
+            dropwizardCore: "io.dropwizard:dropwizard-core:$dropwizardVersion",
+            jedis: "redis.clients:jedis:$jedisVersion",
+        ]
+    }
+}
+
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+}
+
+subprojects { sp ->
+    apply plugin: "java-library"
+    apply plugin: "idea"
+    apply plugin: "jacoco"
+
+    sourceCompatibility = "1.8"
+    targetCompatibility = "1.8"
+
+    tasks.withType(JavaCompile) {
+        options.fork = true
+        options.incremental = true
+    }
+
+    test {
+        testLogging {
+            events "failed"
+            exceptionFormat "full"
+            showStackTraces true
+            showExceptions true
+            showCauses true
+        }
+    }
+}
+
+apply plugin: "jacoco"
+
+task codeCoverateReport(type: JacocoReport) {
+    executionData fileTree(project.rootDir.absolutePath).include("**/build/jacoco/*.exec")
+
+    subprojects.each {
+        sourceSets it.sourceSets.main
+    }
+
+    reports {
+        xml.enabled = true
+        xml.destination file("$buildDir/reports/jacoco/report.xml")
+        html.enabled = true
+        csv.enabled = false
+    }
+}
+
+codeCoverateReport.dependsOn {
+    subprojects*.test
+}
+
+afterEvaluate {
+    subprojects {
+        apply from: file("$rootDir/gradle/gradle-mvn-push.gradle")
+    }
+}
+
+wrapper {
+    gradleVersion = "5.4"
+    distributionType = Wrapper.DistributionType.ALL
+}

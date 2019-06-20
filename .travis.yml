@@ -5,14 +5,18 @@ before_script:
   - psql -d example_app -U postgres -f droptools-example/src/main/resources/db/migration/20141010__init.sql
   - psql -c "grant all on database example_app to example_user;" -U postgres
   - psql -c "grant all on all tables in schema ex to example_user" -d example_app -U postgres
-install: echo 'mvn test will install dependencies for us'
-script: mvn test
-after_success: mvn -DperformRelease=true cobertura:cobertura coveralls:cobertura
+install: echo './gradlew check will install dependencies for us'
+script: ./gradlew --parallel check codeCoverageReport
+#after_success: mvn -DperformRelease=true cobertura:cobertura coveralls:cobertura
 jdk:
   - oraclejdk8
 sudo: false
 cache:
   directories:
-  - $HOME/.m2
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
 addons:
   postgresql: "9.3"
+  apt:
+    packages:
+      - oracle-java8-installer
