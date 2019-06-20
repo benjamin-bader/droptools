@@ -21,7 +21,7 @@ public final class PostgresSupport {
      * @param <T> the type of the field
      * @return a {@link Field} representing the array aggregate.
      *
-     * @see <a href="http://www.postgresql.org/docs/9.3/static/functions-aggregate.html"/>
+     * @see <a href="http://www.postgresql.org/docs/9.3/static/functions-aggregate.html"></a>
      */
     @Support({SQLDialect.POSTGRES})
     public static <T> Field<T[]> arrayAgg(Field<T> field) {
@@ -36,7 +36,7 @@ public final class PostgresSupport {
      * @param <T> the type of the field
      * @return a {@link Field} representing the array aggregate
      *
-     * @see <a href="http://www.postgresql.org/docs/9.3/static/functions-aggregate.html"/>
+     * @see <a href="http://www.postgresql.org/docs/9.3/static/functions-aggregate.html"></a>
      */
     @Support({SQLDialect.POSTGRES})
     public static <T> Field<T[]> arrayAggNoNulls(Field<T> field) {

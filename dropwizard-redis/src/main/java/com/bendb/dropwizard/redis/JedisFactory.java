@@ -13,9 +13,9 @@ import java.net.URI;
 /**
  * A factory for creating configured {@link JedisPool} instances.
  *
- * <p/>
+ * <p>
  * <strong>Configuration Parameters</strong>
- * <table>
+ * <table summary="All JedisFactory configuration parameters">
  *     <tr>
  *         <th>Name</th>
  *         <th>Default Value</th>
