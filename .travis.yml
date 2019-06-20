@@ -5,14 +5,25 @@ before_script:
   - psql -d example_app -U postgres -f droptools-example/src/main/resources/db/migration/20141010__init.sql
   - psql -c "grant all on database example_app to example_user;" -U postgres
   - psql -c "grant all on all tables in schema ex to example_user" -d example_app -U postgres
-install: echo 'mvn test will install dependencies for us'
-script: mvn test
-after_success: mvn -DperformRelease=true cobertura:cobertura coveralls:cobertura
+install: echo './gradlew check will install dependencies for us'
+script: ./gradlew --parallel check codeCoverageReport
+after_success:
+  - .ci/deploy-snapshots.sh
+  - SONATYPE_USERNAME= SONATYPE_PASSWORD= bash <(curl -s https://codecov.io/bash)
 jdk:
   - oraclejdk8
 sudo: false
 cache:
   directories:
-  - $HOME/.m2
+    - "$HOME/.gradle/caches/"
+    - "$HOME/.gradle/wrapper/"
 addons:
-  postgresql: "9.3"
+  postgresql: '9.3'
+  apt:
+    packages:
+      - oracle-java8-installer
+env:
+  global:
+    - secure: ZatHIH8EqbIJnM3s3E1rftA9N+qB1iwP7fGvkLAomd19fHkEEOt/6mowz5JuguZDre9pYX3BlvmSNMxrNOjqDyEg6iLeARFIN3K84l1f6q5CyizFltgMq+a5WfUDrrNkrXTvW32oFJIU4u72QDNjrISn6jDQdZQUC5dcnZokEAk=
+    - secure: b4ZuEazC2EalpE6nyfFWiMbUJvjh9AYpFfsp30KkFto5t/UFhorurfJKQuj4erAVN/9xyjm9bKdmA0ggX2JrfRop9ZpAq4vHfdDYb5jFnH+CVWirPbosDQ9sQNeBcbHoRWi98SK3YwZZCoAWL4Zb7wi5wKv+0WimIq0NjWoK3Lc=
+    - secure: C/kf7l2DWgyBkXGNVofsacQ3yxF+X7G0DJa4oc5befxFhvf/yxZHs6OD3crWUxYFRvP9oxZNP67oKmVptT8w8rXifhf92z1PYX8Wbd4/X50k7JG6e86k3GdiMfgVoso0sjoA267167Mf/JMzB7uurWHvQlhKBdLpwEnIV9U8i5Y=

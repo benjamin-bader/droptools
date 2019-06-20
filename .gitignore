@@ -17,3 +17,7 @@ dependency-reduced-pom.xml
 
 # Misc
 logs/
+
+# Gradle
+.gradle/
+build/

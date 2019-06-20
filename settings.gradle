@@ -1,0 +1,5 @@
+rootProject.name = "droptools"
+include "dropwizard-jooq"
+include "dropwizard-redis"
+include "droptools-example"
+

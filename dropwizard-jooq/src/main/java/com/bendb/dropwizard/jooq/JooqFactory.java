@@ -24,9 +24,9 @@ import java.sql.SQLException;
 
 /**
  * A factory for jOOQ {@link org.jooq.Configuration} objects.
- * <p/>
+ * <p>
  * <strong>Configuration Parameters</strong>
- * <table>
+ * <table summary="Descriptions of all JooqFactory parameters">
  *     <tr>
  *         <th>Name</th>
  *         <th>Default</th>
