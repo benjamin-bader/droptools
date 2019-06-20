@@ -80,7 +80,7 @@ task codeCoverageReport(type: JacocoReport) {
     }
 }
 
-codeCoverateReport.dependsOn {
+codeCoverageReport.dependsOn {
     subprojects*.test
 }
 
