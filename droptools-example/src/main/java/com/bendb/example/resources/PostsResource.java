@@ -27,11 +27,11 @@ import static org.jooq.impl.DSL.*;
 public class PostsResource {
 
     @GET
-    public List<BlogPost> findPostsByTag(@QueryParam("tag") String tag, @JooqInject("slave") DSLContext slave) {
+    public List<BlogPost> findPostsByTag(@QueryParam("tag") String tag, @JooqInject("replica") DSLContext db) {
         final PostTag pt = POST_TAG.as("pt");
 
         // Try *that* in JPA
-        return slave.with("postIds").as(
+        return db.with("postIds").as(
                     select(POST_TAG.POST_ID.as("id"))
                         .from(POST_TAG)
                         .where(POST_TAG.TAG_NAME.equal(DSL.lower(tag))))
@@ -62,9 +62,9 @@ public class PostsResource {
     public Response createPost(
             final @FormParam("text") String text,
             final @FormParam("tags") List<String> tags,
-            @JooqInject("master") DSLContext master) {
+            @JooqInject("primary") DSLContext db) {
         // TODO(ben): implement something like @UnitOfWork
-        return master.transactionResult(new TransactionalCallable<Response>() {
+        return db.transactionResult(new TransactionalCallable<Response>() {
             @Override
             public Response run(Configuration configuration) throws Exception {
                 DSLContext cxt = DSL.using(configuration);

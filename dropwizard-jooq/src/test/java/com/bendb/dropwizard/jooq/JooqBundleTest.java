@@ -23,21 +23,21 @@ import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class JooqBundleTest {
-    @Mock DataSourceFactory dataSourceFactoryMaster;
-    @Mock DataSourceFactory dataSourceFactorySlave;
+    @Mock DataSourceFactory dataSourceFactoryPrimary;
+    @Mock DataSourceFactory dataSourceFactoryReplica;
     @Mock JooqFactory jooqFactory;
-    @Mock Configuration jooqConfigMaster;
-    @Mock Configuration jooqConfigSlave;
+    @Mock Configuration jooqConfigPrimary;
+    @Mock Configuration jooqConfigReplica;
     @Mock Environment environment;
     @Mock Bootstrap<DropwizardConfig> bootstrap;
     @Mock JerseyEnvironment jerseyEnvironment;
     @Mock HealthCheckRegistry healthChecks;
     final static String DEFAULT_NAME = "jooq";
-    final static String DATASOURCE_MASTER = "master";
-    final static String DATASOURCE_SLAVE = "slave";
+    final static String DATASOURCE_PRIMARY = "primary";
+    final static String DATASOURCE_REPLICA = "replica";
 
-    private String validationQueryMaster = "this is a query for master";
-    private String validationQuerySlave= "this is a query for slave";
+    private String validationQueryPrimary = "this is a query for primary";
+    private String validationQueryReplica = "this is a query for replica";
 
     private JooqBundle<DropwizardConfig> jooqBundle = new JooqBundle<DropwizardConfig>() {
         @Override
@@ -47,7 +47,7 @@ public class JooqBundleTest {
 
         @Override
         public DataSourceFactory getDataSourceFactory(DropwizardConfig configuration) {
-            return dataSourceFactoryMaster;
+            return dataSourceFactoryPrimary;
         }
     };
 
@@ -59,19 +59,19 @@ public class JooqBundleTest {
 
         @Override
         public DataSourceFactory getDataSourceFactory(DropwizardConfig configuration) {
-            return dataSourceFactoryMaster;
+            return dataSourceFactoryPrimary;
         }
 
         @Override
         public SortedMap<String,DataSourceFactory> getSecondaryDataSourceFactories(DropwizardConfig configuration) {
             final SortedMap<String,DataSourceFactory> dataSourceFactoryMap = new TreeMap<>();
-            dataSourceFactoryMap.put(DATASOURCE_SLAVE, dataSourceFactorySlave);
+            dataSourceFactoryMap.put(DATASOURCE_REPLICA, dataSourceFactoryReplica);
             return dataSourceFactoryMap;
         }
 
         @Override
         public String primaryDataSourceName() {
-            return DATASOURCE_MASTER;
+            return DATASOURCE_PRIMARY;
         }
     };
 
@@ -79,18 +79,18 @@ public class JooqBundleTest {
     public void setup() throws Exception {
         when(environment.jersey()).thenReturn(jerseyEnvironment);
         when(environment.healthChecks()).thenReturn(healthChecks);
-        when(jooqFactory.build(environment, dataSourceFactoryMaster, DEFAULT_NAME)).thenReturn(jooqConfigMaster);
-        when(jooqFactory.build(environment, dataSourceFactoryMaster, DATASOURCE_MASTER)).thenReturn(jooqConfigMaster);
-        when(jooqFactory.build(environment, dataSourceFactorySlave, DATASOURCE_SLAVE)).thenReturn(jooqConfigSlave);
-        when(dataSourceFactoryMaster.getValidationQuery()).thenReturn(validationQueryMaster);
-        when(dataSourceFactorySlave.getValidationQuery()).thenReturn(validationQuerySlave);
+        when(jooqFactory.build(environment, dataSourceFactoryPrimary, DEFAULT_NAME)).thenReturn(jooqConfigPrimary);
+        when(jooqFactory.build(environment, dataSourceFactoryPrimary, DATASOURCE_PRIMARY)).thenReturn(jooqConfigPrimary);
+        when(jooqFactory.build(environment, dataSourceFactoryReplica, DATASOURCE_REPLICA)).thenReturn(jooqConfigReplica);
+        when(dataSourceFactoryPrimary.getValidationQuery()).thenReturn(validationQueryPrimary);
+        when(dataSourceFactoryReplica.getValidationQuery()).thenReturn(validationQueryReplica);
     }
 
     @Test
     public void buildsAJooqConfiguration() throws Exception {
         jooqBundle.run(new DropwizardConfig(), environment);
-        verify(jooqFactory).build(environment, dataSourceFactoryMaster, DEFAULT_NAME);
-        assertThat(jooqBundle.getConfiguration()).isEqualTo(jooqConfigMaster);
+        verify(jooqFactory).build(environment, dataSourceFactoryPrimary, DEFAULT_NAME);
+        assertThat(jooqBundle.getConfiguration()).isEqualTo(jooqConfigPrimary);
     }
 
     @Test
@@ -114,7 +114,7 @@ public class JooqBundleTest {
         ArgumentCaptor<JooqHealthCheck> captor = ArgumentCaptor.forClass(JooqHealthCheck.class);
         verify(healthChecks).register(eq(DEFAULT_NAME), captor.capture());
 
-        assertThat(captor.getValue().getValidationQuery()).isEqualTo(validationQueryMaster);
+        assertThat(captor.getValue().getValidationQuery()).isEqualTo(validationQueryPrimary);
     }
 
     @Test
@@ -123,11 +123,11 @@ public class JooqBundleTest {
 
         ArgumentCaptor<JooqHealthCheck> captor = ArgumentCaptor.forClass(JooqHealthCheck.class);
 
-        verify(healthChecks).register(eq(DATASOURCE_MASTER), captor.capture());
-        assertThat(captor.getValue().getValidationQuery()).isEqualTo(validationQueryMaster);
+        verify(healthChecks).register(eq(DATASOURCE_PRIMARY), captor.capture());
+        assertThat(captor.getValue().getValidationQuery()).isEqualTo(validationQueryPrimary);
 
-        verify(healthChecks).register(eq(DATASOURCE_SLAVE), captor.capture());
-        assertThat(captor.getValue().getValidationQuery()).isEqualTo(validationQuerySlave);
+        verify(healthChecks).register(eq(DATASOURCE_REPLICA), captor.capture());
+        assertThat(captor.getValue().getValidationQuery()).isEqualTo(validationQueryReplica);
     }
 
     @Test
@@ -135,7 +135,7 @@ public class JooqBundleTest {
         JooqFactory jooqFactory = new JooqBundle<DropwizardConfig>() {
             @Override
             public DataSourceFactory getDataSourceFactory(DropwizardConfig configuration) {
-                return dataSourceFactoryMaster;
+                return dataSourceFactoryPrimary;
             }
         }.getJooqFactory(new DropwizardConfig());
 
@@ -152,7 +152,7 @@ public class JooqBundleTest {
 
             @Override
             public DataSourceFactory getDataSourceFactory(DropwizardConfig configuration) {
-                return dataSourceFactoryMaster;
+                return dataSourceFactoryPrimary;
             }
         };
         jooqBundle.run(new DropwizardConfig(), environment);
@@ -163,15 +163,15 @@ public class JooqBundleTest {
     public void providesBuiltJooqConfiguration() throws Exception {
         assertThat(jooqBundle.getConfiguration()).isNull();
         jooqBundle.run(new DropwizardConfig(), environment);
-        assertThat(jooqBundle.getConfiguration()).is(jooqConfigMaster);
+        assertThat(jooqBundle.getConfiguration()).is(jooqConfigPrimary);
     }
 
     @Test
     public void providesMultipleJooqConfigurations() throws Exception {
         assertThat(jooqBundleMultiDS.getConfigurationMap()).isEmpty();
         jooqBundleMultiDS.run(new DropwizardConfig(), environment);
-        assertThat(jooqBundleMultiDS.getConfigurationMap().containsKey(DATASOURCE_MASTER));
-        assertThat(jooqBundleMultiDS.getConfigurationMap().containsKey(DATASOURCE_SLAVE));
+        assertThat(jooqBundleMultiDS.getConfigurationMap().containsKey(DATASOURCE_PRIMARY));
+        assertThat(jooqBundleMultiDS.getConfigurationMap().containsKey(DATASOURCE_REPLICA));
     }
 
     private static final class DropwizardConfig extends io.dropwizard.Configuration {}

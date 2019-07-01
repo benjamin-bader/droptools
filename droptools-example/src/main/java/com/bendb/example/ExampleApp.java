@@ -22,7 +22,7 @@ public class ExampleApp extends Application<ExampleConfig> {
         bootstrap.addBundle(new FlywayBundle<ExampleConfig>() {
             @Override
             public DataSourceFactory getDataSourceFactory(ExampleConfig configuration) {
-                return configuration.dataSourceFactoryMaster();
+                return configuration.dataSourceFactoryPrimary();
             }
 
             @Override
@@ -38,7 +38,7 @@ public class ExampleApp extends Application<ExampleConfig> {
              */
             @Override
             public DataSourceFactory getDataSourceFactory(ExampleConfig configuration) {
-                return configuration.dataSourceFactoryMaster();
+                return configuration.dataSourceFactoryPrimary();
             }
 
             /**
@@ -48,7 +48,7 @@ public class ExampleApp extends Application<ExampleConfig> {
             public SortedMap<String,DataSourceFactory> getSecondaryDataSourceFactories(ExampleConfig configuration) {
                 // override this method to define database configurations
                 final SortedMap<String,DataSourceFactory> dataSourceFactoryMap = new TreeMap<>();
-                dataSourceFactoryMap.put("slave", configuration.dataSourceFactorySlave());
+                dataSourceFactoryMap.put("replica", configuration.dataSourceFactoryReplica());
                 return dataSourceFactoryMap;
             }
 
@@ -58,7 +58,7 @@ public class ExampleApp extends Application<ExampleConfig> {
              */
             @Override
             public String primaryDataSourceName() {
-                return "master";
+                return "primary";
             }
 
             @Override

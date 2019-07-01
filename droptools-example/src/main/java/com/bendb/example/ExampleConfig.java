@@ -19,11 +19,11 @@ public class ExampleConfig extends Configuration {
 
     @JsonProperty
     @NotNull
-    private DataSourceFactory databaseMaster;
+    private DataSourceFactory databasePrimary;
 
     @JsonProperty
     @NotNull
-    private DataSourceFactory databaseSlave;
+    private DataSourceFactory databaseReplica;
 
     public FlywayFactory flyway() {
         return flyway;
@@ -33,11 +33,11 @@ public class ExampleConfig extends Configuration {
         return jooq;
     }
 
-    public DataSourceFactory dataSourceFactoryMaster() {
-        return databaseMaster;
+    public DataSourceFactory dataSourceFactoryPrimary() {
+        return databasePrimary;
     }
 
-    public DataSourceFactory dataSourceFactorySlave() {
-        return databaseSlave;
+    public DataSourceFactory dataSourceFactoryReplica() {
+        return databaseReplica;
     }
 }
