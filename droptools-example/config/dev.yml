@@ -24,7 +24,7 @@ logging:
     - type: console
       target: stdout
 
-databaseMaster:
+databasePrimary:
   driverClass: org.postgresql.Driver
   user: example_user
   password: s3cr3t
@@ -32,7 +32,7 @@ databaseMaster:
 
 # In this example the follower connects to the same DB as the
 # leader, but this could just as simply be a replica
-databaseSlave:
+databaseReplica:
   driverClass: org.postgresql.Driver
   user: example_user
   password: s3cr3t
