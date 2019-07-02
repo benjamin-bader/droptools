@@ -40,9 +40,9 @@ dependencies {
     implementation "com.google.auto.value:auto-value-annotations:1.6.2"
     annotationProcessor "com.google.auto.value:auto-value:1.6.2"
 
-    implementation "org.postgresql:postgresql:42.2.4"
+    implementation "org.postgresql:postgresql:42.2.6"
     
-    jooqRuntime "org.postgresql:postgresql:42.2.4"
+    jooqRuntime "org.postgresql:postgresql:42.2.6"
 }
 
 jooq {
