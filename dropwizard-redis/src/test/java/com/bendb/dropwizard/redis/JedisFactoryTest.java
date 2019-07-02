@@ -13,9 +13,8 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import java.net.URI;
 
-import static com.bendb.dropwizard.redis.testing.Subjects.jedisFactory;
+import static com.bendb.dropwizard.redis.testing.Subjects.assertThat;
 import static com.google.common.truth.Truth.assertThat;
-import static com.google.common.truth.Truth.assert_;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -37,29 +36,29 @@ public class JedisFactoryTest {
     public void setsEndpointFromUrl() throws Exception {
         factory.setUrl(new URI("redis://foohost:1234"));
 
-        assert_().about(jedisFactory()).that(factory).hasHost("foohost");
-        assert_().about(jedisFactory()).that(factory).hasPort(1234);
+        assertThat(factory).hasHost("foohost");
+        assertThat(factory).hasPort(1234);
     }
 
     @Test
     public void setsPasswordFromUrl() throws Exception {
         factory.setUrl(new URI("redis://u:swordfish@foohost:1234"));
 
-        assert_().about(jedisFactory()).that(factory).hasPassword("swordfish");
+        assertThat(factory).hasPassword("swordfish");
     }
 
     @Test
     public void setsSslFromUrl() throws Exception {
         factory.setUrl(new URI("rediss://u:swordfish@foohost:1234"));
 
-        assert_().about(jedisFactory()).that(factory).hasSsl(true);
+        assertThat(factory).hasSsl(true);
     }
 
     @Test
     public void setsSslFromConfiguration() throws Exception {
         factory.setSsl(true);
 
-        assert_().about(jedisFactory()).that(factory).hasSsl(true);
+        assertThat(factory).hasSsl(true);
     }
 
     @Test
@@ -67,30 +66,30 @@ public class JedisFactoryTest {
         factory.setSsl(true);
         factory.setUrl(new URI("redis://u:swordfish@foohost:1234"));
 
-        assert_().about(jedisFactory()).that(factory).hasSsl(true);
+        assertThat(factory).hasSsl(true);
     }
 
     @Test
     public void assumesDefaultPortIfNoneGiven() {
         factory.setEndpoint(HostAndPort.fromString("localhost"));
 
-        assert_().about(jedisFactory()).that(factory).hasDefaultRedisPort();
+        assertThat(factory).hasDefaultRedisPort();
     }
 
     @Test
     public void checkPasswordIfSet() {
         factory.setPassword(null);
-        assert_().about(jedisFactory()).that(factory).hasNullPassword();
+        assertThat(factory).hasNullPassword();
         factory.setPassword("swordfish");
-        assert_().about(jedisFactory()).that(factory).hasPassword("swordfish");
+        assertThat(factory).hasPassword("swordfish");
     }
 
     @Test
     public void getsHostAndPortFromEndpoint() {
         factory.setEndpoint(HostAndPort.fromString("127.0.0.2:11211"));
 
-        assert_().about(jedisFactory()).that(factory).hasHost("127.0.0.2");
-        assert_().about(jedisFactory()).that(factory).hasPort(11211);
+        assertThat(factory).hasHost("127.0.0.2");
+        assertThat(factory).hasPort(11211);
     }
 
     @Test
@@ -106,8 +105,8 @@ public class JedisFactoryTest {
 
     @Test
     public void setsDefaultIdleAndTotalConnections() {
-        assert_().about(jedisFactory()).that(factory).hasDefaultMinIdleConnections();
-        assert_().about(jedisFactory()).that(factory).hasDefaultMaxIdleConnections();
-        assert_().about(jedisFactory()).that(factory).hasDefaultTotalConnections();
+        assertThat(factory).hasDefaultMinIdleConnections();
+        assertThat(factory).hasDefaultMaxIdleConnections();
+        assertThat(factory).hasDefaultTotalConnections();
     }
 }

@@ -8,7 +8,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
-import static com.google.common.truth.Truth.assert_;
+import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.verify;
 
@@ -27,7 +27,7 @@ public class JedisFactoryTest {
 
     @Test
     public void providesAJedisClientInstance() {
-        assert_().that(factory.provide()).isA(Jedis.class);
+        assertThat(factory.provide()).isInstanceOf(Jedis.class);
         verify(pool).getResource();
     }
 

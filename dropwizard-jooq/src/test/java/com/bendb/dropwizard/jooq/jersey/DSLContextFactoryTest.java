@@ -8,7 +8,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import static com.google.common.truth.Truth.assert_;
+import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.mock;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -24,6 +24,6 @@ public class DSLContextFactoryTest {
 
     @Test
     public void createsADSLContext() {
-        assert_().that(factory.provide()).isA(DSLContext.class);
+        assertThat(factory.provide()).isInstanceOf(DSLContext.class);
     }
 }

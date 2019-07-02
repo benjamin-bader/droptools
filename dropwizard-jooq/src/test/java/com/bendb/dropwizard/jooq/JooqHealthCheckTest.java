@@ -29,7 +29,7 @@ public class JooqHealthCheckTest {
         };
 
         HealthCheck.Result result = runHealthCheck(mockDataProvider);
-        assertThat(result.isHealthy()).named("is healthy").isTrue();
+        assertThat(result.isHealthy()).isTrue();
     }
 
     @Test

@@ -68,7 +68,7 @@ public class JedisBundleTest {
         bundle.run(config, environment);
         verify(jedisFactory).build(environment);
         verify(metricRegistry, times(3)).register(Mockito.anyString(), Mockito.any(Gauge.class));
-        assertThat(bundle.getPool()).is(pool);
+        assertThat(bundle.getPool()).isEqualTo(pool);
     }
 
     @Test

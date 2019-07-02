@@ -15,9 +15,7 @@ allprojects {
             testing: [
                 "junit:junit:4.12",
                 "org.mockito:mockito-all:1.10.19",
-                dependencies.create("com.google.truth:truth:0.23") {
-                    exclude module: "guava"
-                },
+                "com.google.truth:truth:0.46",
             ],
             
             dropwizardDb: "io.dropwizard:dropwizard-db:$dropwizardVersion",

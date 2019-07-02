@@ -163,7 +163,7 @@ public class JooqBundleTest {
     public void providesBuiltJooqConfiguration() throws Exception {
         assertThat(jooqBundle.getConfiguration()).isNull();
         jooqBundle.run(new DropwizardConfig(), environment);
-        assertThat(jooqBundle.getConfiguration()).is(jooqConfigPrimary);
+        assertThat(jooqBundle.getConfiguration()).isEqualTo(jooqConfigPrimary);
     }
 
     @Test

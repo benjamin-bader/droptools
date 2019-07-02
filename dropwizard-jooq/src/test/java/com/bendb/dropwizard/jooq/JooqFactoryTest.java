@@ -45,14 +45,14 @@ public class JooqFactoryTest {
     public void buildsConfigurationUsingDataSourceFactory() throws Exception {
         Configuration config = factory.build(environment, dataSourceFactory);
         DataSourceConnectionProvider provider = (DataSourceConnectionProvider) config.connectionProvider();
-        assertThat(provider.dataSource()).is(managedDataSource);
+        assertThat(provider.dataSource()).isEqualTo(managedDataSource);
     }
 
     @Test
     public void buildsConfigurationUsingDataSourceFactoryAndName() throws Exception {
         Configuration config = factory.build(environment, dataSourceFactory, DATASOURCE_NAME);
         DataSourceConnectionProvider provider = (DataSourceConnectionProvider) config.connectionProvider();
-        assertThat(provider.dataSource()).is(managedDataSource);
+        assertThat(provider.dataSource()).isEqualTo(managedDataSource);
     }
 
     @Test
@@ -61,7 +61,7 @@ public class JooqFactoryTest {
 
         factory.setDialect(Optional.<SQLDialect>absent());
         Configuration config = factory.build(environment, dataSourceFactory);
-        assertThat(config.dialect()).is(SQLDialect.POSTGRES);
+        assertThat(config.dialect()).isEqualTo(SQLDialect.POSTGRES);
     }
 
     @Test
@@ -70,7 +70,7 @@ public class JooqFactoryTest {
 
         factory.setDialect(Optional.of(SQLDialect.DERBY));
         Configuration config = factory.build(environment, dataSourceFactory);
-        assertThat(config.dialect()).is(SQLDialect.DERBY);
+        assertThat(config.dialect()).isEqualTo(SQLDialect.DERBY);
     }
 
     @Test

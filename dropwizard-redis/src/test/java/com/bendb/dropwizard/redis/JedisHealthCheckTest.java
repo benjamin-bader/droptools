@@ -10,7 +10,7 @@ import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.exceptions.JedisConnectionException;
 import redis.clients.jedis.exceptions.JedisException;
 
-import static com.bendb.dropwizard.redis.testing.Subjects.healthCheck;
+import static com.bendb.dropwizard.redis.testing.Subjects.assertThat;
 import static com.google.common.truth.Truth.assert_;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -31,13 +31,13 @@ public class JedisHealthCheckTest {
     @Test
     public void isHealthyWhenPingCompletes() throws Exception {
         when(jedis.ping()).thenReturn("PONG");
-        assert_().about(healthCheck()).that(healthcheck.check()).isHealthy();
+        assertThat(healthcheck.check()).isHealthy();
     }
 
     @Test
     public void isUnhealthyWhenPingFails() throws Exception {
         when(jedis.ping()).thenReturn("huh?");
-        assert_().about(healthCheck()).that(healthcheck.check()).isUnhealthy();
+        assertThat(healthcheck.check()).isUnhealthy();
     }
 
     @Test(expected = JedisException.class)

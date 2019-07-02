@@ -35,12 +35,12 @@ public class JodaDateTimeConverterTest {
 
     @Test
     public void convertsFromTimestamp() {
-        assertThat(converter.fromType()).is(Timestamp.class);
+        assertThat(converter.fromType()).isEqualTo(Timestamp.class);
     }
 
     @Test
     public void convertsToDateTime() {
-        assertThat(converter.toType()).is(DateTime.class);
+        assertThat(converter.toType()).isEqualTo(DateTime.class);
     }
 
     @Test
