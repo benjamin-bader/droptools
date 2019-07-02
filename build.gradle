@@ -9,7 +9,7 @@ allprojects {
     project.ext {
         dropwizardVersion = "1.3.12"
         jooqVersion = "3.11.11"
-        jedisVersion = "2.9.0"
+        jedisVersion = "3.0.1"
 
         libs = [
             testing: [
