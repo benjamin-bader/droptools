@@ -19,8 +19,7 @@ Dependency Info
 Usage
 -----
 
-
-Add a [JedisFactory](http://droptools.bendb.com/0.7.1-5/apidocs/com/bendb/dropwizard/redis/JedisFactory.html) to your [Configuration](http://dropwizard.io/0.7.1/dropwizard-core/apidocs/io/dropwizard/Configuration.html) class.
+Add a `JedisFactory` class:
 
 ```java
 @NotNull
@@ -36,7 +35,7 @@ public void setJedisFactory(JedisFactory jedisFactory) {
 }
 ```
 
-Add a [JedisBundle](http://droptools.bendb.com/0.7.1-5/apidocs/com/bendb/dropwizard/redis/JedisBundle.html) to your [Application](http://dropwizard.io/0.7.1/dropwizard-core/apidocs/io/dropwizard/Application.html) class.
+Add a `JedisBundle` classL
 
 ```java
 @Override
@@ -69,7 +68,7 @@ This will also enable redis health-checking.
 Configuration
 -------------
 
-For configuration the redis connection, there is [JedisFactory](http://droptools.bendb.com/0.7.1-5/apidocs/com/bendb/dropwizard/redis/JedisFactory.html):
+For configuration the redis connection, there is `JedisFactory`:
 
 ```yaml
 redis:

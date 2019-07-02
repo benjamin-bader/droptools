@@ -18,11 +18,10 @@ Dependency Info
 </dependency>
 ```
 
-
 Usage
 -----
 
-Add a [JooqBundle](http://droptools.bendb.com/0.8.1-0/apidocs/com/bendb/dropwizard/jooq/JooqBundle.html) to your [Application](http://dropwizard.io/0.8.1/dropwizard-core/apidocs/io/dropwizard/Application.html) class.
+Add a `JooqBundle` to your `Application` class.
 
 ```java
 @Override
@@ -60,7 +59,7 @@ public BlogPost getPost(@QueryParam("id") int postId, @Context DSLContext databa
 
 This will also enable database healthchecks and install exception mappers.
 
-Finally, because I <3 postgres and jOOQ can lag behind some of its features, [PostgresSupport](http://droptools.bendb.com/0.8.1-0/apidocs/com/bendb/dropwizard/jooq/PostgresSupport.html) provides a few helpers for aggregating array values in queries.
+Finally, because I <3 postgres and jOOQ can lag behind some of its features, `PostgresSupport` provides a few helpers for aggregating array values in queries.
 
 For example (taken from the sample project):
 
@@ -83,15 +82,15 @@ Code Generation
 
 [`dropwizard-jooq`](http://droptools.bendb.com/) provides some classes for making generated pojos, DAOs, etc. more convenient to use.
 
-[JodaDateTimeConverter](http://droptools.bendb.com/0.8.1-0/apidocs/com/bendb/dropwizard/jooq/JooqFactory.html) can be used to map between `java.sql.Timestamp` and Joda `DateTime` objects.  This is currently the only converter bundled; contributions in this area are welcome!
+`JodaDateTimeConverter` can be used to map between `java.sql.Timestamp` and Joda `DateTime` objects.  This is currently the only converter bundled; contributions in this area are welcome!
 
 
 Configuration
 -------------
 
-[`dropwizard-jooq`](http://droptools.bendb.com/) uses the same [DataSourceFactory](http://dropwizard.io/0.8.1/dropwizard-db/apidocs/io/dropwizard/db/DataSourceFactory.html) from [`dropwizard-db`](http://dropwizard.io/0.8.1/dropwizard-db/) for configuring its [DataSource](http://docs.oracle.com/javase/7/docs/api/javax/sql/DataSource.html).
+[`dropwizard-jooq`](http://droptools.bendb.com/) uses the same `DataSourceFactory` for configuring its [DataSource](http://docs.oracle.com/javase/7/docs/api/javax/sql/DataSource.html).
 
-For modifying jOOQ configuration settings, there is [JooqFactory](http://droptools.bendb.com/0.8.1-0/apidocs/com/bendb/dropwizard/jooq/JooqFactory.html):
+For modifying jOOQ configuration settings, there is `JooqFactory`:
 
 ```yaml
 jooq:
