@@ -8,7 +8,6 @@ allprojects {
 
     project.ext {
         dropwizardVersion = "1.3.12"
-        coberaturaVersion = "2.7"
         jooqVersion = "3.11.3"
         jedisVersion = "2.9.0"
 
