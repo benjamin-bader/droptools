@@ -6,13 +6,13 @@ Droptools
 
 Useful Dropwizard addons, including `dropwizard-jooq` and `dropwizard-redis`.
 
-[`dropwizard-jooq`](https://github.com/benjamin-bader/droptools/tree/master/dropwizard-jooq)
+[`dropwizard-jooq`](jooq.md)
 -----------------
 
 A bundle that adds support for relational database access via the excellent [jOOQ](http://jooq.org) library.
 
 
-[`dropwizard-redis`](https://github.com/benjamin-bader/droptools/tree/master/dropwizard-redis)
+[`dropwizard-redis`](redis.md)
 ------------------
 
 A bundle that manages a redis connection pool and makes [Jedis](https://github.com/xetorthio/jedis) clients available to resource methods, without the hassle of pooling logic in your code.

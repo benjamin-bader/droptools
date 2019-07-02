@@ -21,3 +21,6 @@ logs/
 # Gradle
 .gradle/
 build/
+
+# MkDocs
+site/
