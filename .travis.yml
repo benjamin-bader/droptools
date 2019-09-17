@@ -19,9 +19,6 @@ cache:
     - "$HOME/.gradle/wrapper/"
 addons:
   postgresql: '9.3'
-  apt:
-    packages:
-      - oracle-java8-installer
 env:
   global:
     - secure: ZatHIH8EqbIJnM3s3E1rftA9N+qB1iwP7fGvkLAomd19fHkEEOt/6mowz5JuguZDre9pYX3BlvmSNMxrNOjqDyEg6iLeARFIN3K84l1f6q5CyizFltgMq+a5WfUDrrNkrXTvW32oFJIU4u72QDNjrISn6jDQdZQUC5dcnZokEAk=
