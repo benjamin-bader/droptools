@@ -11,7 +11,7 @@ after_success:
   - .ci/deploy-snapshots.sh
   - SONATYPE_USERNAME= SONATYPE_PASSWORD= bash <(curl -s https://codecov.io/bash)
 jdk:
-  - oraclejdk8
+  - openjdk8
 sudo: false
 cache:
   directories:
