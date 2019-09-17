@@ -1,3 +1,4 @@
+group = "com.bendb.droptools"
 description = "blah"
 
 buildscript {
