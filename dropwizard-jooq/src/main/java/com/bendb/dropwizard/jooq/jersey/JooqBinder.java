@@ -2,11 +2,11 @@ package com.bendb.dropwizard.jooq.jersey;
 
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import org.glassfish.jersey.process.internal.RequestScoped;
-import org.glassfish.jersey.server.spi.internal.ValueFactoryProvider;
+import org.glassfish.jersey.server.spi.internal.ValueParamProvider;
 import org.jooq.Configuration;
 import org.jooq.ConnectionProvider;
 import org.jooq.DSLContext;
-import java.util.Map;
+
 import java.util.SortedMap;
 
 /**
@@ -38,8 +38,8 @@ public class JooqBinder extends AbstractBinder {
                     .to(ConnectionProvider.class);
         }
 
-        // bind a ValueFactoryProvider for Named DSLContext(s)
-        bind(new DSLContextValueFactoryProvider(configurationMap))
-                .to(ValueFactoryProvider.class);
+        // bind a ValueParamProvider for Named DSLContext(s)
+        bind(new DSLContextValueParamProvider(configurationMap))
+                .to(ValueParamProvider.class);
     }
 }

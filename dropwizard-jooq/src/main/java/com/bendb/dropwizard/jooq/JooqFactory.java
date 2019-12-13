@@ -5,22 +5,19 @@ import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.db.ManagedDataSource;
 import io.dropwizard.db.PooledDataSourceFactory;
 import io.dropwizard.setup.Environment;
-import org.hibernate.validator.valuehandling.UnwrapValidatedValue;
 import org.jooq.Configuration;
 import org.jooq.ConnectionProvider;
-import org.jooq.DSLContext;
 import org.jooq.SQLDialect;
-import org.jooq.conf.*;
-import org.jooq.impl.DSL;
+import org.jooq.conf.ParamType;
+import org.jooq.conf.RenderKeywordStyle;
+import org.jooq.conf.RenderNameStyle;
+import org.jooq.conf.Settings;
+import org.jooq.conf.StatementType;
 import org.jooq.impl.DataSourceConnectionProvider;
 import org.jooq.impl.DefaultConfiguration;
-import org.jooq.impl.DefaultExecuteListenerProvider;
 import org.jooq.tools.jdbc.JDBCUtils;
 
 import javax.validation.constraints.NotNull;
-import java.sql.Connection;
-import java.sql.DatabaseMetaData;
-import java.sql.SQLException;
 
 /**
  * A factory for jOOQ {@link org.jooq.Configuration} objects.
@@ -124,7 +121,6 @@ public class JooqFactory {
     private static final String DEFAULT_NAME = "jooq";
 
     @NotNull
-    @UnwrapValidatedValue(false)
     private Optional<SQLDialect> dialect = Optional.absent();
 
     private boolean renderSchema = true;

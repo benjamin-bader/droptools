@@ -1,5 +1,6 @@
 package com.bendb.dropwizard.jooq;
 
+import com.bendb.dropwizard.jooq.jersey.DSLContextFeature;
 import com.bendb.dropwizard.jooq.jersey.JooqBinder;
 import com.bendb.dropwizard.jooq.jersey.LoggingDataAccessExceptionMapper;
 import io.dropwizard.ConfiguredBundle;
@@ -46,7 +47,7 @@ public abstract class JooqBundle<C extends io.dropwizard.Configuration>
                         )
                 );
 
-        environment.jersey().register(new JooqBinder(jooqFactoryConfigurationMap));
+        environment.jersey().register(new DSLContextFeature(jooqFactoryConfigurationMap));
         environment.jersey().register(new LoggingDataAccessExceptionMapper());
     }
 
@@ -83,9 +84,13 @@ public abstract class JooqBundle<C extends io.dropwizard.Configuration>
         try {
             final JooqFactory jooqFactory = getJooqFactory(configuration);
             final Configuration cfg = jooqFactory.build(environment, dataSourceFactory, name);
-            final JooqHealthCheck healthCheck = new JooqHealthCheck(cfg, dataSourceFactory.getValidationQuery());
 
-            environment.healthChecks().register(name, healthCheck);
+            if (dataSourceFactory.getValidationQuery().isPresent()) {
+                final JooqHealthCheck healthCheck = new JooqHealthCheck(
+                        cfg, dataSourceFactory.getValidationQuery().get());
+
+                environment.healthChecks().register(name, healthCheck);
+            }
 
             jooqFactoryConfigurationMap.put(name, cfg);
         } catch (ClassNotFoundException e) {

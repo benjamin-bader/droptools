@@ -14,6 +14,7 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import java.util.Optional;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
@@ -82,8 +83,8 @@ public class JooqBundleTest {
         when(jooqFactory.build(environment, dataSourceFactoryPrimary, DEFAULT_NAME)).thenReturn(jooqConfigPrimary);
         when(jooqFactory.build(environment, dataSourceFactoryPrimary, DATASOURCE_PRIMARY)).thenReturn(jooqConfigPrimary);
         when(jooqFactory.build(environment, dataSourceFactoryReplica, DATASOURCE_REPLICA)).thenReturn(jooqConfigReplica);
-        when(dataSourceFactoryPrimary.getValidationQuery()).thenReturn(validationQueryPrimary);
-        when(dataSourceFactoryReplica.getValidationQuery()).thenReturn(validationQueryReplica);
+        when(dataSourceFactoryPrimary.getValidationQuery()).thenReturn(Optional.ofNullable(validationQueryPrimary));
+        when(dataSourceFactoryReplica.getValidationQuery()).thenReturn(Optional.ofNullable(validationQueryReplica));
     }
 
     @Test

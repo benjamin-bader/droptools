@@ -26,6 +26,10 @@ import static org.jooq.impl.DSL.*;
 @Produces(MediaType.APPLICATION_JSON)
 public class PostsResource {
 
+    @Context
+    @JooqInject("primary")
+    DSLContext primary;
+
     @GET
     public List<BlogPost> findPostsByTag(@QueryParam("tag") String tag, @JooqInject("replica") DSLContext db) {
         final PostTag pt = POST_TAG.as("pt");
@@ -61,10 +65,9 @@ public class PostsResource {
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     public Response createPost(
             final @FormParam("text") String text,
-            final @FormParam("tags") List<String> tags,
-            @JooqInject("primary") DSLContext db) {
+            final @FormParam("tags") List<String> tags) {
         // TODO(ben): implement something like @UnitOfWork
-        return db.transactionResult(new TransactionalCallable<Response>() {
+        return primary.transactionResult(new TransactionalCallable<Response>() {
             @Override
             public Response run(Configuration configuration) throws Exception {
                 DSLContext cxt = DSL.using(configuration);
