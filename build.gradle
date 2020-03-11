@@ -7,7 +7,7 @@ allprojects {
     version VERSION
 
     project.ext {
-        dropwizardVersion = "2.0.0"
+        dropwizardVersion = "2.0.2"
         jooqVersion = "3.13.1"
         jedisVersion = "3.0.1"
 
