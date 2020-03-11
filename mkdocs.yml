@@ -5,7 +5,7 @@ site_url: https://droptools.bendb.com
 site_description: "Useful Dropwizard addons"
 site_author: Benjamin Bader
 
-copyright: "Copyright &copy; 2014-2019 Benjamin Bader"
+copyright: "Copyright &copy; 2014-2020 Benjamin Bader"
 
 theme:
   name: material
