@@ -8,7 +8,7 @@ allprojects {
 
     project.ext {
         dropwizardVersion = "2.0.0"
-        jooqVersion = "3.11.11"
+        jooqVersion = "3.13.1"
         jedisVersion = "3.0.1"
 
         libs = [
