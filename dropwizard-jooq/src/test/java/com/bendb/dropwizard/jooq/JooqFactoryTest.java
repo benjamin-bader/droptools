@@ -5,7 +5,7 @@ import com.google.common.base.Optional;
 import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.db.ManagedDataSource;
 import io.dropwizard.lifecycle.setup.LifecycleEnvironment;
-import io.dropwizard.setup.Environment;
+import io.dropwizard.core.setup.Environment;
 import org.jooq.Configuration;
 import org.jooq.ExecuteListener;
 import org.jooq.ExecuteListenerProvider;

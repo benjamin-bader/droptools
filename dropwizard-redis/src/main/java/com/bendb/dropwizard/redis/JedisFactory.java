@@ -2,7 +2,7 @@ package com.bendb.dropwizard.redis;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.net.HostAndPort;
-import io.dropwizard.setup.Environment;
+import io.dropwizard.core.setup.Environment;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 import redis.clients.jedis.Protocol;

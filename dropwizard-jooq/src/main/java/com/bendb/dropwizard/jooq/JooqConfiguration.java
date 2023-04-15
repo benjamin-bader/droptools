@@ -1,7 +1,7 @@
 package com.bendb.dropwizard.jooq;
 
 import com.google.common.collect.ImmutableSortedMap;
-import io.dropwizard.Configuration;
+import io.dropwizard.core.Configuration;
 import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.db.DatabaseConfiguration;
 

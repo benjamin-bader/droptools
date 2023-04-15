@@ -6,6 +6,8 @@ Droptools
 
 Useful Dropwizard addons, including `dropwizard-jooq` and `dropwizard-redis`.
 
+I, [daberkow](https://github.com/daberkow/), have patched the library to support Dropwizard 3.0 and Java 11+. I am not using `dropwizard-redis`, that has been patched to pass builds, yet I can not promise any other operations.
+
 [`dropwizard-jooq`](docs/jooq.md)
 -----------------
 
@@ -17,6 +19,12 @@ A bundle that adds support for relational database access via the excellent [jOO
 
 A bundle that manages a redis connection pool and makes [Jedis](https://github.com/xetorthio/jedis) clients available to resource methods, without the hassle of pooling logic in your code.
 
+Version Matrix
+--------------
+
+jOOQ only supports certain versions of Java with the open source edition. Dropwizard also now has version 3 which maintains the `javax` namespace, and version 4 which goes ot `jakarta`.
+
+jOOQ 3.17 supports Java 11. jOOQ 3.18 supports Java 17. Dropwizard 3.0 and 4.0 requires Java 11. This current build is compiled against jOOQ 3.17 and Dropwizard 3.0; making it Java 8+ compatible with `javax` as the namespace.
 
 Support
 -------

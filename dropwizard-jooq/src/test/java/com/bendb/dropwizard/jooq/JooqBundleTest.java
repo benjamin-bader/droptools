@@ -4,8 +4,8 @@ import com.bendb.dropwizard.jooq.jersey.JooqBinder;
 import com.codahale.metrics.health.HealthCheckRegistry;
 import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.jersey.setup.JerseyEnvironment;
-import io.dropwizard.setup.Bootstrap;
-import io.dropwizard.setup.Environment;
+import io.dropwizard.core.setup.Bootstrap;
+import io.dropwizard.core.setup.Environment;
 import org.jooq.Configuration;
 import org.junit.Before;
 import org.junit.Test;
@@ -175,5 +175,5 @@ public class JooqBundleTest {
         assertThat(jooqBundleMultiDS.getConfigurationMap().containsKey(DATASOURCE_REPLICA));
     }
 
-    private static final class DropwizardConfig extends io.dropwizard.Configuration {}
+    private static final class DropwizardConfig extends io.dropwizard.core.Configuration {}
 }
