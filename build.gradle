@@ -8,7 +8,7 @@ allprojects {
 
     project.ext {
         dropwizardVersion = "3.0.0"
-        jooqVersion = "3.17.12"
+        jooqVersion = "3.16.18"
         jedisVersion = "3.0.1"
         postgresPluginVer = "42.6.0"
 

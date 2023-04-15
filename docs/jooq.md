@@ -83,7 +83,7 @@ Code Generation
 [`dropwizard-jooq`](http://droptools.bendb.com/) provides some classes for making generated pojos, DAOs, etc. more convenient to use.
 
 
-JodaDateTime was a Java 8 library. It has been deprecated for java.time afterwards. With Jooq 3.17 and Dropwizard 3.0
+JodaDateTime was a Java 8 library. It has been deprecated for java.time afterwards. With Jooq 3.16 and Dropwizard 3.0
 requiring at minimal Java 11, I have removed it.
 
 ~~`JodaDateTimeConverter` can be used to map between `java.sql.Timestamp` and Joda `DateTime` objects.  This is currently the only converter bundled; contributions in this area are welcome!~~

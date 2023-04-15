@@ -24,7 +24,7 @@ Version Matrix
 
 jOOQ only supports certain versions of Java with the open source edition. Dropwizard also now has version 3 which maintains the `javax` namespace, and version 4 which goes ot `jakarta`.
 
-jOOQ 3.17 supports Java 11. jOOQ 3.18 supports Java 17. Dropwizard 3.0 and 4.0 requires Java 11. This current build is compiled against jOOQ 3.17 and Dropwizard 3.0; making it Java 8+ compatible with `javax` as the namespace.
+jOOQ 3.16 is the last version which supports Java 11. jOOQ 3.17+ supports Java 17+. Dropwizard 3.0 and 4.0 requires Java 11. This current build is compiled against jOOQ 3.16 and Dropwizard 3.0; making it Java 8+ compatible with `javax` as the namespace.
 
 Support
 -------
