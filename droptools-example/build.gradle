@@ -8,22 +8,17 @@ buildscript {
 
     dependencies {
         classpath "com.github.johnrengelman:shadow:8.1.1"
-        classpath "org.postgresql:postgresql:$postgresPluginVer"
+        classpath "org.postgresql:postgresql:$postgresPluginVersion"
         classpath group: 'org.jooq', name: 'jooq', version: jooqVersion
         classpath group: 'org.jooq', name: 'jooq-meta', version: jooqVersion
         classpath group: 'org.jooq', name: 'jooq-codegen', version: jooqVersion
     }
 }
 
-plugins {
-    id "com.github.ben-manes.versions" version "0.46.0"
-}
-
 group = "com.bendb.droptools"
 description = "blah"
 
 apply plugin: "application"
-//apply plugin: "nu.studer.jooq"
 apply plugin: "com.github.johnrengelman.shadow"
 
 tasks.withType(PublishToMavenRepository).configureEach { it.enabled = false }
@@ -49,7 +44,7 @@ dependencies {
     implementation "com.google.auto.value:auto-value-annotations:1.10.1"
     annotationProcessor "com.google.auto.value:auto-value:1.10.1"
 
-    implementation "org.postgresql:postgresql:$postgresPluginVer"
+    implementation "org.postgresql:postgresql:$postgresPluginVersion"
 
     // For jOOQ
     runtimeOnly group: 'org.postgresql', name: 'postgresql', version: '42.5.1'

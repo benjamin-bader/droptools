@@ -10,7 +10,7 @@ allprojects {
         dropwizardVersion = "3.0.0"
         jooqVersion = "3.16.18"
         jedisVersion = "3.0.1"
-        postgresPluginVer = "42.6.0"
+        postgresPluginVersion = "42.6.0"
 
         libs = [
             testing: [
@@ -71,10 +71,7 @@ task codeCoverageReport(type: JacocoReport) {
     }
 
     reports {
-        // xml.enabled = true
         xml.destination file("$buildDir/reports/jacoco/report.xml")
-        // html.enabled = true
-        // csv.enabled = false
     }
 }
 
