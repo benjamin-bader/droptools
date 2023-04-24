@@ -7,11 +7,8 @@ buildscript {
     }
 
     dependencies {
+        classpath "nu.studer:gradle-jooq-plugin:8.2"
         classpath "com.github.johnrengelman:shadow:8.1.1"
-        classpath "org.postgresql:postgresql:$postgresPluginVersion"
-        classpath group: 'org.jooq', name: 'jooq', version: jooqVersion
-        classpath group: 'org.jooq', name: 'jooq-meta', version: jooqVersion
-        classpath group: 'org.jooq', name: 'jooq-codegen', version: jooqVersion
     }
 }
 
@@ -19,6 +16,7 @@ group = "com.bendb.droptools"
 description = "blah"
 
 apply plugin: "application"
+apply plugin: "nu.studer.jooq"
 apply plugin: "com.github.johnrengelman.shadow"
 
 tasks.withType(PublishToMavenRepository).configureEach { it.enabled = false }
@@ -47,51 +45,53 @@ dependencies {
     implementation "org.postgresql:postgresql:$postgresPluginVersion"
 
     // For jOOQ
-    runtimeOnly group: 'org.postgresql', name: 'postgresql', version: '42.5.1'
+    jooqGenerator group: "org.postgresql", name: "postgresql", version: "$postgresPluginVersion"
 }
 
- import org.jooq.codegen.GenerationTool
- import org.jooq.meta.jaxb.*
+jooq {
+    version = jooqVersion // Leaving this in, because we can change the jOOQ version
 
- ext.genpath = new File("${projectDir}/src/generated/java")
- ext.jooqpath = new File("${projectDir}/src/generated/java/com/bendb/example/db/")
+    configurations {
+        main {  // name of the jOOQ configuration
+            generateSchemaSourceOnCompilation = true  // default (can be omitted)
 
- sourceSets.main.java.srcDirs += genpath.toString()
-
- task generateJooq {
-     doLast {
-         if (!jooqpath.exists()) {
-             jooqpath.mkdirs()
-         }
-
-         Configuration configuration = new Configuration()
-                 .withJdbc(new Jdbc()
-                         .withDriver('org.postgresql.Driver')
-                         .withUrl('jdbc:postgresql://localhost:5432/example_app')
-                         .withUser('example_user')
-                         .withPassword('s3cr3t')
-                 )
-                 .withGenerator(new Generator()
-                         .withGenerate(new Generate()
-                                 .withDaos(true)
-                                 .withPojos(true))
-                         .withDatabase(new Database()
-                                 .withName('org.jooq.meta.postgres.PostgresDatabase')
-                                 .withIncludes(".*")
-                                 .withExcludes("")
-                                 .withInputSchema("ex")
-                         )
-                         .withTarget(new Target()
-                                 .withPackageName('com.bendb.example.db')
-                                 .withDirectory(genpath.toString())
-                         )
-                 );
-         GenerationTool.generate(configuration);
-     }
- }
-
- task deleteGeneratedJooqCode(type: Delete) {
-     delete jooqpath
- }
-
- generateJooq.dependsOn(deleteGeneratedJooqCode)
+            generationTool {
+                jdbc {
+                    driver = 'org.postgresql.Driver'
+                    url = "jdbc:postgresql://localhost:5432/example_app"
+                    user = "example_user"
+                    password = "s3cr3t"
+                }
+                generator {
+                    name = 'org.jooq.codegen.DefaultGenerator'
+                    database {
+                        name = 'org.jooq.meta.postgres.PostgresDatabase'
+                        inputSchema = 'ex'
+                        forcedTypes {
+                            forcedType {
+                                name = 'varchar'
+                                includeExpression = '.*'
+                                includeTypes = 'JSONB?'
+                            }
+                            forcedType {
+                                name = 'varchar'
+                                includeExpression = '.*'
+                                includeTypes = 'INET'
+                            }
+                        }
+                    }
+                    generate {
+                        deprecated = false
+                        records = true
+                        immutablePojos = true
+                        fluentSetters = true
+                    }
+                    target {
+                        packageName = 'com.bendb.example.db'
+                    }
+                    strategy.name = 'org.jooq.codegen.DefaultGeneratorStrategy'
+                }
+            }
+        }
+    }
+}

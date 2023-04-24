@@ -76,7 +76,7 @@ task codeCoverageReport(type: JacocoReport) {
 }
 
 codeCoverageReport.dependsOn {
-    subprojects*.test
+    [subprojects*.test, ':droptools-example:startScripts', ':droptools-example:startShadowScripts']
 }
 
 // To accept gradle scans and publish them
