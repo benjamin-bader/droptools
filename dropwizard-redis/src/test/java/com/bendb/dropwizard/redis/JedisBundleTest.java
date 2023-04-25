@@ -18,7 +18,8 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import redis.clients.jedis.JedisPool;
 
-import static com.google.common.truth.Truth.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -68,7 +69,7 @@ public class JedisBundleTest {
         bundle.run(config, environment);
         verify(jedisFactory).build(environment);
         verify(metricRegistry, times(3)).register(Mockito.anyString(), Mockito.any(Gauge.class));
-        assertThat(bundle.getPool()).isEqualTo(pool);
+        assertThat(bundle.getPool(), equalTo(pool));
     }
 
     @Test
@@ -78,7 +79,7 @@ public class JedisBundleTest {
         ArgumentCaptor<JedisHealthCheck> captor = ArgumentCaptor.forClass(JedisHealthCheck.class);
         verify(healthChecks).register(eq("redis"), captor.capture());
 
-        assertThat(captor.getValue()).isNotNull();
+        assertThat(captor.getValue(), not(nullValue()));
     }
 
     @Test

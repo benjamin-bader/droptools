@@ -8,7 +8,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
-import static com.google.common.truth.Truth.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
 import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.verify;
 
@@ -27,7 +28,7 @@ public class JedisFactoryTest {
 
     @Test
     public void providesAJedisClientInstance() {
-        assertThat(factory.provide()).isInstanceOf(Jedis.class);
+        assertThat(factory.provide(), instanceOf(Jedis.class));
         verify(pool).getResource();
     }
 

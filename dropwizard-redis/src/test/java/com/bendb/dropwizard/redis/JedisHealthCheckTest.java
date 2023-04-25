@@ -1,5 +1,6 @@
 package com.bendb.dropwizard.redis;
 
+import com.codahale.metrics.health.HealthCheck.Result;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,7 +12,8 @@ import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.exceptions.JedisConnectionException;
 import redis.clients.jedis.exceptions.JedisException;
 
-import static com.bendb.dropwizard.redis.testing.Subjects.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -31,13 +33,13 @@ public class JedisHealthCheckTest {
     @Test
     public void isHealthyWhenPingCompletes() throws Exception {
         when(jedis.ping()).thenReturn("PONG");
-        assertThat(healthcheck.check()).isHealthy();
+        assertThat(healthcheck.check(), equalTo(Result.healthy()));
     }
 
     @Test
     public void isUnhealthyWhenPingFails() throws Exception {
         when(jedis.ping()).thenReturn("huh?");
-        assertThat(healthcheck.check()).isUnhealthy();
+        assertThat(healthcheck.check().isHealthy(), is(false));
     }
 
     @Test
