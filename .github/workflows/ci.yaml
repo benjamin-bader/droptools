@@ -1,0 +1,50 @@
+name: Pre-merge checks
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_PASSWORD: wow_some_password_bud
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 10
+        ports:
+          - 5432:5432
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: zulu
+          java-version: 17
+
+      - name: Configure DB
+        run: >-
+          psql -U postgres -c "CREATE DATABASE example_app;"
+          psql -U postgres -c "CREATE USER example_user WITH PASSWORD 's3cr3t';"
+          psql -U postgres -d example_app -f droptools-example/src/main/resources/db/migration/20141010__init.sql
+          psql -U postgres -c "GRANT ALL ON DATABASE example_app TO example_user;"
+          psql -U postgres -d example_app -c "GRANT ALL ON ALL TABLES IN SCHEMA ex TO example_user;"
+        env:
+          PGPASSWORD: wow_some_password_bud
+
+      - name: Generate DB code
+        run: ./gradlew droptools-example:generateJooq
+
+      - name: Build and run tests
+        run: ./gradlew check
