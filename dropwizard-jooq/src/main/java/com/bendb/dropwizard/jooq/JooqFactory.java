@@ -263,7 +263,7 @@ public class JooqFactory {
         this.fetchWarnings = fetchWarnings;
     }
 
-    public Configuration build(Environment environment, DataSourceFactory factory) throws ClassNotFoundException {
+    public Configuration build(Environment environment, PooledDataSourceFactory factory) throws ClassNotFoundException {
         return build(environment, factory, DEFAULT_NAME);
     }
 

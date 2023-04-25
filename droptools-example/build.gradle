@@ -1,23 +1,11 @@
-buildscript {
-    repositories {
-        mavenCentral()
-        maven {
-            url "https://plugins.gradle.org/m2/"
-        }
-    }
-
-    dependencies {
-        classpath "nu.studer:gradle-jooq-plugin:8.2"
-        classpath "com.github.johnrengelman:shadow:8.1.1"
-    }
+plugins {
+    id "application"
+    alias libs.plugins.jooq
+    alias libs.plugins.shadow
 }
 
 group = "com.bendb.droptools"
 description = "blah"
-
-apply plugin: "application"
-apply plugin: "nu.studer.jooq"
-apply plugin: "com.github.johnrengelman.shadow"
 
 tasks.withType(PublishToMavenRepository).configureEach { it.enabled = false }
 
@@ -35,27 +23,29 @@ shadowJar {
 dependencies {
     implementation project(":dropwizard-jooq")
 
-    implementation libs.dropwizardCore
-    implementation libs.dropwizardDb
-    implementation "io.dropwizard.modules:dropwizard-flyway:3.0.0-1"
+    implementation libs.dropwizard.core
+    implementation libs.dropwizard.db
+    implementation libs.dropwizard.flyway
 
-    implementation "com.google.auto.value:auto-value-annotations:1.10.1"
-    annotationProcessor "com.google.auto.value:auto-value:1.10.1"
+    implementation libs.autovalue.annotations
+    annotationProcessor libs.autovalue.processor
 
-    implementation "org.postgresql:postgresql:$postgresPluginVersion"
+    implementation libs.postgres
 
     // For jOOQ
-    jooqGenerator group: "org.postgresql", name: "postgresql", version: "$postgresPluginVersion"
+    jooqGenerator libs.postgres
 }
 
 jooq {
-    version = jooqVersion // Leaving this in, because we can change the jOOQ version
+    version = libs.versions.jooq.get() // Leaving this in, because we can change the jOOQ version
 
     configurations {
         main {  // name of the jOOQ configuration
-            generateSchemaSourceOnCompilation = true  // default (can be omitted)
+            generateSchemaSourceOnCompilation = false
 
             generationTool {
+                logging = org.jooq.meta.jaxb.Logging.DEBUG
+
                 jdbc {
                     driver = 'org.postgresql.Driver'
                     url = "jdbc:postgresql://localhost:5432/example_app"
@@ -65,20 +55,8 @@ jooq {
                 generator {
                     name = 'org.jooq.codegen.DefaultGenerator'
                     database {
-                        name = 'org.jooq.meta.postgres.PostgresDatabase'
-                        inputSchema = 'ex'
-                        forcedTypes {
-                            forcedType {
-                                name = 'varchar'
-                                includeExpression = '.*'
-                                includeTypes = 'JSONB?'
-                            }
-                            forcedType {
-                                name = 'varchar'
-                                includeExpression = '.*'
-                                includeTypes = 'INET'
-                            }
-                        }
+                        name = "org.jooq.meta.postgres.PostgresDatabase"
+                        inputSchema = "ex"
                     }
                     generate {
                         deprecated = false
@@ -87,9 +65,8 @@ jooq {
                         fluentSetters = true
                     }
                     target {
-                        packageName = 'com.bendb.example.db'
+                        packageName = "com.bendb.example.db"
                     }
-                    strategy.name = 'org.jooq.codegen.DefaultGeneratorStrategy'
                 }
             }
         }

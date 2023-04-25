@@ -1,33 +1,35 @@
 package com.bendb.dropwizard.jooq;
 
+import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.anyString;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.lenient;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import com.codahale.metrics.MetricRegistry;
 import com.google.common.base.Optional;
-import io.dropwizard.db.DataSourceFactory;
-import io.dropwizard.db.ManagedDataSource;
-import io.dropwizard.lifecycle.setup.LifecycleEnvironment;
 import io.dropwizard.core.setup.Environment;
+import io.dropwizard.db.ManagedDataSource;
+import io.dropwizard.db.PooledDataSourceFactory;
+import io.dropwizard.lifecycle.setup.LifecycleEnvironment;
 import org.jooq.Configuration;
-import org.jooq.ExecuteListener;
-import org.jooq.ExecuteListenerProvider;
 import org.jooq.SQLDialect;
 import org.jooq.impl.DataSourceConnectionProvider;
-import org.jooq.impl.DefaultExecuteListenerProvider;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
-
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.*;
+import org.mockito.junit.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
 public class JooqFactoryTest {
-    @Mock DataSourceFactory dataSourceFactory;
+    @Mock PooledDataSourceFactory dataSourceFactory;
     @Mock ManagedDataSource managedDataSource;
     @Mock Environment environment;
     @Mock LifecycleEnvironment lifecycle;
+    @Mock MetricRegistry metricRegistry;
     final static String DATASOURCE_NAME = "database";
 
     private JooqFactory factory;
@@ -35,6 +37,7 @@ public class JooqFactoryTest {
     @Before
     public void setup() throws Exception {
         when(environment.lifecycle()).thenReturn(lifecycle);
+        when(environment.metrics()).thenReturn(metricRegistry);
         when(dataSourceFactory.build(any(MetricRegistry.class), anyString())).thenReturn(managedDataSource);
 
         factory = new JooqFactory();
@@ -57,7 +60,7 @@ public class JooqFactoryTest {
 
     @Test
     public void infersDialectFromJdbcUrlWhenDialectIsNotSpecified() throws Exception {
-        when(dataSourceFactory.getUrl()).thenReturn("jdbc:postgresql://localhost:5432/test");
+        doReturn("jdbc:postgresql://localhost:5432/test").when(dataSourceFactory).getUrl();
 
         factory.setDialect(Optional.<SQLDialect>absent());
         Configuration config = factory.build(environment, dataSourceFactory);
@@ -66,7 +69,7 @@ public class JooqFactoryTest {
 
     @Test
     public void usesSpecifiedDialect() throws Exception {
-        when(dataSourceFactory.getUrl()).thenReturn("jdbc:postgresql://localhost:5432/test");
+        lenient().doReturn("jdbc:postgresql://localhost:5432/test").when(dataSourceFactory).getUrl();
 
         factory.setDialect(Optional.of(SQLDialect.DERBY));
         Configuration config = factory.build(environment, dataSourceFactory);

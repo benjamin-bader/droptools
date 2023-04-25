@@ -1,9 +1,13 @@
+plugins {
+    id "droptools-java-library"
+}
+
 description = "Addon bundle for Dropwizard to support use of Redis"
 
 dependencies {
     api libs.jedis
-    implementation libs.dropwizardCore
+    implementation libs.dropwizard.core
 
-    testImplementation libs.testing
+    testImplementation libs.bundles.testing
 }
 
