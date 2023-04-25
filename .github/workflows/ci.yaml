@@ -34,12 +34,12 @@ jobs:
           java-version: 17
 
       - name: Configure DB
-        run: >-
-          psql -U postgres -c "CREATE DATABASE example_app;"
-          psql -U postgres -c "CREATE USER example_user WITH PASSWORD 's3cr3t';"
-          psql -U postgres -d example_app -f droptools-example/src/main/resources/db/migration/20141010__init.sql
-          psql -U postgres -c "GRANT ALL ON DATABASE example_app TO example_user;"
-          psql -U postgres -d example_app -c "GRANT ALL ON ALL TABLES IN SCHEMA ex TO example_user;"
+        run: |
+          psql -h localhost -U postgres -c "CREATE DATABASE example_app;"
+          psql -h localhost -U postgres -c "CREATE USER example_user WITH PASSWORD 's3cr3t';"
+          psql -h localhost -U postgres -d example_app -f droptools-example/src/main/resources/db/migration/20141010__init.sql
+          psql -h localhost -U postgres -c "GRANT ALL ON DATABASE example_app TO example_user;"
+          psql -h localhost -U postgres -d example_app -c "GRANT ALL ON ALL TABLES IN SCHEMA ex TO example_user;"
         env:
           PGPASSWORD: wow_some_password_bud
 
