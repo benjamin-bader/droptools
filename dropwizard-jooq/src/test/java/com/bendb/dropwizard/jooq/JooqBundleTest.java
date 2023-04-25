@@ -1,5 +1,6 @@
 package com.bendb.dropwizard.jooq;
 
+import com.bendb.dropwizard.jooq.jersey.DSLContextFeature;
 import com.bendb.dropwizard.jooq.jersey.JooqBinder;
 import com.codahale.metrics.health.HealthCheckRegistry;
 import io.dropwizard.db.DataSourceFactory;
@@ -12,14 +13,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.Optional;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -97,15 +97,14 @@ public class JooqBundleTest {
     @Test
     public void doesNothingInBootstrap() {
         jooqBundle.initialize(bootstrap);
-        verifyZeroInteractions(bootstrap);
+        verifyNoInteractions(bootstrap);
     }
 
     @Test
     public void registersAnInjectibleProviderOnParameters() throws Exception {
         jooqBundle.run(new DropwizardConfig(), environment);
 
-        ArgumentCaptor<JooqBinder> captor = ArgumentCaptor.forClass(JooqBinder.class);
-        verify(jerseyEnvironment, atLeastOnce()).register(captor.capture());
+        verify(jerseyEnvironment, atLeastOnce()).register(isA(DSLContextFeature.class));
     }
 
     @Test

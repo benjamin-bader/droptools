@@ -5,7 +5,7 @@ import redis.clients.jedis.JedisPool;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyZeroInteractions;
+import static org.mockito.Mockito.verifyNoInteractions;
 
 public class JedisPoolManagerTest {
     @Test
@@ -22,6 +22,6 @@ public class JedisPoolManagerTest {
     public void doesNothingOnStart() throws Exception {
         JedisPool pool = mock(JedisPool.class);
         new JedisPoolManager(pool).start();
-        verifyZeroInteractions(pool);
+        verifyNoInteractions(pool);
     }
 }

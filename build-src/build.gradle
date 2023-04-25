@@ -1,0 +1,14 @@
+plugins {
+    id "java-gradle-plugin"
+}
+
+gradlePlugin {
+    plugins {
+        java {
+            id = "droptools-java-library"
+            displayName = "Droptools Java Library"
+            description = "Common Java library settings for Droptools modules"
+            implementationClass = "com.bendb.droptools.gradle.DroptoolsJavaPlugin"
+        }
+    }
+}

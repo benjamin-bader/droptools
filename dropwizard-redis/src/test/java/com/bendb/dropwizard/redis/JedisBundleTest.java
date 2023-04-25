@@ -1,5 +1,6 @@
 package com.bendb.dropwizard.redis;
 
+import com.bendb.dropwizard.redis.jersey.JedisPoolBinder;
 import com.codahale.metrics.Gauge;
 import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.health.HealthCheckRegistry;
@@ -14,11 +15,10 @@ import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 import redis.clients.jedis.JedisPool;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -46,21 +46,21 @@ public class JedisBundleTest {
             }
         };
 
-        when(environment.healthChecks()).thenReturn(healthChecks);
-        when(environment.jersey()).thenReturn(jerseyEnvironment);
-        when(environment.lifecycle()).thenReturn(lifecycleEnvironment);
-        when(environment.metrics()).thenReturn(metricRegistry);
+        lenient().when(environment.healthChecks()).thenReturn(healthChecks);
+        lenient().when(environment.jersey()).thenReturn(jerseyEnvironment);
+        lenient().when(environment.lifecycle()).thenReturn(lifecycleEnvironment);
+        lenient().when(environment.metrics()).thenReturn(metricRegistry);
 
-        when(jedisFactory.build(environment)).thenReturn(pool);
-        when(pool.getNumActive()).thenReturn(10);
-        when(pool.getNumIdle()).thenReturn(5);
-        when(pool.getNumWaiters()).thenReturn(1);
+        lenient().when(jedisFactory.build(environment)).thenReturn(pool);
+        lenient().when(pool.getNumActive()).thenReturn(10);
+        lenient().when(pool.getNumIdle()).thenReturn(5);
+        lenient().when(pool.getNumWaiters()).thenReturn(1);
     }
 
     @Test
     public void bootstrapsNothing() throws Exception {
         bundle.initialize(bootstrap);
-        verifyZeroInteractions(bootstrap);
+        verifyNoInteractions(bootstrap);
     }
 
     @Test
@@ -85,9 +85,6 @@ public class JedisBundleTest {
     public void registersJedisInjectableProvider() throws Exception {
         bundle.run(config, environment);
 
-        ArgumentCaptor<JedisFactory> captor = ArgumentCaptor.forClass(JedisFactory.class);
-        verify(jerseyEnvironment, atLeastOnce()).register(captor.capture());
-
-        assertThat(captor.getValue()).isNotNull();
+        verify(jerseyEnvironment, atLeastOnce()).register(isA(JedisPoolBinder.class));
     }
 }

@@ -1,5 +1,24 @@
+import org.gradle.api.initialization.resolve.RepositoriesMode
+
+pluginManagement {
+    repositories {
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+
+dependencyResolutionManagement {
+    repositoriesMode = RepositoriesMode.PREFER_SETTINGS
+
+    repositories {
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+
+includeBuild "build-src"
+
 rootProject.name = "droptools"
 include "dropwizard-jooq"
 include "dropwizard-redis"
 include "droptools-example"
-
