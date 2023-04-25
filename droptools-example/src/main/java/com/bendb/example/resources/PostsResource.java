@@ -44,7 +44,7 @@ public class PostsResource {
                 .leftOuterJoin(pt)
                 .on(BLOG_POST.ID.equal(pt.POST_ID))
                 .whereExists(selectOne()
-                        .from(POST_TAG)
+                        .from(DSL.name("postIds"))
                         .where(field("id").equal(BLOG_POST.ID)))
                 .groupBy(BLOG_POST.ID, BLOG_POST.BODY, BLOG_POST.CREATED_AT)
                 .orderBy(BLOG_POST.CREATED_AT.desc())
