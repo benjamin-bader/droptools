@@ -3,17 +3,17 @@ package com.bendb.dropwizard.jooq;
 import com.bendb.dropwizard.jooq.jersey.DSLContextFeature;
 import com.bendb.dropwizard.jooq.jersey.JooqBinder;
 import com.bendb.dropwizard.jooq.jersey.LoggingDataAccessExceptionMapper;
-import io.dropwizard.ConfiguredBundle;
+import io.dropwizard.core.ConfiguredBundle;
 import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.db.PooledDataSourceFactory;
-import io.dropwizard.setup.Bootstrap;
-import io.dropwizard.setup.Environment;
+import io.dropwizard.core.setup.Bootstrap;
+import io.dropwizard.core.setup.Environment;
 import org.jooq.Configuration;
 import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
-public abstract class JooqBundle<C extends io.dropwizard.Configuration>
+public abstract class JooqBundle<C extends io.dropwizard.core.Configuration>
         implements ConfiguredBundle<C>, JooqConfiguration<C> {
 
     private static final String DEFAULT_NAME = "jooq";

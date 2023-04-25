@@ -1,6 +1,6 @@
 package com.bendb.dropwizard.jooq;
 
-import io.dropwizard.Configuration;
+import io.dropwizard.core.Configuration;
 import io.dropwizard.db.DataSourceFactory;
 import java.util.SortedMap;
 

@@ -64,7 +64,7 @@ public class JedisHealthCheckTest {
         when(jedis.ping()).thenThrow(new JedisException("boom"));
         try {
             healthcheck.check();
-            assert_().fail("expected a JedisException, got nothing");
+            assert_().withMessage("expected a JedisException, got nothing").fail();
         } catch (JedisException e) {
             verify(jedis).close();
         }
