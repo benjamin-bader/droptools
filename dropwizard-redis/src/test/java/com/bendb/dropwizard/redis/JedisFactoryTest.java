@@ -4,21 +4,21 @@ import com.google.common.net.HostAndPort;
 import io.dropwizard.jersey.setup.JerseyEnvironment;
 import io.dropwizard.lifecycle.setup.LifecycleEnvironment;
 import io.dropwizard.core.setup.Environment;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
 
 import java.net.URI;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import static com.bendb.dropwizard.redis.testing.Subjects.assertThat;
 import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class JedisFactoryTest {
     @Mock Environment environment;
     @Mock JerseyEnvironment jerseyEnvironment;
@@ -26,9 +26,9 @@ public class JedisFactoryTest {
 
     JedisFactory factory;
 
-    @Before
+    @BeforeEach
     public void setup() {
-        when(environment.lifecycle()).thenReturn(lifecycleEnvironment);
+        lenient().when(environment.lifecycle()).thenReturn(lifecycleEnvironment);
         factory = new JedisFactory();
     }
 

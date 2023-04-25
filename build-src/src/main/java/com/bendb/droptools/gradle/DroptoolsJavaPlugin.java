@@ -45,6 +45,8 @@ public class DroptoolsJavaPlugin implements Plugin<Project> {
 
   private static void configureTestTasks(Project p) {
     p.getTasks().withType(Test.class).configureEach(task -> {
+      task.useJUnitPlatform();
+
       task.testLogging(logging -> {
         logging.events(TestLogEvent.FAILED);
         logging.setShowExceptions(true);

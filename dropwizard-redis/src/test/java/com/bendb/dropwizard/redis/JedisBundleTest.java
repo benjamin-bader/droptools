@@ -9,19 +9,19 @@ import io.dropwizard.jersey.setup.JerseyEnvironment;
 import io.dropwizard.lifecycle.setup.LifecycleEnvironment;
 import io.dropwizard.core.setup.Bootstrap;
 import io.dropwizard.core.setup.Environment;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 import redis.clients.jedis.JedisPool;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.*;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class JedisBundleTest {
     static class TestConfig extends Configuration {}
 
@@ -37,7 +37,7 @@ public class JedisBundleTest {
 
     private JedisBundle<TestConfig> bundle;
 
-    @Before
+    @BeforeEach
     public void setup() {
         bundle = new JedisBundle<TestConfig>() {
             @Override

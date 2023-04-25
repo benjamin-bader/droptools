@@ -1,6 +1,6 @@
 package com.bendb.dropwizard.redis;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import redis.clients.jedis.JedisPool;
 
 import static org.mockito.Mockito.mock;

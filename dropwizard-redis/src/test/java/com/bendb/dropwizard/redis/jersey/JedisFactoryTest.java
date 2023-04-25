@@ -1,27 +1,27 @@
 package com.bendb.dropwizard.redis.jersey;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.verify;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class JedisFactoryTest {
     @Mock JedisPool pool;
     @Mock Jedis jedis;
 
     private JedisFactory factory;
 
-    @Before
+    @BeforeEach
     public void setup() {
-        when(pool.getResource()).thenReturn(jedis);
+        lenient().when(pool.getResource()).thenReturn(jedis);
         factory = new JedisFactory(pool);
     }
 
