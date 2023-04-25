@@ -1,28 +1,28 @@
 package com.bendb.dropwizard.redis;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.exceptions.JedisConnectionException;
 import redis.clients.jedis.exceptions.JedisException;
 
 import static com.bendb.dropwizard.redis.testing.Subjects.assertThat;
-import static com.google.common.truth.Truth.assert_;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class JedisHealthCheckTest {
     @Mock JedisPool pool;
     @Mock Jedis jedis;
 
     JedisHealthCheck healthcheck;
 
-    @Before
+    @BeforeEach
     public void setup() {
         when(pool.getResource()).thenReturn(jedis);
         healthcheck = new JedisHealthCheck(pool);
@@ -40,16 +40,18 @@ public class JedisHealthCheckTest {
         assertThat(healthcheck.check()).isUnhealthy();
     }
 
-    @Test(expected = JedisException.class)
+    @Test
     public void doesNotCatchJedisExceptions() throws Exception {
         when(jedis.ping()).thenThrow(new JedisException("boom"));
-        healthcheck.check();
+        Assertions.assertThrows(JedisException.class, healthcheck::check);
     }
 
-    @Test(expected = JedisConnectionException.class)
+    @Test
     public void doesNotCatchJedisPoolExceptions() throws Exception {
         when(pool.getResource()).thenThrow(new JedisConnectionException("nope."));
-        healthcheck.check();
+        Assertions.assertThrows(
+            JedisConnectionException.class,
+            healthcheck::check);
     }
 
     @Test
@@ -62,11 +64,7 @@ public class JedisHealthCheckTest {
     @Test
     public void returnsConnectionWhenPingThrows() throws Exception {
         when(jedis.ping()).thenThrow(new JedisException("boom"));
-        try {
-            healthcheck.check();
-            assert_().withMessage("expected a JedisException, got nothing").fail();
-        } catch (JedisException e) {
-            verify(jedis).close();
-        }
+        Assertions.assertThrows(JedisException.class, healthcheck::check);
+        verify(jedis).close();
     }
 }

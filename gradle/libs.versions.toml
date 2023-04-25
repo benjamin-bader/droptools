@@ -17,13 +17,15 @@ postgres = { module = "org.postgresql:postgresql", version.ref = "postgres" }
 
 
 # test deps
-junit = "junit:junit:4.12"
-mockito = "org.mockito:mockito-core:5.3.1"
+junit = "org.junit.jupiter:junit-jupiter:5.8.2"
+mockito-core = "org.mockito:mockito-core:5.3.1"
+mockito-junit = "org.mockito:mockito-junit-jupiter:5.3.1"
 truth = "com.google.truth:truth:1.1.3"
 
 [plugins]
 jooq = "nu.studer.jooq:7.2"
 shadow = "com.github.johnrengelman.shadow:8.1.1"
+versions = "com.github.ben-manes.versions:0.46.0"
 
 [bundles]
-testing = ["junit", "mockito", "truth"]
+testing = ["junit", "mockito-core", "mockito-junit", "truth"]

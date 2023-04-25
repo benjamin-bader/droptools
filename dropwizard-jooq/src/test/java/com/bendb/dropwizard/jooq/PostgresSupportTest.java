@@ -2,7 +2,7 @@ package com.bendb.dropwizard.jooq;
 
 import org.jooq.Field;
 import org.jooq.test.data.Table1;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static com.google.common.truth.Truth.assertThat;
 

@@ -6,7 +6,6 @@ import static org.mockito.Mockito.anyString;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 import com.codahale.metrics.MetricRegistry;
 import com.google.common.base.Optional;
@@ -17,13 +16,13 @@ import io.dropwizard.lifecycle.setup.LifecycleEnvironment;
 import org.jooq.Configuration;
 import org.jooq.SQLDialect;
 import org.jooq.impl.DataSourceConnectionProvider;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class JooqFactoryTest {
     @Mock PooledDataSourceFactory dataSourceFactory;
     @Mock ManagedDataSource managedDataSource;
@@ -34,11 +33,11 @@ public class JooqFactoryTest {
 
     private JooqFactory factory;
 
-    @Before
-    public void setup() throws Exception {
-        when(environment.lifecycle()).thenReturn(lifecycle);
-        when(environment.metrics()).thenReturn(metricRegistry);
-        when(dataSourceFactory.build(any(MetricRegistry.class), anyString())).thenReturn(managedDataSource);
+    @BeforeEach
+    public void setup() {
+        lenient().when(environment.lifecycle()).thenReturn(lifecycle);
+        lenient().when(environment.metrics()).thenReturn(metricRegistry);
+        lenient().when(dataSourceFactory.build(any(MetricRegistry.class), anyString())).thenReturn(managedDataSource);
 
         factory = new JooqFactory();
         factory.setDialect(Optional.of(SQLDialect.H2));

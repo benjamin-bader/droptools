@@ -1,6 +1,6 @@
 plugins {
     id "droptools-java-library"
-    id "com.github.ben-manes.versions" version "0.46.0"
+    alias libs.plugins.versions
 }
 
 description = "Addon bundle for Dropwizard to support jOOQ for database access"

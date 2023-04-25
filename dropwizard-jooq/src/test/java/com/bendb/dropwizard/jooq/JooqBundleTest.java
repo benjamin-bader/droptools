@@ -1,28 +1,27 @@
 package com.bendb.dropwizard.jooq;
 
 import com.bendb.dropwizard.jooq.jersey.DSLContextFeature;
-import com.bendb.dropwizard.jooq.jersey.JooqBinder;
 import com.codahale.metrics.health.HealthCheckRegistry;
 import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.jersey.setup.JerseyEnvironment;
 import io.dropwizard.core.setup.Bootstrap;
 import io.dropwizard.core.setup.Environment;
 import org.jooq.Configuration;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.Optional;
 import java.util.SortedMap;
 import java.util.TreeMap;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.*;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class JooqBundleTest {
     @Mock DataSourceFactory dataSourceFactoryPrimary;
     @Mock DataSourceFactory dataSourceFactoryReplica;
@@ -76,15 +75,15 @@ public class JooqBundleTest {
         }
     };
 
-    @Before
+    @BeforeEach
     public void setup() throws Exception {
-        when(environment.jersey()).thenReturn(jerseyEnvironment);
-        when(environment.healthChecks()).thenReturn(healthChecks);
-        when(jooqFactory.build(environment, dataSourceFactoryPrimary, DEFAULT_NAME)).thenReturn(jooqConfigPrimary);
-        when(jooqFactory.build(environment, dataSourceFactoryPrimary, DATASOURCE_PRIMARY)).thenReturn(jooqConfigPrimary);
-        when(jooqFactory.build(environment, dataSourceFactoryReplica, DATASOURCE_REPLICA)).thenReturn(jooqConfigReplica);
-        when(dataSourceFactoryPrimary.getValidationQuery()).thenReturn(Optional.ofNullable(validationQueryPrimary));
-        when(dataSourceFactoryReplica.getValidationQuery()).thenReturn(Optional.ofNullable(validationQueryReplica));
+        lenient().when(environment.jersey()).thenReturn(jerseyEnvironment);
+        lenient().when(environment.healthChecks()).thenReturn(healthChecks);
+        lenient().when(jooqFactory.build(environment, dataSourceFactoryPrimary, DEFAULT_NAME)).thenReturn(jooqConfigPrimary);
+        lenient().when(jooqFactory.build(environment, dataSourceFactoryPrimary, DATASOURCE_PRIMARY)).thenReturn(jooqConfigPrimary);
+        lenient().when(jooqFactory.build(environment, dataSourceFactoryReplica, DATASOURCE_REPLICA)).thenReturn(jooqConfigReplica);
+        lenient().when(dataSourceFactoryPrimary.getValidationQuery()).thenReturn(Optional.ofNullable(validationQueryPrimary));
+        lenient().when(dataSourceFactoryReplica.getValidationQuery()).thenReturn(Optional.ofNullable(validationQueryReplica));
     }
 
     @Test
