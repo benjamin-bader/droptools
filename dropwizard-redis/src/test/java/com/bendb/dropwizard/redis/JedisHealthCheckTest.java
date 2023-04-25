@@ -33,7 +33,7 @@ public class JedisHealthCheckTest {
     @Test
     public void isHealthyWhenPingCompletes() throws Exception {
         when(jedis.ping()).thenReturn("PONG");
-        assertThat(healthcheck.check(), equalTo(Result.healthy()));
+        assertThat(healthcheck.check().isHealthy(), is(true));
     }
 
     @Test
