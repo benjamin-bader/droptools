@@ -1,10 +1,10 @@
 package com.bendb.dropwizard.jooq;
 
-import com.google.common.base.Optional;
 import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.db.ManagedDataSource;
 import io.dropwizard.db.PooledDataSourceFactory;
 import io.dropwizard.core.setup.Environment;
+import java.util.Optional;
 import org.jooq.Configuration;
 import org.jooq.ConnectionProvider;
 import org.jooq.SQLDialect;
@@ -121,7 +121,7 @@ public class JooqFactory {
     private static final String DEFAULT_NAME = "jooq";
 
     @NotNull
-    private Optional<SQLDialect> dialect = Optional.absent();
+    private Optional<SQLDialect> dialect = Optional.empty();
 
     private boolean renderSchema = true;
 

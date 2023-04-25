@@ -9,11 +9,11 @@ import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.verify;
 
 import com.codahale.metrics.MetricRegistry;
-import com.google.common.base.Optional;
 import io.dropwizard.core.setup.Environment;
 import io.dropwizard.db.ManagedDataSource;
 import io.dropwizard.db.PooledDataSourceFactory;
 import io.dropwizard.lifecycle.setup.LifecycleEnvironment;
+import java.util.Optional;
 import org.jooq.Configuration;
 import org.jooq.SQLDialect;
 import org.jooq.impl.DataSourceConnectionProvider;
@@ -62,7 +62,7 @@ public class JooqFactoryTest {
     public void infersDialectFromJdbcUrlWhenDialectIsNotSpecified() throws Exception {
         doReturn("jdbc:postgresql://localhost:5432/test").when(dataSourceFactory).getUrl();
 
-        factory.setDialect(Optional.<SQLDialect>absent());
+        factory.setDialect(Optional.empty());
         Configuration config = factory.build(environment, dataSourceFactory);
         assertThat(config.dialect(), equalTo(SQLDialect.POSTGRES));
     }
