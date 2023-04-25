@@ -11,7 +11,13 @@ import java.sql.SQLException;
 
 @Provider
 public class LoggingDataAccessExceptionMapper extends LoggingExceptionMapper<DataAccessException> {
-    private static Logger logger = LoggerFactory.getLogger(LoggingDataAccessExceptionMapper.class);
+    LoggingDataAccessExceptionMapper(Logger logger) {
+        super(logger);
+    }
+
+    public LoggingDataAccessExceptionMapper() {
+        this(LoggerFactory.getLogger(LoggingDataAccessExceptionMapper.class));
+    }
 
     @Override
     protected void logException(long id, DataAccessException exception) {
@@ -23,10 +29,5 @@ public class LoggingDataAccessExceptionMapper extends LoggingExceptionMapper<Dat
         } else {
             logger.error(formatLogMessage(id, exception), exception);
         }
-    }
-
-    @VisibleForTesting
-    static void setLogger(Logger logger) {
-        LoggingDataAccessExceptionMapper.logger = logger;
     }
 }

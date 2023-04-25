@@ -1,5 +1,8 @@
 package com.bendb.dropwizard.jooq;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
+
 import com.codahale.metrics.health.HealthCheck;
 import org.jooq.Configuration;
 import org.jooq.exception.DataAccessException;
@@ -8,13 +11,11 @@ import org.jooq.tools.jdbc.MockConnection;
 import org.jooq.tools.jdbc.MockDataProvider;
 import org.jooq.tools.jdbc.MockExecuteContext;
 import org.jooq.tools.jdbc.MockResult;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
 import java.sql.Savepoint;
-
-import static com.google.common.truth.Truth.assertThat;
-import static com.google.common.truth.Truth.assert_;
 
 public class JooqHealthCheckTest {
     private String validationQuery = "this is a query";
@@ -29,7 +30,7 @@ public class JooqHealthCheckTest {
         };
 
         HealthCheck.Result result = runHealthCheck(mockDataProvider);
-        assertThat(result.isHealthy()).isTrue();
+        assertThat(result.isHealthy(), is(true));
     }
 
     @Test
@@ -41,13 +42,9 @@ public class JooqHealthCheckTest {
             }
         };
 
-        try {
-            runHealthCheck(mockDataProvider);
-            assert_().fail();
-        } catch (DataAccessException e) {
-            assertThat(e.getMessage()).contains(validationQuery);
-            assertThat(e.getMessage()).contains("BOOM");
-        }
+        DataAccessException e = Assertions.assertThrows(DataAccessException.class, () -> runHealthCheck(mockDataProvider));
+        assertThat(e.getMessage(), containsString(validationQuery));
+        assertThat(e.getMessage(), containsString("BOOM"));
     }
 
     private HealthCheck.Result runHealthCheck(MockDataProvider provider) throws Exception {

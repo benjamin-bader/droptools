@@ -7,18 +7,20 @@ import io.dropwizard.jersey.setup.JerseyEnvironment;
 import io.dropwizard.core.setup.Bootstrap;
 import io.dropwizard.core.setup.Environment;
 import org.jooq.Configuration;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
 import java.util.SortedMap;
 import java.util.TreeMap;
-import org.mockito.junit.jupiter.MockitoExtension;
 
-import static com.google.common.truth.Truth.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -36,8 +38,8 @@ public class JooqBundleTest {
     final static String DATASOURCE_PRIMARY = "primary";
     final static String DATASOURCE_REPLICA = "replica";
 
-    private String validationQueryPrimary = "this is a query for primary";
-    private String validationQueryReplica = "this is a query for replica";
+    static final String validationQueryPrimary = "this is a query for primary";
+    static final String validationQueryReplica = "this is a query for replica";
 
     private JooqBundle<DropwizardConfig> jooqBundle = new JooqBundle<DropwizardConfig>() {
         @Override
@@ -82,15 +84,15 @@ public class JooqBundleTest {
         lenient().when(jooqFactory.build(environment, dataSourceFactoryPrimary, DEFAULT_NAME)).thenReturn(jooqConfigPrimary);
         lenient().when(jooqFactory.build(environment, dataSourceFactoryPrimary, DATASOURCE_PRIMARY)).thenReturn(jooqConfigPrimary);
         lenient().when(jooqFactory.build(environment, dataSourceFactoryReplica, DATASOURCE_REPLICA)).thenReturn(jooqConfigReplica);
-        lenient().when(dataSourceFactoryPrimary.getValidationQuery()).thenReturn(Optional.ofNullable(validationQueryPrimary));
-        lenient().when(dataSourceFactoryReplica.getValidationQuery()).thenReturn(Optional.ofNullable(validationQueryReplica));
+        lenient().when(dataSourceFactoryPrimary.getValidationQuery()).thenReturn(Optional.of(validationQueryPrimary));
+        lenient().when(dataSourceFactoryReplica.getValidationQuery()).thenReturn(Optional.of(validationQueryReplica));
     }
 
     @Test
     public void buildsAJooqConfiguration() throws Exception {
         jooqBundle.run(new DropwizardConfig(), environment);
         verify(jooqFactory).build(environment, dataSourceFactoryPrimary, DEFAULT_NAME);
-        assertThat(jooqBundle.getConfiguration()).isEqualTo(jooqConfigPrimary);
+        Assertions.assertEquals(jooqBundle.getConfiguration(), jooqConfigPrimary);
     }
 
     @Test
@@ -113,7 +115,7 @@ public class JooqBundleTest {
         ArgumentCaptor<JooqHealthCheck> captor = ArgumentCaptor.forClass(JooqHealthCheck.class);
         verify(healthChecks).register(eq(DEFAULT_NAME), captor.capture());
 
-        assertThat(captor.getValue().getValidationQuery()).isEqualTo(validationQueryPrimary);
+        Assertions.assertEquals(captor.getValue().getValidationQuery(), validationQueryPrimary);
     }
 
     @Test
@@ -123,10 +125,10 @@ public class JooqBundleTest {
         ArgumentCaptor<JooqHealthCheck> captor = ArgumentCaptor.forClass(JooqHealthCheck.class);
 
         verify(healthChecks).register(eq(DATASOURCE_PRIMARY), captor.capture());
-        assertThat(captor.getValue().getValidationQuery()).isEqualTo(validationQueryPrimary);
+        Assertions.assertEquals(captor.getValue().getValidationQuery(), validationQueryPrimary);
 
         verify(healthChecks).register(eq(DATASOURCE_REPLICA), captor.capture());
-        assertThat(captor.getValue().getValidationQuery()).isEqualTo(validationQueryReplica);
+        Assertions.assertEquals(captor.getValue().getValidationQuery(), validationQueryReplica);
     }
 
     @Test
@@ -138,7 +140,7 @@ public class JooqBundleTest {
             }
         }.getJooqFactory(new DropwizardConfig());
 
-        assertThat(jooqFactory).isNotNull();
+        Assertions.assertNotNull(jooqFactory);
     }
 
     @Test
@@ -155,22 +157,22 @@ public class JooqBundleTest {
             }
         };
         jooqBundle.run(new DropwizardConfig(), environment);
-        assertThat(jooqBundle.getConfigurationMap().containsKey(DEFAULT_NAME));
+        assertThat(jooqBundle.getConfigurationMap(), hasKey(DEFAULT_NAME));
     }
 
     @Test
     public void providesBuiltJooqConfiguration() throws Exception {
-        assertThat(jooqBundle.getConfiguration()).isNull();
+        assertThat(jooqBundle.getConfiguration(), nullValue());
         jooqBundle.run(new DropwizardConfig(), environment);
-        assertThat(jooqBundle.getConfiguration()).isEqualTo(jooqConfigPrimary);
+        assertThat(jooqBundle.getConfiguration(), equalTo(jooqConfigPrimary));
     }
 
     @Test
     public void providesMultipleJooqConfigurations() throws Exception {
-        assertThat(jooqBundleMultiDS.getConfigurationMap()).isEmpty();
+        assertThat(jooqBundleMultiDS.getConfigurationMap(), is(anEmptyMap()));
         jooqBundleMultiDS.run(new DropwizardConfig(), environment);
-        assertThat(jooqBundleMultiDS.getConfigurationMap().containsKey(DATASOURCE_PRIMARY));
-        assertThat(jooqBundleMultiDS.getConfigurationMap().containsKey(DATASOURCE_REPLICA));
+        assertThat(jooqBundleMultiDS.getConfigurationMap(), hasKey(DATASOURCE_PRIMARY));
+        assertThat(jooqBundleMultiDS.getConfigurationMap(), hasKey(DATASOURCE_REPLICA));
     }
 
     private static final class DropwizardConfig extends io.dropwizard.core.Configuration {}

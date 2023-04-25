@@ -1,6 +1,7 @@
 package com.bendb.dropwizard.jooq;
 
-import static com.google.common.truth.Truth.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.anyString;
 import static org.mockito.Mockito.doReturn;
@@ -47,14 +48,14 @@ public class JooqFactoryTest {
     public void buildsConfigurationUsingDataSourceFactory() throws Exception {
         Configuration config = factory.build(environment, dataSourceFactory);
         DataSourceConnectionProvider provider = (DataSourceConnectionProvider) config.connectionProvider();
-        assertThat(provider.dataSource()).isEqualTo(managedDataSource);
+        assertThat(provider.dataSource(), equalTo(managedDataSource));
     }
 
     @Test
     public void buildsConfigurationUsingDataSourceFactoryAndName() throws Exception {
         Configuration config = factory.build(environment, dataSourceFactory, DATASOURCE_NAME);
         DataSourceConnectionProvider provider = (DataSourceConnectionProvider) config.connectionProvider();
-        assertThat(provider.dataSource()).isEqualTo(managedDataSource);
+        assertThat(provider.dataSource(), equalTo(managedDataSource));
     }
 
     @Test
@@ -63,7 +64,7 @@ public class JooqFactoryTest {
 
         factory.setDialect(Optional.<SQLDialect>absent());
         Configuration config = factory.build(environment, dataSourceFactory);
-        assertThat(config.dialect()).isEqualTo(SQLDialect.POSTGRES);
+        assertThat(config.dialect(), equalTo(SQLDialect.POSTGRES));
     }
 
     @Test
@@ -72,7 +73,7 @@ public class JooqFactoryTest {
 
         factory.setDialect(Optional.of(SQLDialect.DERBY));
         Configuration config = factory.build(environment, dataSourceFactory);
-        assertThat(config.dialect()).isEqualTo(SQLDialect.DERBY);
+        assertThat(config.dialect(), equalTo(SQLDialect.DERBY));
     }
 
     @Test
@@ -84,19 +85,19 @@ public class JooqFactoryTest {
     @Test
     public void logExecutedSqlIsASynonymOfExecuteLogging() throws Exception {
         factory.setLogExecutedSql(true);
-        assertThat(factory.isLogExecutedSql()).isTrue();
-        assertThat(factory.isExecuteLogging()).isTrue();
+        assertThat(factory.isLogExecutedSql(), is(true));
+        assertThat(factory.isExecuteLogging(), is(true));
 
         factory.setLogExecutedSql(false);
-        assertThat(factory.isLogExecutedSql()).isFalse();
-        assertThat(factory.isExecuteLogging()).isFalse();
+        assertThat(factory.isLogExecutedSql(), is(false));
+        assertThat(factory.isExecuteLogging(), is(false));
 
         factory.setExecuteLogging(true);
-        assertThat(factory.isLogExecutedSql()).isTrue();
-        assertThat(factory.isExecuteLogging()).isTrue();
+        assertThat(factory.isLogExecutedSql(), is(true));
+        assertThat(factory.isExecuteLogging(), is(true));
 
         factory.setExecuteLogging(false);
-        assertThat(factory.isLogExecutedSql()).isFalse();
-        assertThat(factory.isExecuteLogging()).isFalse();
+        assertThat(factory.isLogExecutedSql(), is(false));
+        assertThat(factory.isExecuteLogging(), is(false));
     }
 }

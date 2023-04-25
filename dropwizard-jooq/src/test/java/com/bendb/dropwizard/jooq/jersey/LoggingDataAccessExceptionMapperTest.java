@@ -1,37 +1,20 @@
 package com.bendb.dropwizard.jooq.jersey;
 
 import org.jooq.exception.DataAccessException;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.slf4j.Logger;
 
 import java.sql.SQLException;
 
 import static org.mockito.Mockito.anyString;
 import static org.mockito.Mockito.eq;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-@ExtendWith(MockitoExtension.class)
 public class LoggingDataAccessExceptionMapperTest {
-    @Mock Logger logger;
 
-    LoggingDataAccessExceptionMapper mapper;
-
-    @BeforeEach
-    public void setup() {
-        LoggingDataAccessExceptionMapper.setLogger(logger);
-
-        mapper = new LoggingDataAccessExceptionMapper();
-    }
-
-    @AfterEach
-    public void tearDown() {
-        LoggingDataAccessExceptionMapper.setLogger(null);
-    }
+    Logger logger = mock();
+    LoggingDataAccessExceptionMapper mapper = new LoggingDataAccessExceptionMapper(logger);
 
     @Test
     public void logsUnderlyingSQLException() {
