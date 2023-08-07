@@ -1,7 +1,5 @@
 package com.bendb.droptools.gradle;
 
-import com.vanniktech.maven.publish.JavaLibrary;
-import com.vanniktech.maven.publish.JavadocJar;
 import com.vanniktech.maven.publish.MavenPublishBaseExtension;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
