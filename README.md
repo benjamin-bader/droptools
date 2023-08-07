@@ -6,8 +6,6 @@ Droptools
 
 Useful Dropwizard addons, including `dropwizard-jooq` and `dropwizard-redis`.
 
-I, [daberkow](https://github.com/daberkow/), have patched the library to support Dropwizard 3.0 and Java 11+. I am not using `dropwizard-redis`, that has been patched to pass builds, yet I can not promise any other operations.
-
 [`dropwizard-jooq`](docs/jooq.md)
 -----------------
 
