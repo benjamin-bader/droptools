@@ -21,7 +21,7 @@ public class DroptoolsJavaPlugin implements Plugin<Project> {
     applyBasePlugins(p.getPlugins());
 
     p.setGroup(Objects.requireNonNull(p.findProperty("GROUP")));
-    p.setVersion(Objects.requireNonNull(p.findProperty("VERSION")));
+    p.setVersion(Objects.requireNonNull(p.findProperty("VERSION_NAME")));
 
     applyJavaSettings(p);
     configureTestTasks(p);

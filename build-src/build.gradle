@@ -10,5 +10,16 @@ gradlePlugin {
             description = "Common Java library settings for Droptools modules"
             implementationClass = "com.bendb.droptools.gradle.DroptoolsJavaPlugin"
         }
+
+        publish {
+            id = "droptools-publish"
+            displayName = "Droptools Publish"
+            description = "Common publishing settings for Droptools modules"
+            implementationClass = "com.bendb.droptools.gradle.DroptoolsPublishPlugin"
+        }
     }
+}
+
+dependencies {
+    api libs.mavenPublish
 }

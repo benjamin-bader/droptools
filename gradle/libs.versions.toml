@@ -13,6 +13,7 @@ dropwizard-db = { module = "io.dropwizard:dropwizard-db", version.ref = "dropwiz
 dropwizard-flyway = "io.dropwizard.modules:dropwizard-flyway:3.0.0-1"
 jedis = { module = "redis.clients:jedis", version.ref = "jedis" }
 jooq = { module = "org.jooq:jooq", version.ref = "jooq" }
+mavenPublish = "com.vanniktech:gradle-maven-publish-plugin:0.25.3"
 postgres = { module = "org.postgresql:postgresql", version.ref = "postgres" }
 
 
